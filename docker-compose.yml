@@ -8,3 +8,4 @@ services:
       - "8080:8000"
     volumes:
       - ./app:/project/app
+      - ./posts:/project/posts

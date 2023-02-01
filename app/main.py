@@ -1,3 +1,4 @@
+import os
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
@@ -13,10 +14,19 @@ templates = Jinja2Templates(
 
 @app.get("/", response_class=HTMLResponse)
 async def root(request: Request):
+    posts = []
+
+    for post_id in os.listdir("posts"):
+        try:
+            post_id = int(post_id)
+            posts.append(post_id)
+        except ValueError:
+            pass
 
     context = {
         "request": request,
+        "post_list": sorted(posts),
         "message": "Hello World"
     }
 
-    return templates.TemplateResponse("base.html", context)
+    return templates.TemplateResponse("components/postlist.html", context)
