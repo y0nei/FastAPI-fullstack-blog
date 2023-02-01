@@ -3,7 +3,7 @@
 {% block postlist %}
 <ul>
 {% for post in post_list %}
-    <li>{{ post }}</li>
+    <li><a href="post/{{ post }}">{{ post }}</a></li>
 {% endfor %}
 </ul>
 {% endblock %}

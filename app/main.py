@@ -1,8 +1,9 @@
 import os
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, HTTPException
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
+import markdown
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
@@ -30,3 +31,21 @@ async def root(request: Request):
     }
 
     return templates.TemplateResponse("components/postlist.html", context)
+
+@app.get("/post/{id}", response_class=HTMLResponse)
+async def read_post(request: Request, id: int):
+    try:
+        with open(f"posts/{id}/content.md", "r") as f:
+            content = f.read()
+    except FileNotFoundError:
+        raise HTTPException(status_code=404, detail="Post not found")
+
+    body = markdown.Markdown().convert(content)
+
+    context = {
+        "request": request,
+        "id": id,
+        "body": body
+    }
+
+    return templates.TemplateResponse("components/article.html", context)
