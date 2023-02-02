@@ -28,7 +28,6 @@ def getMetadata(post_id: int):
     except FileNotFoundError:
         raise HTTPException(status_code=404, detail="Post not found")
 
-    # Extract the front matter from the markdown file
     metadata, _ = parseMarkdown(content)
 
     return {

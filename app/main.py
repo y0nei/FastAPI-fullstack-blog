@@ -1,18 +1,17 @@
-import os
+import os, markdown
 from fastapi import FastAPI, Request, HTTPException
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
-import markdown
 from app.helpers import parseMarkdown, getMetadata
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
 
 templates = Jinja2Templates(
-        directory="app/templates",
-        lstrip_blocks=True, trim_blocks=True # Whitespace control
-    )
+    directory="app/templates",
+    lstrip_blocks=True, trim_blocks=True # Whitespace control
+)
 
 @app.get("/", response_class=HTMLResponse)
 async def root(request: Request):
@@ -29,7 +28,6 @@ async def root(request: Request):
     context = {
         "request": request,
         "post_list": sorted(posts, key=lambda x: x["id"]),
-        "message": "Hello World"
     }
 
     return templates.TemplateResponse("components/postlist.html", context)
