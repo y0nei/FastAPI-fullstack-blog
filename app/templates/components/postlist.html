@@ -1,13 +1,27 @@
 {% extends "base.html" %}
 
+{% block postlist_styling %}
+<style>
+    table, th, td {
+        border: 1px solid;
+        border-collapse: collapse;
+    }
+</style>
+{% endblock %}
+
 {% block postlist %}
-<ul>
-{% for post in post_list %}
-    <li style="display: flex; align-items: center">
-        <p>id: {{ post.id }},</p>
-        <a href="post/{{ post.id }}">{{ post.title[0] }}</a>
-        <p>, {{ post.date[0] }}</p>
-    </li>
-{% endfor %}
-</ul>
+<table>
+    <tr>
+        <th>id</th>
+        <th>title</th>
+        <th>date</th>
+    </tr>
+    {% for post in post_list %}
+    <tr>
+        <td>{{ post.id }}</td>
+        <td><a href="post/{{ post.id }}">{{ post.title[0] }}</a></td>
+        <td>{{ post.date[0] }}</td>
+    </tr>
+    {% endfor %}
+</table>
 {% endblock %}
