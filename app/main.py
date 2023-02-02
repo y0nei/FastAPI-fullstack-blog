@@ -4,7 +4,7 @@ from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 import markdown
-from app.helpers import parseMarkdown
+from app.helpers import parseMarkdown, getMetadata
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
@@ -21,13 +21,14 @@ async def root(request: Request):
     for post_id in os.listdir("posts"):
         try:
             post_id = int(post_id)
-            posts.append(post_id)
+            post = getMetadata(post_id)
+            posts.append(post)
         except ValueError:
             pass
 
     context = {
         "request": request,
-        "post_list": sorted(posts),
+        "post_list": sorted(posts, key=lambda x: x["id"]),
         "message": "Hello World"
     }
 
