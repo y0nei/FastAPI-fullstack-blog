@@ -4,6 +4,7 @@ from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 import markdown
+from app.helpers import parseMarkdown
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
@@ -40,11 +41,13 @@ async def read_post(request: Request, id: int):
     except FileNotFoundError:
         raise HTTPException(status_code=404, detail="Post not found")
 
-    body = markdown.Markdown().convert(content)
+    metadata, body = parseMarkdown(content)
+    body = markdown.Markdown().convert(body)
 
     context = {
         "request": request,
         "id": id,
+        **metadata,
         "body": body
     }
 
