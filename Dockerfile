@@ -12,6 +12,7 @@ RUN pip install pipenv && \
     pip install --no-cache-dir --upgrade -r requirements.txt
 
 COPY app ./app
+COPY posts ./posts
 
 # If running behind a proxy add --proxy-headers and remove --reload
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--reload"]
