@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block article_styling %}
+<link href="{{ url_for('static', path='/css/pygments/dracula.css') }}" rel="stylesheet">
+{% endblock %}
+
 {% block article %}
 {# title #}
     <h1>{{ title[0] }}</h1>
