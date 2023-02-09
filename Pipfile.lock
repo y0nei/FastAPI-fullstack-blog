@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "5ea48c90f6acb39702b46b38fcecf2f4d086b128302b374e9c14454dbbbd4a94"
+            "sha256": "94a631c3f066eb997e193a4b76315ee2cf2d96683ca11ee3ff085d278a629182"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -34,11 +34,11 @@
         },
         "fastapi": {
             "hashes": [
-                "sha256:15d9271ee52b572a015ca2ae5c72e1ce4241dd8532a534ad4f7ec70c376a580f",
-                "sha256:f9773ea22290635b2f48b4275b2bf69a8fa721fda2e38228bed47139839dc877"
+                "sha256:d17e85deb3a350b731467e7bf035e158faffa381310a1b7356421e916fcc64f2",
+                "sha256:d4e4bd820204eeaa19879bf129bbce73db09bdc209d5d83a064b40b2b00557b0"
             ],
             "index": "pypi",
-            "version": "==0.89.1"
+            "version": "==0.90.1"
         },
         "h11": {
             "hashes": [
@@ -216,6 +216,14 @@
             "markers": "python_version >= '3.7'",
             "version": "==1.10.4"
         },
+        "pygments": {
+            "hashes": [
+                "sha256:b3ed06a9e8ac9a9aae5a6f5dbe78a8a58655d17b43b93c078f094ddc476ae297",
+                "sha256:fa7bd7bd2771287c0de303af8bfdfc731f51bd2c6a47ab69d117138893b82717"
+            ],
+            "index": "pypi",
+            "version": "==2.14.0"
+        },
         "python-dotenv": {
             "hashes": [
                 "sha256:1c93de8f636cde3ce377292818d0e440b6e45a82f215c3744979151fa8151c49",
@@ -278,11 +286,11 @@
         },
         "starlette": {
             "hashes": [
-                "sha256:b092cbc365bea34dd6840b42861bdabb2f507f8671e642e8272d2442e08ea4ff",
-                "sha256:b5eda991ad5f0ee5d8ce4c4540202a573bb6691ecd0c712262d0bc85cf8f2c50"
+                "sha256:8510e5b3d670326326c5c1d4cb657cc66832193fe5d5b7015a51c7b1e1b1bf42",
+                "sha256:ec69736c90be8dbfc6ec6800ba6feb79c8c44f9b1706c0b2bb27f936bcf362cc"
             ],
             "markers": "python_version >= '3.7'",
-            "version": "==0.22.0"
+            "version": "==0.23.1"
         },
         "typing-extensions": {
             "hashes": [

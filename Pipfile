@@ -8,6 +8,7 @@ fastapi = "*"
 uvicorn = {extras = ["standard"], version = "*"}
 jinja2 = "*"
 markdown = "*"
+pygments = "*"
 
 [dev-packages]
 
