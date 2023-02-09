@@ -21,6 +21,9 @@ def parseMarkdown(content: str) -> tuple[dict[str, str], str]:
 
     return md.Meta, body
 
+def convertMarkdown(content: str) -> str:
+    return markdown.markdown(content, extensions=['fenced_code'])
+
 def getMetadata(post_id: int):
     try:
         with open(f"posts/{post_id}/content.md", "r") as f:
