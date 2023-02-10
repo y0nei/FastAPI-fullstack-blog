@@ -8,7 +8,7 @@ COPY Pipfile.lock .
 
 # Generate requirements.txt and install dependencies
 RUN pip install pipenv && \
-    pipenv requirements > requirements.txt && \
+    pipenv requirements --dev > requirements.txt && \
     pip install --no-cache-dir --upgrade -r requirements.txt
 
 COPY app ./app

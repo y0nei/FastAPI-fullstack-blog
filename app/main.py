@@ -3,15 +3,25 @@ from fastapi import FastAPI, Request, HTTPException
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
+from starlette.routing import WebSocketRoute
 from app.helpers import parseMarkdown, convertMarkdown, getMetadata
+from app.hotreload import hotreload
 
-app = FastAPI()
+app = FastAPI(
+    routes=[WebSocketRoute("/hot-reload", hotreload, name="hot-reload")],
+    on_startup=[hotreload.startup],
+    on_shutdown=[hotreload.shutdown],
+)
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
 
 templates = Jinja2Templates(
     directory="app/templates",
     lstrip_blocks=True, trim_blocks=True # Whitespace control
 )
+
+# TODO: Add enviroment variable support
+templates.env.globals["DEBUG"] = True  # Development flag.
+templates.env.globals["hotreload"] = hotreload
 
 @app.get("/", response_class=HTMLResponse)
 async def root(request: Request):
