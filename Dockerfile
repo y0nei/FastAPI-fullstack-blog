@@ -9,6 +9,7 @@ COPY Pipfile .
 COPY Pipfile.lock .
 
 # Generate requirements.txt and install dependencies
+RUN apk add git
 RUN pip install pipenv && \
     if [ ${DEBUG} = true ]; then \
         pipenv requirements --dev > requirements.txt; \

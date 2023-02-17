@@ -15,8 +15,15 @@ templates = Jinja2Templates(
 )
 
 if Settings().DEBUG:
-    from app.hotreload import hotreloadSetup
-    hotreloadSetup(app, templates)
+    import arel
+
+    async def reload_data():
+        print("Reloading server data...")
+
+    app.add_middleware(arel.HotReloadMiddleware, paths=[
+        arel.Path("posts", on_reload=[reload_data]),
+        arel.Path("app/templates")
+    ])
 else:
     print(">DEBUG env variable is set to:", Settings().DEBUG,
           "\n>To enable browser hotreloading set it to true")

@@ -11,7 +11,7 @@ markdown = "*"
 pygments = "*"
 
 [dev-packages]
-arel = "==0.2.*"
+arel = {ref = "fm/middleware", git = "https://github.com/florimondmanca/arel.git"}
 
 [requires]
 python_version = "3.10"
