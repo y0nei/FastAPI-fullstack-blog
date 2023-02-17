@@ -3,15 +3,10 @@ from fastapi import FastAPI, Request, HTTPException
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
-from starlette.routing import WebSocketRoute
 from app.helpers import parseMarkdown, convertMarkdown, getMetadata
-from app.hotreload import hotreload
+from app.settings import Settings
 
-app = FastAPI(
-    routes=[WebSocketRoute("/hot-reload", hotreload, name="hot-reload")],
-    on_startup=[hotreload.startup],
-    on_shutdown=[hotreload.shutdown],
-)
+app = FastAPI()
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
 
 templates = Jinja2Templates(
@@ -19,9 +14,12 @@ templates = Jinja2Templates(
     lstrip_blocks=True, trim_blocks=True # Whitespace control
 )
 
-# TODO: Add enviroment variable support
-templates.env.globals["DEBUG"] = True  # Development flag.
-templates.env.globals["hotreload"] = hotreload
+if Settings().DEBUG:
+    from app.hotreload import hotreloadSetup
+    hotreloadSetup(app, templates)
+else:
+    print(">DEBUG env variable is set to:", Settings().DEBUG,
+          "\n>To enable browser hotreloading set it to true")
 
 @app.get("/", response_class=HTMLResponse)
 async def root(request: Request):

@@ -2,14 +2,20 @@ FROM python:3.10-alpine
 
 WORKDIR /project
 
+ARG DEBUG
+
 # Copy pipenv files over
 COPY Pipfile .
 COPY Pipfile.lock .
 
 # Generate requirements.txt and install dependencies
 RUN pip install pipenv && \
-    pipenv requirements --dev > requirements.txt && \
-    pip install --no-cache-dir --upgrade -r requirements.txt
+    if [ ${DEBUG} = true ]; then \
+        pipenv requirements --dev > requirements.txt; \
+    else \
+        pipenv requirements > requirements.txt; \
+    fi; \
+    pip install --no-cache-dir -q --upgrade -r requirements.txt
 
 COPY app ./app
 COPY posts ./posts

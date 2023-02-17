@@ -2,8 +2,13 @@ version: '3.8'
 
 services:
   app:
-    build: .
+    build:
+      context: .
+      args:
+        - DEBUG=${DEBUG}
     container_name: "yonei-dev"
+    environment:
+        DEBUG: ${DEBUG}
     ports:
       - "8080:8000"
     volumes:
