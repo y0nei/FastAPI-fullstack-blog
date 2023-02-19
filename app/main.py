@@ -4,7 +4,7 @@ from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from app.helpers import parseMarkdown, convertMarkdown, getMetadata
-from app.settings import Settings
+from app.settings import settings
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
@@ -14,19 +14,28 @@ templates = Jinja2Templates(
     lstrip_blocks=True, trim_blocks=True # Whitespace control
 )
 
-if Settings().DEBUG:
-    import arel
+if settings.DEBUG == 1 and settings.ENVIROMENT == "development":
+    try:
+        import arel
 
-    async def reload_data():
-        print("Reloading server data...")
+        async def reload_data():
+            print("Reloading server data...")
 
-    app.add_middleware(arel.HotReloadMiddleware, paths=[
-        arel.Path("posts", on_reload=[reload_data]),
-        arel.Path("app/templates")
-    ])
+        # TODO: Read Arel reload dirs to settings
+        app.add_middleware(arel.HotReloadMiddleware, paths=[
+            arel.Path("posts", on_reload=[reload_data]),
+            arel.Path("app/templates")
+        ])
+    except ImportError:
+        print(">Arel could not be successfully imported",
+              "\n>Make sure your docker build args match the enviroment")
 else:
-    print(">DEBUG env variable is set to:", Settings().DEBUG,
-          "\n>To enable browser hotreloading set it to true")
+    print(">DEBUG env variable is set to:", settings.DEBUG,
+          "\n>To enable browser hotreloading set it to 1")
+
+# TODO: Add lru cache on settings
+if settings.DEBUG == 1:
+    print(settings.dict())
 
 @app.get("/", response_class=HTMLResponse)
 async def root(request: Request):

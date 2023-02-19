@@ -5,12 +5,14 @@ services:
     build:
       context: .
       args:
-        - DEBUG=${DEBUG}
+        - ENVIROMENT=${ENVIROMENT}
     container_name: "yonei-dev"
     environment:
+        ENVIROMENT: ${ENVIROMENT}
         DEBUG: ${DEBUG}
     ports:
       - "8080:8000"
     volumes:
       - ./app:/project/app
-      - ./posts:/project/posts
+      - ./posts:/project/posts:ro
+    restart: unless-stopped
