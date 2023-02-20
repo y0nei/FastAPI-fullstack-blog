@@ -2,7 +2,7 @@ FROM python:3.10-alpine
 
 WORKDIR /project
 
-ARG ENVIROMENT
+ARG ENVIRONMENT
 
 # Copy pipenv files over
 COPY Pipfile .
@@ -11,7 +11,7 @@ COPY Pipfile.lock .
 # Generate requirements.txt and install dependencies
 RUN apk add git
 RUN pip install -U pipenv && \
-    if [ "${ENVIROMENT}" = "development" ]; then \
+    if [ "${ENVIRONMENT}" = "development" ]; then \
         pipenv requirements --dev > requirements.txt; \
     else \
         pipenv requirements > requirements.txt; \

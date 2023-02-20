@@ -5,10 +5,10 @@ services:
     build:
       context: .
       args:
-        - ENVIROMENT=${ENVIROMENT}
+        - ENVIRONMENT=${ENVIRONMENT}
     container_name: "yonei-dev"
     environment:
-        ENVIROMENT: ${ENVIROMENT}
+        ENVIRONMENT: ${ENVIRONMENT}
         DEBUG: ${DEBUG}
     ports:
       - "8080:8000"

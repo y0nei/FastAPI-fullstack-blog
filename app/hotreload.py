@@ -4,9 +4,9 @@ async def reload_data():
     print("Reloading server data...")
 
 def initHotreload(app):
-    if settings.DEBUG != 1 or settings.ENVIROMENT != "development":
+    if settings.DEBUG != 1 or settings.ENVIRONMENT != "development":
         print(">To enable browser hotreloading: set DEBUG to 1",
-              "\n>and ENVIROMENT to development in the .env file")
+              "\n>and ENVIRONMENT to development in the .env file")
         return
 
     try:
@@ -19,4 +19,4 @@ def initHotreload(app):
         ])
     except ImportError:
         print(">Arel could not be successfully imported",
-              "\n>Make sure your docker build args match the enviroment")
+              "\n>Make sure your docker build args match the environment")

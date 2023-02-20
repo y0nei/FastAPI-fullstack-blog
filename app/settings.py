@@ -7,7 +7,7 @@ class EnvType(str, Enum):
 
 class Settings(BaseSettings):
     DEBUG: int = 1
-    ENVIROMENT: EnvType = EnvType.DEVELOPMENT
+    ENVIRONMENT: EnvType = EnvType.DEVELOPMENT
 
     class Config:
         env_file = ".env"
