@@ -1,25 +1,34 @@
-FROM python:3.10-alpine
-
-WORKDIR /project
+FROM python:3.11-alpine AS build
 
 ARG ENVIRONMENT
 
-# Copy pipenv files over
-COPY Pipfile .
-COPY Pipfile.lock .
+RUN pip install -U pipenv
+COPY Pipfile Pipfile.lock .
 
-# Generate requirements.txt and install dependencies
-RUN apk add git
-RUN pip install -U pipenv && \
-    if [ "${ENVIRONMENT}" = "development" ]; then \
+RUN if [ "${ENVIRONMENT}" = "development" ]; then \
         pipenv requirements --dev > requirements.txt; \
     else \
         pipenv requirements > requirements.txt; \
-    fi; \
-    pip install --no-cache-dir -q -U -r requirements.txt
+    fi
+
+FROM python:3.11-alpine
+
+ENV PATH=$PATH:/home/docker/.local/bin \
+    PYTHONUNBUFFERED=1
+
+WORKDIR /project
+
+RUN apk add git
+
+RUN adduser -D -g "docker" docker
+RUN chown -R docker:docker /project
+USER docker
+
+COPY --from=build ./requirements.txt .
+RUN pip install --no-cache-dir -U pip -r requirements.txt
 
 COPY app ./app
 COPY posts ./posts
 
 # If running behind a proxy add --proxy-headers and remove --reload
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--reload"]
+ENTRYPOINT ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--reload"]
