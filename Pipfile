@@ -12,6 +12,8 @@ pygments = "*"
 
 [dev-packages]
 arel = "==0.2.*"
+pytest = "*"
+httpx = "*"
 
 [requires]
 python_version = "3.10"
