@@ -1,5 +1,5 @@
 import os
-from fastapi import FastAPI, Request, HTTPException
+from fastapi import FastAPI, Request, Path, HTTPException
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
@@ -40,7 +40,7 @@ async def root(request: Request):
     return templates.TemplateResponse("components/postlist.html", context)
 
 @app.get("/post/{id}", response_class=HTMLResponse)
-async def read_post(request: Request, id: int):
+async def read_post(request: Request, id: int = Path(gt=0)):
     try:
         with open(f"posts/{id}/content.md", "r") as f:
             content = f.read()
