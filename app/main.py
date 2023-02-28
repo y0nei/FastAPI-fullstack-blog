@@ -14,7 +14,7 @@ templates = Jinja2Templates(
     directory="app/templates",
     lstrip_blocks=True, trim_blocks=True # Whitespace control
 )
-initHotreload(app)
+initHotreload(app, templates)
 
 # TODO: Add lru cache on settings
 if settings.DEBUG == 1:

@@ -14,4 +14,9 @@
 {# html body #}
 <hr>
 {{ body|safe }}
+
+<!-- Hot reload script -->
+{% if DEBUG %}
+    {{ hotreload.script(url_for('hot-reload')) | safe }}
+{% endif %}
 {% endblock %}
