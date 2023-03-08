@@ -50,6 +50,5 @@ def getMetadata(post_id: int):
     metadata, _ = parseMarkdown(content)
 
     return {
-        "id": post_id,
         **metadata
     }

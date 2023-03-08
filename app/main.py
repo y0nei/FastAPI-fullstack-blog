@@ -24,10 +24,14 @@ if settings.DEBUG == 1:
 async def root(request: Request):
     posts = []
 
+    def getPost(post_id: int):
+        metadata = getMetadata(post_id)
+        return {"id": post_id, **metadata}
+
     for post_id in os.listdir("posts"):
         try:
             post_id = int(post_id)
-            post = getMetadata(post_id)
+            post = getPost(post_id)
             posts.append(post)
         except ValueError:
             pass
