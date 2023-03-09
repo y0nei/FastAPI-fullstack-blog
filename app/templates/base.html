@@ -8,11 +8,7 @@
         {% block article_styling %}{% endblock %}
     </head>
     <body>
-        {% block postlist %}{% endblock %}
+        {% block home %}{% endblock %}
         {% block article %}{% endblock %}
-
-        <button hx-get="/posts" hx-swap="outerHTML">test htmx</button>
-
-        <script src="{{ url_for('static', path='/htmx.min.js') }}"></script>
     </body>
 </html>

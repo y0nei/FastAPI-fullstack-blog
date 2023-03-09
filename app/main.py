@@ -22,6 +22,13 @@ if settings.DEBUG == 1:
 
 @app.get("/", response_class=HTMLResponse)
 async def root(request: Request):
+    return templates.TemplateResponse("home.html", {"request": request})
+
+@app.get("/posts")
+async def read_post_list(
+    request: Request,
+    hx_request: str | None = Header(None)
+):
     posts = []
 
     def getPost(post_id: int):
@@ -41,15 +48,10 @@ async def root(request: Request):
         "post_list": sorted(posts, key=lambda x: x["id"]),
     }
 
-    return templates.TemplateResponse("components/postlist.html", context)
-
-@app.get("/posts")
-async def read_post_list(hx_request: str | None = Header(None)):
-
     if hx_request:
-        return HTMLResponse(f"<p>hx-request: {hx_request}</p>")
+        return templates.TemplateResponse("components/postlist.html", context)
     else:
-        return {"response": "json"}
+        return context["post_list"]
 
 @app.get("/post/{id}", response_class=HTMLResponse)
 async def read_post(request: Request, id: int = Path(gt=0)):

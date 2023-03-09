@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block postlist_styling %}
+<style>
+    table, th, td {
+        border: 1px solid;
+        border-collapse: collapse;
+    }
+</style>
+{% endblock %}
+
+{% block home %}
+    <div hx-get="/posts" hx-swap="outerHTML" hx-trigger="load"></div>
+
+    <script src="{{ url_for('static', path='/htmx.min.js') }}"></script>
+{% endblock %}
