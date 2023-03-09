@@ -22,8 +22,17 @@ def test_invalid_post_route_item():
     assert non_int_value.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY
     assert negative_value.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY
 
-def test_post_list_conditional_response_type_based_on_header_params():
+def test_post_list_request_headers():
+    """
+    Checks if the '/posts' endpoint returns proper hx-request and content-type header
+    when the 'hx-request' header is specified.
+    """
+    # hx-response
     hx_response = client.get("/posts", headers={"hx-request": "foo"})
+    assert hx_response.request.headers.__contains__("hx-request") is True
+    assert hx_response.request.headers.get("hx-request") == "foo"
+    assert hx_response.headers.get("content-type") == "text/html; charset=utf-8"
+    # json response
     json_response = client.get("/posts")
-    assert hx_response.json() == {"response": "htmx"}
-    assert json_response.json() == {"response": "json"}
+    assert json_response.request.headers.__contains__("hx-request") is False
+    assert json_response.headers.get("content-type") == "application/json"
