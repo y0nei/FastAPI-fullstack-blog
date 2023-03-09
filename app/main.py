@@ -47,7 +47,7 @@ async def root(request: Request):
 async def read_post_list(hx_request: str | None = Header(None)):
 
     if hx_request:
-        return {"response": "htmx"}
+        return HTMLResponse(f"<p>hx-request: {hx_request}</p>")
     else:
         return {"response": "json"}
 
