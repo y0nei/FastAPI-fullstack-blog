@@ -13,7 +13,7 @@ templates = Jinja2Templates(
 )
 initHotreload(post_router, templates)
 
-@post_router.get("/posts")
+@post_router.get("/")
 async def read_post_list(
     request: Request,
     hx_request: str | None = Header(None)
@@ -42,7 +42,7 @@ async def read_post_list(
     else:
         return context["post_list"]
 
-@post_router.get("/post/{id}", response_class=HTMLResponse)
+@post_router.get("/{id}", response_class=HTMLResponse)
 async def read_post(request: Request, id: int = Path(gt=0)):
     try:
         with open(f"posts/{id}/content.md", "r") as f:

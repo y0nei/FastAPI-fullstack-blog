@@ -11,4 +11,4 @@ if settings.DEBUG == 1:
     print(settings.dict())
 
 app.include_router(home.home_router)
-app.include_router(posts.post_router)
+app.include_router(posts.post_router, prefix="/posts")
