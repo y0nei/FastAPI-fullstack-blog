@@ -22,8 +22,9 @@ def initHotreload(app, templates):
 
         # TODO: Read Arel reload dirs to settings
         app.routes.append(WebSocketRoute("/hot-reload", hotreload, name="hot-reload"))
-        app.router.on_startup.append(hotreload.startup)
-        app.router.on_shutdown.append(hotreload.shutdown)
+        app.on_startup.append(hotreload.startup)
+        app.on_shutdown.append(hotreload.shutdown)
+
         templates.env.globals["DEBUG"] = settings.DEBUG
         templates.env.globals["hotreload"] = hotreload
 
