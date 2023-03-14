@@ -27,8 +27,8 @@ USER docker
 COPY --from=build ./requirements.txt .
 RUN pip install --no-cache-dir -U pip -r requirements.txt
 
+COPY main.py .
 COPY app ./app
 COPY posts ./posts
 
-# If running behind a proxy add --proxy-headers and remove --reload
-ENTRYPOINT ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--reload"]
+ENTRYPOINT ["python3", "main.py"]
