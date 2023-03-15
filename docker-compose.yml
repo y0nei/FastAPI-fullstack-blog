@@ -13,6 +13,7 @@ services:
     ports:
       - "8080:8000"
     volumes:
+      - .env:/project/.env:ro
       - ./app:/project/app
       - ./posts:/project/posts:ro
     restart: unless-stopped

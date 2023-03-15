@@ -27,7 +27,7 @@ USER docker
 COPY --from=build ./requirements.txt .
 RUN pip install --no-cache-dir -U pip -r requirements.txt
 
-COPY main.py .
+COPY main.py .env .
 COPY app ./app
 COPY posts ./posts
 
