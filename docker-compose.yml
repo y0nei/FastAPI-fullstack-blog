@@ -7,9 +7,6 @@ services:
       args:
         - ENVIRONMENT=${ENVIRONMENT}
     container_name: "yonei-dev"
-    environment:
-        ENVIRONMENT: ${ENVIRONMENT}
-        DEBUG: ${DEBUG}
     ports:
       - "8080:8000"
     volumes:
