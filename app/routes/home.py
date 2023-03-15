@@ -11,5 +11,5 @@ templates = Jinja2Templates(
 home_router = APIRouter(tags=["home"])
 
 @home_router.get("/", response_class=HTMLResponse)
-async def root(request: Request):
+async def home(request: Request):
     return templates.TemplateResponse("home.html", {"request": request})
