@@ -1,6 +1,6 @@
 import pytest
 from app.helpers import sortPosts
-from app.enums import SortChoices, OrderChoices
+from app.schemas.sorting import SortChoices, OrderChoices
 
 example_list = [
     {"id": 4, "date": ["21-03-2017"]},

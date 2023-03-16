@@ -2,8 +2,9 @@ import os
 from fastapi import APIRouter, Request, Path, Header, HTTPException
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
-from app.helpers import parseMarkdown, convertMarkdown, getMetadata
+from app.helpers import parseMarkdown, convertMarkdown, getMetadata, sortPosts
 from app.hotreload import initHotreload
+from app.schemas.sorting import SortChoices, OrderChoices
 
 post_router = APIRouter(tags=["posts"])
 
@@ -16,6 +17,8 @@ initHotreload(post_router, templates)
 @post_router.get("/")
 async def post_list(
     request: Request,
+    sort: SortChoices = SortChoices.id,
+    order: OrderChoices = OrderChoices.ascending,
     hx_request: str | None = Header(None)
 ):
     posts = []
@@ -34,7 +37,7 @@ async def post_list(
 
     context = {
         "request": request,
-        "post_list": sorted(posts, key=lambda x: x["id"]),
+        "post_list": sortPosts(posts, sort, order)
     }
 
     if hx_request:

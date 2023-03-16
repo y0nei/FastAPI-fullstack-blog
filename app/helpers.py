@@ -1,7 +1,7 @@
 import markdown
 from fastapi import HTTPException
 from datetime import datetime
-from app.enums import SortChoices, OrderChoices
+from app.schemas.sorting import SortChoices, OrderChoices
 
 from pygments.formatters import HtmlFormatter
 from markdown.extensions.codehilite import CodeHiliteExtension
