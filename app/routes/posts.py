@@ -1,8 +1,7 @@
 import os
-from fastapi import APIRouter, Request, Path, Header, HTTPException
+from fastapi import APIRouter, Request, Header
 from fastapi.templating import Jinja2Templates
-from fastapi.responses import HTMLResponse
-from app.helpers import parseMarkdown, convertMarkdown, getMetadata, sortPosts
+from app.helpers import getMetadata, sortPosts
 from app.hotreload import initHotreload
 from app.schemas.sorting import SortChoices, OrderChoices
 
@@ -14,7 +13,7 @@ templates = Jinja2Templates(
 )
 initHotreload(post_router, templates)
 
-@post_router.get("/")
+@post_router.get("/posts")
 async def post_list(
     request: Request,
     sort: SortChoices = SortChoices.id,
@@ -44,22 +43,3 @@ async def post_list(
         return templates.TemplateResponse("components/postlist.html", context)
     else:
         return context["post_list"]
-
-@post_router.get("/{id}", response_class=HTMLResponse)
-async def article(request: Request, id: int = Path(gt=0)):
-    try:
-        with open(f"posts/{id}/content.md", "r") as f:
-            content = f.read()
-    except FileNotFoundError:
-        raise HTTPException(status_code=404, detail="Post not found")
-
-    metadata, body = parseMarkdown(content)
-
-    context = {
-        "request": request,
-        "id": id,
-        **metadata,
-        "body": convertMarkdown(body)
-    }
-
-    return templates.TemplateResponse("components/article.html", context)
