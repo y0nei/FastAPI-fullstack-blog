@@ -19,7 +19,7 @@ async def post_list(
     sort: SortChoices = SortChoices.id,
     order: OrderChoices = OrderChoices.ascending,
     page: int = Query(1, gt=0),
-    page_items: int = Query(5, gt=0),
+    page_items: int = Query(2, gt=0),
     hx_request: str | None = Header(None)
 ):
     posts = []
@@ -46,12 +46,33 @@ async def post_list(
     if not current_page_items:
         raise HTTPException(status_code=404, detail="Page doesent exist")
 
+    # next and previous pages
+    pagination = {}
+    if page > 1:
+        pagination["prev"] = f"/posts?sort={sort.value}&order={order.value}&page={page-1}&page_items={page_items}"
+    else:
+        pagination["prev"] = None
+
+    if end_index >= len(posts):
+        pagination["next"] = None
+    else:
+        pagination["next"] = f"/posts?sort={sort.value}&order={order.value}&page={page+1}&page_items={page_items}"
+
+    # Total pages
+    if len(posts) <= page_items:
+        total_pages = 1
+    else:
+        total_pages = (len(posts) + page_items - 1) // page_items
+
     context = {
-        "request": request,
-        "post_list": current_page_items
+        "post_list": current_page_items,
+        "total_pages": total_pages,
+        "current_page": page,
+        "total": len(posts),
+        "pagination": pagination
     }
 
     if hx_request:
-        return templates.TemplateResponse("components/postlist.html", context)
+        return templates.TemplateResponse("components/postlist.html", {"request": request, **context})
     else:
-        return context["post_list"]
+        return context
