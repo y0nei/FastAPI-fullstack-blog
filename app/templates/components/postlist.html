@@ -1,14 +1,31 @@
-<table>
-    <tr>
-        <th>id</th>
-        <th>title</th>
-        <th>date</th>
-    </tr>
-    {% for post in post_list %}
-    <tr>
-        <td>{{ post.id }}</td>
-        <td><a href="posts/{{ post.id }}">{{ post.title[0] }}</a></td>
-        <td>{{ post.date[0] }}</td>
-    </tr>
-    {% endfor %}
-</table>
+<div id="postlist">
+    <table>
+        <tr>
+            <th>id</th>
+            <th>title</th>
+            <th>date</th>
+        </tr>
+        {% for post in post_list %}
+        <tr >
+            <td>{{ post.id }}</td>
+            <td><a href="posts/{{ post.id }}">{{ post.title[0] }}</a></td>
+            <td>{{ post.date[0] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    {# pagination #}
+    {% if pagination['next'] != None %}
+        <button class='btn' hx-get="{{pagination['next']}}" hx-target="#postlist" hx-swap="outerHTML">
+            next
+        </button>
+    {% endif %}
+    {% if pagination['prev'] != None %}
+        <button class='btn' hx-get="{{pagination['prev']}}" hx-target="#postlist" hx-swap="outerHTML">
+            previous
+        </button>
+    {% endif %}
+
+    <p>page {{ current_page }}/{{ total_pages }}</p>
+    <p>showing {{ post_list|length }}/{{ total }} on current page</p>
+</div>
