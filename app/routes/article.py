@@ -21,10 +21,9 @@ async def article(request: Request, id: int = Path(gt=0)):
     metadata, body = parseMarkdown(content)
 
     context = {
-        "request": request,
         "id": id,
         **metadata,
         "body": convertMarkdown(body)
     }
 
-    return templates.TemplateResponse("components/article.html", context)
+    return templates.TemplateResponse("components/article.html", {"request": request, **context})
