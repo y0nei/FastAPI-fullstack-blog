@@ -1,0 +1,24 @@
+image: docker:latest
+
+services:
+  - docker:dind
+
+stages:
+  - build
+  - test
+
+build:
+  stage: build
+  script:
+    - cp .env.example .env
+    - docker compose build
+
+test:
+  stage: test
+  script:
+    - cp .env.example .env
+    - docker compose up -d
+    - docker exec yonei-dev pytest /project
+  needs:
+    - job: build
+      artifacts: true
