@@ -5,7 +5,7 @@ from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 templates = Jinja2Templates(
     directory="app/templates",
-    lstrip_blocks=True, trim_blocks=True # Whitespace control
+    lstrip_blocks=True, trim_blocks=True  # Whitespace control
 )
 
 home_router = APIRouter(tags=["home"])

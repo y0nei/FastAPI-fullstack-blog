@@ -6,17 +6,16 @@
 
 {% block article %}
 {# title #}
-    <h1>{{ title[0] }}</h1>
+<h1>{{ title[0] }}</h1>
 {# description #}
-    <p>{{ description[0] }}</p>
+<p>{{ description[0] }}</p>
 {# date #}
-    <p>created: {{ date[0] }}</p>
+<p>created: {{ date[0] }}</p>
 {# html body #}
 <hr>
 {{ body|safe }}
 
-<!-- Hot reload script -->
 {% if DEBUG %}
-    {{ hotreload.script(url_for('hot-reload')) | safe }}
+    {{ hotreload.script(url_for("hot-reload")) | safe }}
 {% endif %}
 {% endblock %}

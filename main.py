@@ -6,5 +6,5 @@ if __name__ == "__main__":
         app="app.api:app",
         host=settings.APP_HOST,
         port=settings.APP_PORT,
-        reload=True if settings.ENVIRONMENT != "production" else False,
+        reload=True if settings.ENVIRONMENT != "production" else False
     )

@@ -4,6 +4,7 @@ from app.helpers import parseMarkdown, convertMarkdown
 with open("app/tests/samples/valid_markdown.md", "r") as f:
     valid_md = f.read()
 
+# TODO: Join an array of sinle line strings to form the "expected_body" (readability)
 expected_body = """This is the first paragraph of the document.
 
 # This is a heading

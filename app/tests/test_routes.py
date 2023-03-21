@@ -4,6 +4,7 @@ from app.api import app
 
 client = TestClient(app)
 
+# TODO: Handle testing route status codes better / in a single test
 def test_home_route():
     response = client.get("/")
     assert response.status_code == status.HTTP_200_OK

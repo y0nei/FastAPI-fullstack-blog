@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block home %}
-    <div hx-get="/posts" hx-swap="outerHTML" hx-trigger="load"></div>
+<div hx-get="/posts" hx-swap="outerHTML" hx-trigger="load"></div>
 
-    <script src="{{ url_for('static', path='/htmx.min.js') }}"></script>
+<script src="{{ url_for('static', path='/htmx.min.js') }}"></script>
 {% endblock %}

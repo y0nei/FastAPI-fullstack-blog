@@ -6,7 +6,6 @@ from app.routes import home, posts, article
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
 
-# TODO: Add lru cache on settings
 if settings.DEBUG == 1:
     print(settings.dict())
 

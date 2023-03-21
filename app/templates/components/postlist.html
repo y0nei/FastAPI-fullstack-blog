@@ -6,7 +6,7 @@
             <th>date</th>
         </tr>
         {% for post in post_list %}
-        <tr >
+        <tr>
             <td>{{ post.id }}</td>
             <td><a href="posts/{{ post.id }}">{{ post.title[0] }}</a></td>
             <td>{{ post.date[0] }}</td>
@@ -15,13 +15,13 @@
     </table>
 
     {# pagination #}
-    {% if pagination['next'] != None %}
-        <button class='btn' hx-get="{{pagination['next']}}" hx-target="#postlist" hx-swap="outerHTML">
+    {% if pagination["next"] != None %}
+        <button hx-get="{{ pagination['next'] }}" hx-target="#postlist" hx-swap="outerHTML">
             next
         </button>
     {% endif %}
-    {% if pagination['prev'] != None %}
-        <button class='btn' hx-get="{{pagination['prev']}}" hx-target="#postlist" hx-swap="outerHTML">
+    {% if pagination["prev"] != None %}
+        <button hx-get="{{ pagination['prev'] }}" hx-target="#postlist" hx-swap="outerHTML">
             previous
         </button>
     {% endif %}

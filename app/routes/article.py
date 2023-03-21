@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Request, Path, HTTPException
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
+from app.hotreload import initHotreload
 from app.helpers import parseMarkdown, convertMarkdown
 
 article_router = APIRouter(tags=["posts"])
@@ -9,6 +10,7 @@ templates = Jinja2Templates(
     directory="app/templates",
     lstrip_blocks=True, trim_blocks=True # Whitespace control
 )
+initHotreload(article_router, templates)
 
 @article_router.get("/posts/{id}", response_class=HTMLResponse)
 async def article(request: Request, id: int = Path(gt=0)):

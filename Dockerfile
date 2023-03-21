@@ -3,7 +3,7 @@ FROM python:3.11-alpine AS build
 ARG ENVIRONMENT
 
 RUN pip install -U pipenv
-COPY Pipfile Pipfile.lock .
+COPY Pipfile Pipfile.lock ./
 
 RUN if [ "${ENVIRONMENT}" = "development" ]; then \
         pipenv requirements --dev > requirements.txt; \
@@ -27,7 +27,7 @@ USER docker
 COPY --from=build ./requirements.txt .
 RUN pip install --no-cache-dir -U pip -r requirements.txt
 
-COPY main.py .env .
+COPY main.py .env ./
 COPY app ./app
 COPY posts ./posts
 
