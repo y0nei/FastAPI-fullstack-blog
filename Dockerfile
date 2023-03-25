@@ -3,13 +3,9 @@ FROM python:3.11-alpine AS build
 ARG ENVIRONMENT
 
 RUN pip install -U pipenv
-COPY Pipfile Pipfile.lock ./
 
-RUN if [ "${ENVIRONMENT}" = "development" ]; then \
-        pipenv requirements --dev > requirements.txt; \
-    else \
-        pipenv requirements > requirements.txt; \
-    fi
+COPY Pipfile Pipfile.lock ./
+RUN pipenv requirements --dev > requirements.txt
 
 FROM python:3.11-alpine
 

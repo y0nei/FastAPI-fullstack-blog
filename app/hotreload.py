@@ -29,5 +29,4 @@ def initHotreload(app, templates):
         templates.env.globals["hotreload"] = hotreload
 
     except ImportError:
-        print(">Arel could not be successfully imported",
-              "\n>Make sure your docker build args match the environment")
+        print(">Arel could not be successfully imported")

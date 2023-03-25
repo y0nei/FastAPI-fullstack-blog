@@ -4,8 +4,6 @@ services:
   app:
     build:
       context: .
-      args:
-        - ENVIRONMENT=${ENVIRONMENT}
     container_name: "yonei-dev"
     ports:
       - "8080:8000"
