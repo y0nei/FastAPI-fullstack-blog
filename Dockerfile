@@ -2,10 +2,10 @@ FROM python:3.11-alpine AS build
 
 ARG ENVIRONMENT
 
-RUN pip install -U pipenv
+RUN pip install --no-cache-dir -U poetry
 
-COPY Pipfile Pipfile.lock ./
-RUN pipenv requirements --dev > requirements.txt
+COPY pyproject.toml poetry.lock ./
+RUN poetry export --with dev -f requirements.txt --output requirements.txt
 
 FROM python:3.11-alpine
 
@@ -21,7 +21,8 @@ RUN chown -R docker:docker /project
 USER docker
 
 COPY --from=build ./requirements.txt .
-RUN pip install --no-cache-dir -U pip -r requirements.txt
+RUN pip install --no-cache-dir -U pip
+RUN pip install --no-cache-dir -U -r requirements.txt
 
 COPY main.py .env ./
 COPY app ./app
