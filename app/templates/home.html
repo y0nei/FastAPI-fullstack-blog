@@ -10,6 +10,17 @@
 {% endblock %}
 
 {% block home %}
+<form hx-get="/posts" hx-target="#postlist" hx-trigger="change">
+    <select name="sort">
+        <option value="id">id</option>
+        <option value="date">date</option>
+    </select>
+    <select name="order">
+        <option value="asc">ascending</option>
+        <option value="desc">descending</option>
+    </select>
+</form>
+
 <div hx-get="/posts" hx-swap="outerHTML" hx-trigger="load"></div>
 
 <script src="{{ url_for('static', path='/htmx.min.js') }}"></script>
