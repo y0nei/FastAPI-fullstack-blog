@@ -24,4 +24,7 @@
 <div hx-get="/posts" hx-swap="outerHTML" hx-trigger="load"></div>
 
 <script src="{{ url_for('static', path='/htmx.min.js') }}"></script>
+{% if DEBUG %}
+    {{ hotreload.script(url_for("hot-reload")) | safe }}
+{% endif %}
 {% endblock %}
