@@ -24,7 +24,7 @@ COPY --from=build ./requirements.txt .
 RUN pip install --no-cache-dir -U pip
 RUN pip install --no-cache-dir -U -r requirements.txt
 
-COPY main.py .env ./
+COPY main.py .
 COPY app ./app
 COPY posts ./posts
 
