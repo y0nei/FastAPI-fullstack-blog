@@ -3,6 +3,7 @@ from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
 from app.hotreload import initHotreload
 from app.helpers import parseMarkdown, convertMarkdown
+from app.database import get_route_views, add_view
 
 article_router = APIRouter(tags=["posts"])
 
@@ -14,6 +15,7 @@ initHotreload(article_router, templates)
 
 @article_router.get("/posts/{id}", response_class=HTMLResponse)
 async def article(request: Request, id: int = Path(gt=0)):
+    await add_view(request)
     try:
         with open(f"posts/{id}/content.md", "r") as f:
             content = f.read()
@@ -25,6 +27,7 @@ async def article(request: Request, id: int = Path(gt=0)):
     context = {
         "id": id,
         **metadata,
+        "views": await get_route_views(id),
         "body": convertMarkdown(body)
     }
 
