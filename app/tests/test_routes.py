@@ -2,6 +2,10 @@ from fastapi.testclient import TestClient
 from fastapi import status
 from app.api import app
 
+import asyncio
+from app.database import client as motor_client
+motor_client.get_io_loop = asyncio.get_running_loop
+
 client = TestClient(app)
 
 # TODO: Handle testing route status codes better / in a single test
