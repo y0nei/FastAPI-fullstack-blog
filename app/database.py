@@ -1,15 +1,19 @@
 import uuid
 from fastapi import Request
 from app.settings import settings
-import motor.motor_asyncio
+from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorCollection
 
-client = motor.motor_asyncio.AsyncIOMotorClient(
+# TODO: move those database variables out of this file
+client = AsyncIOMotorClient(
     f"mongodb://{settings.DB_USER}:{settings.DB_PASSWORD}@{settings.DB_HOST}:{settings.DB_PORT}"
 )
 database = client[settings.MONGO_DATABASE]
-collection = database[settings.MONGO_COLLECTION]
+my_collection = database[settings.MONGO_COLLECTION]
 
-async def get_route_views(id: int) -> dict[str, int]:
+async def get_prod_db():
+    return my_collection
+
+async def get_route_views(id: int, collection: AsyncIOMotorCollection) -> dict[str, int]:
     pipeline = [{"$match": {"routes": f"/posts/{id}"}}, {"$count": "views"}]
     cursor = collection.aggregate(pipeline)
     try:
@@ -18,7 +22,7 @@ async def get_route_views(id: int) -> dict[str, int]:
         return {"views": 0}  # TODO: Catch an error here
     return item
 
-async def add_view(request: Request):
+async def add_view(request: Request, collection: AsyncIOMotorCollection):
     ssid = request.session.get("ssid")
     # Create a new session if one does not exist
     if not ssid:

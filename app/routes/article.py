@@ -1,9 +1,11 @@
-from fastapi import APIRouter, Request, Path, HTTPException
+from typing import Annotated
+from fastapi import APIRouter, Request, Path, HTTPException, Depends
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
 from app.hotreload import initHotreload
 from app.helpers import parseMarkdown, convertMarkdown
-from app.database import get_route_views, add_view
+from app.database import get_route_views, add_view, get_prod_db
+from motor.motor_asyncio import AsyncIOMotorCollection as MotorCollection
 
 article_router = APIRouter(tags=["posts"])
 
@@ -14,8 +16,12 @@ templates = Jinja2Templates(
 initHotreload(article_router, templates)
 
 @article_router.get("/posts/{id}", response_class=HTMLResponse)
-async def article(request: Request, id: int = Path(gt=0)):
-    await add_view(request)
+async def article(
+        request: Request,
+        database: Annotated[MotorCollection, Depends(get_prod_db)],
+        id: int = Path(gt=0)
+):
+    await add_view(request, database)
     try:
         with open(f"posts/{id}/content.md", "r") as f:
             content = f.read()
@@ -27,7 +33,7 @@ async def article(request: Request, id: int = Path(gt=0)):
     context = {
         "id": id,
         **metadata,
-        "views": await get_route_views(id),
+        "views": await get_route_views(id, database),
         "body": convertMarkdown(body)
     }
 

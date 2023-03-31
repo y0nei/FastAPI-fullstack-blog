@@ -1,9 +1,10 @@
-from fastapi import APIRouter
-from fastapi import Request
+from typing import Annotated
+from fastapi import APIRouter, Depends, Request
 from app.hotreload import initHotreload
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-from app.database import add_view
+from app.database import add_view, get_prod_db
+from motor.motor_asyncio import AsyncIOMotorCollection as MotorCollection
 
 home_router = APIRouter(tags=["home"])
 templates = Jinja2Templates(
@@ -13,6 +14,6 @@ templates = Jinja2Templates(
 initHotreload(home_router, templates)
 
 @home_router.get("/", response_class=HTMLResponse)
-async def home(request: Request):
-    await add_view(request)
+async def home(request: Request, database: Annotated[MotorCollection, Depends(get_prod_db)]):
+    await add_view(request, database)
     return templates.TemplateResponse("home.html", {"request": request})
