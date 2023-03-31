@@ -1,7 +1,5 @@
 FROM python:3.11-alpine AS build
 
-ARG ENVIRONMENT
-
 RUN pip install --no-cache-dir -U poetry
 
 COPY pyproject.toml poetry.lock ./
@@ -13,8 +11,6 @@ ENV PATH=$PATH:/home/docker/.local/bin \
     PYTHONUNBUFFERED=1
 
 WORKDIR /project
-
-RUN apk add git
 
 RUN adduser -D -g "docker" docker
 RUN chown -R docker:docker /project
