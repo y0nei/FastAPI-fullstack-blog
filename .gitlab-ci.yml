@@ -4,11 +4,12 @@ stages:
   - test
   - docker-build
 
-before_script:
-  - pip install poetry
-  - poetry config virtualenvs.create false
-  - poetry config virtualenvs.in-project true
-  - poetry install
+.before_script_template: &configure_poetry
+  before_script:
+    - pip install poetry
+    - poetry config virtualenvs.create false
+    - poetry config virtualenvs.in-project true
+    - poetry install
 
 cache:
   paths:
@@ -16,6 +17,7 @@ cache:
 
 test:
   stage: test
+  <<: *configure_poetry
   script:
     - poetry run pytest
 
