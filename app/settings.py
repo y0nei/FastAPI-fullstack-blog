@@ -10,15 +10,15 @@ class Settings(BaseSettings):
     ENVIRONMENT: str = EnvType.DEVELOPMENT
     APP_HOST: str = "0.0.0.0"
     APP_PORT: int = 8000
-    SECRET_KEY: str
+    SECRET_KEY: str = "supersecret"
 
-    DB_USER: str
-    DB_PASSWORD: str
-    DB_HOST: str
+    DB_USER: str = "user"
+    DB_PASSWORD: str = "password"
+    DB_HOST: str = "0.0.0.0"
     DB_PORT: int = 27017
 
-    MONGO_DATABASE: str
-    MONGO_COLLECTION: str
+    MONGO_DATABASE: str = "database"
+    MONGO_COLLECTION: str = "collection"
 
     class Config:
         env_file = ".env"
