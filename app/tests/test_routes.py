@@ -1,6 +1,7 @@
 from fastapi.testclient import TestClient
 from fastapi import status
 from app.api import app
+from app.database import get_prod_db
 from mongomock_motor import AsyncMongoMockClient
 
 client = TestClient(app)
@@ -10,6 +11,8 @@ async def get_mock_db():
     db = mongoclient["someDB"]
     collection = db["someCollection"]
     return collection
+
+app.dependency_overrides[get_prod_db] = get_mock_db
 
 # TODO: Handle testing route status codes better / in a single test
 def test_home_route():
