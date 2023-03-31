@@ -1,12 +1,15 @@
 from fastapi.testclient import TestClient
 from fastapi import status
 from app.api import app
-
-import asyncio
-from app.database import client as motor_client
-motor_client.get_io_loop = asyncio.get_running_loop
+from mongomock_motor import AsyncMongoMockClient
 
 client = TestClient(app)
+mongoclient = AsyncMongoMockClient()
+
+async def get_mock_db():
+    db = mongoclient["someDB"]
+    collection = db["someCollection"]
+    return collection
 
 # TODO: Handle testing route status codes better / in a single test
 def test_home_route():

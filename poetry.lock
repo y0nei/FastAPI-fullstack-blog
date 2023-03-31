@@ -395,6 +395,37 @@ files = [
 ]
 
 [[package]]
+name = "mongomock"
+version = "4.1.2"
+description = "Fake pymongo stub for testing simple MongoDB-dependent code"
+category = "dev"
+optional = false
+python-versions = "*"
+files = [
+    {file = "mongomock-4.1.2-py2.py3-none-any.whl", hash = "sha256:08a24938a05c80c69b6b8b19a09888d38d8c6e7328547f94d46cadb7f47209f2"},
+    {file = "mongomock-4.1.2.tar.gz", hash = "sha256:f06cd62afb8ae3ef63ba31349abd220a657ef0dd4f0243a29587c5213f931b7d"},
+]
+
+[package.dependencies]
+packaging = "*"
+sentinels = "*"
+
+[[package]]
+name = "mongomock-motor"
+version = "0.0.18"
+description = "Library for mocking AsyncIOMotorClient built on top of mongomock."
+category = "dev"
+optional = false
+python-versions = ">=3.6"
+files = [
+    {file = "mongomock_motor-0.0.18-py3-none-any.whl", hash = "sha256:87e9678ab459f868d4e4207b631c0abb932e6f33a98f81c516ca0d73a8cb0d2c"},
+    {file = "mongomock_motor-0.0.18.tar.gz", hash = "sha256:5d34aba038f133abd21ba3b4e1bb913aeeb0d7bf96264781c60a51336ee5b841"},
+]
+
+[package.dependencies]
+mongomock = ">=3.23.0,<5.0.0"
+
+[[package]]
 name = "motor"
 version = "3.1.1"
 description = "Non-blocking MongoDB driver for Tornado or asyncio"
@@ -717,6 +748,17 @@ idna = {version = "*", optional = true, markers = "extra == \"idna2008\""}
 idna2008 = ["idna"]
 
 [[package]]
+name = "sentinels"
+version = "1.0.0"
+description = "Various objects to denote special meanings in python"
+category = "dev"
+optional = false
+python-versions = "*"
+files = [
+    {file = "sentinels-1.0.0.tar.gz", hash = "sha256:7be0704d7fe1925e397e92d18669ace2f619c92b5d4eb21a89f31e026f9ff4b1"},
+]
+
+[[package]]
 name = "sniffio"
 version = "1.3.0"
 description = "Sniff out which async library your code is running under"
@@ -966,4 +1008,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "49dae5d0781afbae44358f3ddd45e292b8d127e4471d0a834d2aa44ca250df92"
+content-hash = "ffe8f715adfdc66b01c4d0aa3a806bf127c232d3a142fff59619918a4126d118"
