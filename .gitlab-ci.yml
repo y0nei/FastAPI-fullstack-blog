@@ -28,3 +28,5 @@ docker build:
     - docker:dind
   script:
     - docker compose build
+  only:
+    - tags
