@@ -1,13 +1,24 @@
+import pytest
 from fastapi import status
+from app.database import get_route_views
 
 # TODO: Handle testing route status codes better / in a single test
 def test_home_route(client):
     response = client.get("/")
     assert response.status_code == status.HTTP_200_OK
 
-def test_valid_post_route_item(client):
+@pytest.mark.asyncio
+async def test_valid_post_route_item(client, get_db):
+    """
+    Checks if a valid article endpoint returns status code HTTP_200_OK
+    and increases the views of that post in the database
+    """
+    db = await get_db
+    assert await get_route_views(1, db) == {"views": 0}
+    # After creating a request the view should go up by 1
     response = client.get("/posts/1")
     assert response.status_code == status.HTTP_200_OK
+    assert await get_route_views(1, db) == {"views": 1}
 
 def test_empty_post_route_item(client):
     response = client.get("/posts/999")

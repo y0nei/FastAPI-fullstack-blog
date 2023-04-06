@@ -13,6 +13,7 @@ my_collection = database[settings.MONGO_COLLECTION]
 async def get_prod_db():
     return my_collection
 
+# TODO: modify this to also search other routes
 async def get_route_views(id: int, collection: AsyncIOMotorCollection) -> dict[str, int]:
     pipeline = [{"$match": {"routes": f"/posts/{id}"}}, {"$count": "views"}]
     cursor = collection.aggregate(pipeline)

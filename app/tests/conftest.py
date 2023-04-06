@@ -9,7 +9,11 @@ mongoclient = AsyncMongoMockClient()
 async def get_mock_db():
     db = mongoclient["someDB"]
     collection = db["someCollection"]
-    yield collection
+    return collection
+
+@pytest.fixture()
+async def get_db():
+    return await get_mock_db()
 
 @pytest.fixture(scope="session")
 def client():
