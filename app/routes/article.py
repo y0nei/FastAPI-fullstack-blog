@@ -33,7 +33,7 @@ async def article(
     context = {
         "id": id,
         **metadata,
-        "views": await get_route_views(id, database),
+        "views": await get_route_views(f"/posts/{id}", database),
         "body": convertMarkdown(body)
     }
 
