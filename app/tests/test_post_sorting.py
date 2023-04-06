@@ -11,6 +11,7 @@ example_list = [
 ]
 
 def test_sort_by_id():
+    """Checks post sorting by id key"""
     ascending = sortPosts(example_list, SortChoices.id)
     descending = sortPosts(example_list, SortChoices.id, OrderChoices.descending)
     assert ascending == [
@@ -23,6 +24,7 @@ def test_sort_by_id():
     assert descending == ascending[::-1]
 
 def test_sort_by_date():
+    """Checks post sorting by date key"""
     ascending = sortPosts(example_list, SortChoices.date)
     descending = sortPosts(example_list, SortChoices.date, OrderChoices.descending)
     assert ascending == [
@@ -35,9 +37,11 @@ def test_sort_by_date():
     assert descending == ascending[::-1]
 
 def test_sort_invalid_key():
+    """Checks if post sorting throws an error on invalid sort key"""
     with pytest.raises(ValueError):
         assert sortPosts(example_list, "foo")
 
 def test_sort_key_is_None():
+    """Checks if post sorting defaults to the id key when no key is specified"""
     result = sortPosts(example_list)
     assert result == sortPosts(example_list, SortChoices.id)

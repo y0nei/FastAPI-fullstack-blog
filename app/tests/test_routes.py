@@ -2,11 +2,10 @@ import pytest
 from fastapi import status
 from app.database import get_route_views
 
-# TODO: Handle testing route status codes better / in a single test
 @pytest.mark.asyncio
 async def test_home_route(client, get_db):
     """
-    Checks if the home route returns status code HTTP_200_OK
+    Checks if the home route returns status code 200
     and increases the views of it the database
     """
     db = await get_db
@@ -19,8 +18,8 @@ async def test_home_route(client, get_db):
 @pytest.mark.asyncio
 async def test_valid_post_route_item(client, get_db):
     """
-    Checks if a valid article endpoint returns status code HTTP_200_OK
-    and increases the views of that post in the database
+    Checks if a valid article endpoint returns status code 200
+    and increases the views of in the database
     """
     db = await get_db
     assert await get_route_views("/posts/1", db) == {"views": 0}
@@ -31,11 +30,13 @@ async def test_valid_post_route_item(client, get_db):
 
 @pytest.mark.asyncio
 async def test_empty_post_route_item(client):
+    """Checks if non-existent posts returns status code 404"""
     response = await client.get("/posts/999")
     assert response.status_code == status.HTTP_404_NOT_FOUND
 
 @pytest.mark.asyncio
 async def test_invalid_post_route_item(client):
+    """Checks if non-int and negative values return status code 422"""
     non_int_value = await client.get("/posts/foo")
     negative_value = await client.get("/posts/-1")
     assert non_int_value.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY
