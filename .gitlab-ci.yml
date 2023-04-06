@@ -19,7 +19,7 @@ test:
   stage: test
   <<: *configure_poetry
   script:
-    - poetry run pytest
+    - poetry run pytest -v
 
 docker build:
   stage: docker-build
