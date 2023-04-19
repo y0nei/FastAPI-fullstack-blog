@@ -1,17 +1,7 @@
 from datetime import datetime
 from fastapi import Request
 from app.settings import settings
-from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorCollection
-
-# TODO: move those database variables out of this file
-client = AsyncIOMotorClient(
-    f"mongodb://{settings.DB_USER}:{settings.DB_PASSWORD}@{settings.DB_HOST}:{settings.DB_PORT}"
-)
-database = client[settings.MONGO_DATABASE]
-my_collection = database[settings.MONGO_COLLECTION]
-
-async def get_prod_db():
-    return my_collection
+from motor.motor_asyncio import AsyncIOMotorCollection
 
 async def get_route_views(route: str, collection: AsyncIOMotorCollection) -> dict[str, int]:
     pipeline = [{"$match": {"routes": route}}, {"$count": "views"}]

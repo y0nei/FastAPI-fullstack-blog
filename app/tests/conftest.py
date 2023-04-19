@@ -3,7 +3,7 @@ import pytest_asyncio
 import asyncio
 from httpx import AsyncClient
 from app.api import app
-from app.database import get_prod_db
+from app.settings import get_prod_db
 from mongomock_motor import AsyncMongoMockClient
 
 mongoclient = AsyncMongoMockClient()

@@ -1,5 +1,6 @@
 from enum import Enum
 from pydantic import BaseSettings
+from motor.motor_asyncio import AsyncIOMotorClient
 
 class EnvType(str, Enum):
     DEVELOPMENT = "development"
@@ -20,7 +21,14 @@ class Settings(BaseSettings):
     MONGO_DATABASE: str = "database"
     MONGO_COLLECTION: str = "collection"
 
+    @property
+    def DB_URL(self) -> str:
+        return f"mongodb://{self.DB_USER}:{self.DB_PASSWORD}@{self.DB_HOST}:{self.DB_PORT}"
+
     class Config:
         env_file = ".env"
 
 settings: Settings = Settings()
+
+async def get_prod_db():
+    return AsyncIOMotorClient(settings.DB_URL)[settings.MONGO_DATABASE][settings.MONGO_COLLECTION]

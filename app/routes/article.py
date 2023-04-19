@@ -4,7 +4,8 @@ from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
 from app.hotreload import initHotreload
 from app.helpers import parseMarkdown, convertMarkdown
-from app.database import get_route_views, add_view, get_prod_db
+from app.database import get_route_views, add_view
+from app.settings import get_prod_db
 from motor.motor_asyncio import AsyncIOMotorCollection as MotorCollection
 
 article_router = APIRouter(tags=["posts"])

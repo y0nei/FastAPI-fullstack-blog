@@ -3,7 +3,8 @@ from fastapi import APIRouter, Depends, Request
 from app.hotreload import initHotreload
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-from app.database import add_view, get_prod_db
+from app.database import add_view
+from app.settings import get_prod_db
 from motor.motor_asyncio import AsyncIOMotorCollection as MotorCollection
 
 home_router = APIRouter(tags=["home"])
