@@ -28,4 +28,5 @@ async def client():
     app.dependency_overrides[get_prod_db] = get_mock_db
 
     async with AsyncClient(app=app, base_url="http://test") as _client:
+        await _client.get("/createsession")  # Create cookie session
         yield _client
