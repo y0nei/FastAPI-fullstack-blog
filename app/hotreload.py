@@ -13,20 +13,17 @@ def initHotreload(app, templates):
         import arel
         from starlette.routing import WebSocketRoute
 
-        hotreload = arel.HotReload(
-            paths=[
-                arel.Path("posts", on_reload=[reload_data]),
-                arel.Path("app/templates"),
-            ],
-        )
+        hotreload = arel.HotReload([
+            arel.Path("posts", on_reload=[reload_data]),
+            arel.Path("app/templates"),
+            arel.Path("app/static/css")
+        ])
 
-        # TODO: Read Arel reload dirs to settings
         app.routes.append(WebSocketRoute("/hot-reload", hotreload, name="hot-reload"))
         app.on_startup.append(hotreload.startup)
         app.on_shutdown.append(hotreload.shutdown)
 
         templates.env.globals["DEBUG"] = settings.DEBUG
         templates.env.globals["hotreload"] = hotreload
-
     except ImportError:
         print(">Arel could not be successfully imported")

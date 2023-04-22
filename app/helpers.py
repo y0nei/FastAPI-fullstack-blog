@@ -19,7 +19,6 @@ class CustomHtmlFormatter(HtmlFormatter):
 def parseMarkdown(content: str) -> tuple[dict[str, str], str]:
     md = markdown.Markdown(extensions=["meta"])
     md.convert(content)
-
     lines = content.split("\n")
 
     # Find the indices of the first two lines that contain separators
@@ -48,9 +47,7 @@ def getMetadata(post_id: int):
 
     metadata, _ = parseMarkdown(content)
 
-    return {
-        **metadata
-    }
+    return {**metadata}
 
 def sortPosts(arr: list, key: str | None = None, order=OrderChoices.ascending) -> list:
     if key is None:

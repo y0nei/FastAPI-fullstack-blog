@@ -12,15 +12,15 @@ article_router = APIRouter(tags=["posts"])
 
 templates = Jinja2Templates(
     directory="app/templates",
-    lstrip_blocks=True, trim_blocks=True # Whitespace control
+    lstrip_blocks=True, trim_blocks=True  # Whitespace control
 )
 initHotreload(article_router, templates)
 
 @article_router.get("/posts/{id}", response_class=HTMLResponse)
 async def article(
-        request: Request,
-        database: Annotated[MotorCollection, Depends(get_prod_db)],
-        id: int = Path(gt=0)
+    request: Request,
+    database: Annotated[MotorCollection, Depends(get_prod_db)],
+    id: int = Path(gt=0)
 ):
     await add_view(request, database)
     try:

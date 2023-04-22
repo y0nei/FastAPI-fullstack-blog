@@ -9,7 +9,7 @@ async def get_route_views(route: str, collection: AsyncIOMotorCollection) -> dic
     try:
         item = await cursor.next()
     except StopAsyncIteration:
-        return {"views": 0}  # TODO: Catch an error here
+        return {"views": 0}
     return item
 
 async def add_view(request: Request, collection: AsyncIOMotorCollection):

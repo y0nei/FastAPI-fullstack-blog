@@ -18,7 +18,7 @@ async def set_session(request: Request):
         request.session["ssid"] = ssid
         return JSONResponse({"detail": "ssid set sucessfully"}, 200)
     else:
-        return JSONResponse({"detail": "ssid already exists in the session"}, 400)
+        return JSONResponse({"detail": "ssid already exists in the session"}, 409)
 
 if settings.DEBUG == 1:
     print(settings.dict())
