@@ -13,6 +13,7 @@ markdown = "^3.4.3"
 pygments = "^2.14.0"
 motor = "^3.1.1"
 itsdangerous = "^2.1.2"
+prometheus-fastapi-instrumentator = "^6.0.0"
 
 [tool.poetry.group.dev.dependencies]
 arel = "==0.2.*"
