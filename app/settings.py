@@ -11,6 +11,7 @@ class Settings(BaseSettings):
     ENVIRONMENT: str = EnvType.DEVELOPMENT
     APP_HOST: str = "0.0.0.0"
     APP_PORT: int = 8000
+    ENABLE_METRICS: bool = False
     SECRET_KEY: str = "supersecret"
 
     DB_USER: str = "user"
