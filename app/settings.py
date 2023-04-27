@@ -7,6 +7,7 @@ class EnvType(str, Enum):
     PRODUCTION = "production"
 
 class Settings(BaseSettings):
+    LOG_LEVEL: str = "info"
     DEBUG: int = 1
     ENVIRONMENT: str = EnvType.DEVELOPMENT
     APP_HOST: str = "0.0.0.0"
