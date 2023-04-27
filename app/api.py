@@ -9,6 +9,20 @@ app = FastAPI()
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
 app.add_middleware(SessionMiddleware, secret_key=settings.SECRET_KEY)
 
+# Set the Instrumentator and add middleware to app
+if settings.ENABLE_METRICS:
+    from prometheus_fastapi_instrumentator import Instrumentator
+    instrumentator = Instrumentator().instrument(app)
+else:
+    print("App metrics are disabled")
+
+@app.on_event("startup")
+async def startup():
+    if settings.ENABLE_METRICS:
+        instrumentator.expose(app)
+    else:
+        print("App metrics are disabled")
+
 @app.get("/createsession")
 async def set_session(request: Request):
     ssid = request.session.get("ssid")
