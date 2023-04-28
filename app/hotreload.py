@@ -4,8 +4,8 @@ async def reload_data():
     logger.info("Reloading server data...")
 
 def initHotreload(app, templates):
-    if settings.DEBUG != 1 or settings.ENVIRONMENT != "development":
-        logger.warning("Hotreloading is disabled")
+    if not settings.HOTRELOAD:
+        logger.warning(f"Hotreloading is disabled, HOTRELOAD={settings.HOTRELOAD}")
         return
 
     try:
@@ -22,7 +22,7 @@ def initHotreload(app, templates):
         app.on_startup.append(hotreload.startup)
         app.on_shutdown.append(hotreload.shutdown)
 
-        templates.env.globals["DEBUG"] = settings.DEBUG
+        templates.env.globals["ENABLE_HOTRELOAD"] = settings.HOTRELOAD
         templates.env.globals["hotreload"] = hotreload
     except ImportError:
         logger.exception("Arel could not be imported")

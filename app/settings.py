@@ -9,10 +9,10 @@ class EnvType(str, Enum):
 
 class Settings(BaseSettings):
     LOG_LEVEL: str = "info"
-    DEBUG: int = 1
     ENVIRONMENT: str = EnvType.DEVELOPMENT
     APP_HOST: str = "0.0.0.0"
     APP_PORT: int = 8000
+    HOTRELOAD: bool = False
     ENABLE_METRICS: bool = False
     SECRET_KEY: str = "supersecret"
 

@@ -23,7 +23,7 @@
 
 <div hx-get="/posts" hx-swap="outerHTML" hx-trigger="load"></div>
 
-{% if DEBUG %}
+{% if ENABLE_HOTRELOAD %}
     {{ hotreload.script(url_for("hot-reload")) | safe }}
 {% endif %}
 {% endblock %}
