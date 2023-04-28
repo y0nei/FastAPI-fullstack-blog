@@ -1,6 +1,6 @@
 from datetime import datetime
 from fastapi import Request
-from app.settings import settings
+from app.settings import logger
 from motor.motor_asyncio import AsyncIOMotorCollection
 
 async def get_route_views(route: str, collection: AsyncIOMotorCollection) -> dict[str, int]:
@@ -15,7 +15,7 @@ async def get_route_views(route: str, collection: AsyncIOMotorCollection) -> dic
 async def add_view(request: Request, collection: AsyncIOMotorCollection):
     ssid = request.session.get("ssid")
     if not ssid:
-        print("ssid not found", f"ssid={ssid}") if settings.DEBUG else None
+        logger.warning(f"ssid not found, ssid={ssid}")
         return
 
     # Check if the current route is already present in the database
@@ -36,7 +36,7 @@ async def add_view(request: Request, collection: AsyncIOMotorCollection):
             {"_id": result.upserted_id},
             {"$currentDate": {"timestamps.last_modified": True}}
         )
-        print(f"New document created for ssid={ssid}") if settings.DEBUG else None
+        logger.info(f"New document created for ssid={ssid}")
     else:
         # Check if the routes field was updated
         if result.modified_count > 0:
@@ -44,4 +44,4 @@ async def add_view(request: Request, collection: AsyncIOMotorCollection):
                 {"ssid": ssid},
                 {"$currentDate": {"timestamps.last_modified": True}}
             )
-            print(f"Document updated for ssid={ssid}") if settings.DEBUG else None
+            logger.info(f"Document updated for ssid={ssid}")

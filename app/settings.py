@@ -1,3 +1,4 @@
+import logging
 from enum import Enum
 from pydantic import BaseSettings
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -34,3 +35,6 @@ settings: Settings = Settings()
 
 async def get_prod_db():
     return AsyncIOMotorClient(settings.DB_URL)[settings.MONGO_DATABASE][settings.MONGO_COLLECTION]
+
+# TODO: Temporarely store this here
+logger = logging.getLogger("uvicorn.error")
