@@ -18,7 +18,7 @@ else:
 
 @app.on_event("startup")
 async def startup():
-    logger.info(f"Settings: {settings.dict()}")
+    logger.debug(f"Settings: {settings.dict()}")
     if settings.ENABLE_METRICS:
         instrumentator.expose(app)
     else:
