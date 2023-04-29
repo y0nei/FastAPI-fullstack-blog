@@ -1,5 +1,5 @@
 import pytest
-from src.helpers import parseMarkdown, convertMarkdown
+from src.utils.helpers.markdown import parseMarkdown, convertMarkdown
 
 with open("src/tests/samples/valid_markdown.md", "r") as f:
     valid_md = f.read()

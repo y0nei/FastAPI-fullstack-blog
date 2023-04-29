@@ -1,8 +1,4 @@
 import markdown
-from fastapi import HTTPException
-from datetime import datetime
-from src.schemas.sorting import SortChoices, OrderChoices
-
 from pygments.formatters import HtmlFormatter
 from markdown.extensions.codehilite import CodeHiliteExtension
 
@@ -37,28 +33,3 @@ def convertMarkdown(content: str) -> str:
         "fenced_code",
         CodeHiliteExtension(pygments_formatter=CustomHtmlFormatter, css_class="highlight")
     ])
-
-def getMetadata(post_id: int):
-    try:
-        with open(f"posts/{post_id}/content.md", "r") as f:
-            content = f.read()
-    except FileNotFoundError:
-        raise HTTPException(status_code=404, detail="Post not found")
-
-    metadata, _ = parseMarkdown(content)
-
-    return {**metadata}
-
-def sortPosts(arr: list, key: str | None = None, order=OrderChoices.ascending) -> list:
-    if key is None:
-        key = SortChoices.id
-    elif not isinstance(key, SortChoices):
-        raise ValueError(f"Invalid sort key '{key}', expected one of {list(SortChoices)}")
-
-    reverse = order == OrderChoices.descending
-    if key == SortChoices.date:
-        sorted_arr = sorted(arr, key=lambda x: datetime.strptime(x[key][0], "%d-%m-%Y"), reverse=reverse)
-    else:
-        sorted_arr = sorted(arr, key=lambda x: x[key], reverse=reverse)
-
-    return sorted_arr

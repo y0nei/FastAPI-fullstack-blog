@@ -1,6 +1,6 @@
 from typing import Annotated
 from fastapi import APIRouter, Depends, Request
-from src.core.hotreload import initHotreload
+from src.utils.hotreload import initHotreload
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from src.core.database.database import add_view

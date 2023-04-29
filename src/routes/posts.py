@@ -1,7 +1,8 @@
 import os
 from fastapi import APIRouter, Request, Header, Query, HTTPException
 from fastapi.templating import Jinja2Templates
-from src.helpers import getMetadata, sortPosts
+from src.utils.helpers.postsorting import sortPosts
+from src.utils.helpers.markdown import parseMarkdown
 from src.schemas.sorting import SortChoices, OrderChoices
 
 post_router = APIRouter(tags=["posts"])
@@ -23,7 +24,13 @@ async def post_list(
     posts = []
 
     def getPost(post_id: int):
-        metadata = getMetadata(post_id)
+        try:
+            with open(f"posts/{post_id}/content.md", "r") as f:
+                content = f.read()
+        except FileNotFoundError:
+            raise HTTPException(status_code=404, detail="Post not found")
+
+        metadata, _ = parseMarkdown(content)
         return {"id": post_id, **metadata}
 
     for post_id in os.listdir("posts"):

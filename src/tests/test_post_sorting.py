@@ -1,5 +1,5 @@
 import pytest
-from src.helpers import sortPosts
+from src.utils.helpers.postsorting import sortPosts
 from src.schemas.sorting import SortChoices, OrderChoices
 
 example_list = [
