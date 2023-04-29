@@ -1,8 +1,11 @@
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from app.settings import settings, logger
-from app.routes import home, posts, article, session
 from starlette.middleware.sessions import SessionMiddleware
+from app.routes.home import home_router
+from app.routes.posts import post_router
+from app.routes.article import article_router
+from app.routes.session import session_router
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
@@ -23,7 +26,7 @@ async def startup():
     else:
         logger.warning("App metrics are disabled")
 
-app.include_router(home.home_router)
-app.include_router(posts.post_router)
-app.include_router(article.article_router)
-app.include_router(session.session_router)
+app.include_router(home_router)
+app.include_router(post_router)
+app.include_router(article_router)
+app.include_router(session_router)
