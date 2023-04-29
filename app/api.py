@@ -1,8 +1,7 @@
-from fastapi import FastAPI, Request
-from fastapi.responses import JSONResponse
+from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from app.settings import settings, logger
-from app.routes import home, posts, article
+from app.routes import home, posts, article, session
 from starlette.middleware.sessions import SessionMiddleware
 
 app = FastAPI()
@@ -24,17 +23,7 @@ async def startup():
     else:
         logger.warning("App metrics are disabled")
 
-@app.get("/createsession")
-async def set_session(request: Request):
-    ssid = request.session.get("ssid")
-    if not ssid:
-        from uuid import uuid4
-        ssid = str(uuid4())
-        request.session["ssid"] = ssid
-        return JSONResponse({"detail": "ssid set sucessfully"}, 200)
-    else:
-        return JSONResponse({"detail": "ssid already exists in the session"}, 409)
-
 app.include_router(home.home_router)
 app.include_router(posts.post_router)
 app.include_router(article.article_router)
+app.include_router(session.session_router)
