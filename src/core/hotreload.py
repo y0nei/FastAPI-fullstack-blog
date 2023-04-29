@@ -1,4 +1,5 @@
-from app.settings import settings, logger
+from src.core.settings import settings
+from src.core.logging import logger
 
 async def reload_data():
     logger.info("Reloading server data...")
@@ -14,8 +15,8 @@ def initHotreload(app, templates):
 
         hotreload = arel.HotReload([
             arel.Path("posts", on_reload=[reload_data]),
-            arel.Path("app/templates"),
-            arel.Path("app/static/css")
+            arel.Path("src/templates"),
+            arel.Path("src/static/css")
         ])
 
         app.routes.append(WebSocketRoute("/hot-reload", hotreload, name="hot-reload"))

@@ -1,15 +1,15 @@
 from typing import Annotated
 from fastapi import APIRouter, Depends, Request
-from app.hotreload import initHotreload
+from src.core.hotreload import initHotreload
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-from app.database import add_view
-from app.settings import get_prod_db
+from src.core.database.database import add_view
+from src.core.database.session import get_prod_db
 from motor.motor_asyncio import AsyncIOMotorCollection as MotorCollection
 
 home_router = APIRouter(tags=["home"])
 templates = Jinja2Templates(
-    directory="app/templates",
+    directory="src/templates",
     lstrip_blocks=True, trim_blocks=True  # Whitespace control
 )
 initHotreload(home_router, templates)

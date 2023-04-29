@@ -9,6 +9,6 @@ services:
       - "8080:8000"
     volumes:
       - .env:/project/.env:ro
-      - ./app:/project/app
+      - ./src:/project/src
       - ./posts:/project/posts:ro
     restart: unless-stopped

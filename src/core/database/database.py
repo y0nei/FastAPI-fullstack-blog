@@ -1,6 +1,6 @@
 from datetime import datetime
 from fastapi import Request
-from app.settings import logger
+from src.core.logging import logger
 from motor.motor_asyncio import AsyncIOMotorCollection
 
 async def get_route_views(route: str, collection: AsyncIOMotorCollection) -> dict[str, int]:

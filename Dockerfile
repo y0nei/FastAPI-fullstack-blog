@@ -21,7 +21,7 @@ RUN pip install --no-cache-dir -U pip
 RUN pip install --no-cache-dir -U -r requirements.txt
 
 COPY main.py .
-COPY app ./app
+COPY src ./src
 COPY posts ./posts
 
 ENTRYPOINT ["python3", "main.py"]

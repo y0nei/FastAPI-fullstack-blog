@@ -1,13 +1,13 @@
 import os
 from fastapi import APIRouter, Request, Header, Query, HTTPException
 from fastapi.templating import Jinja2Templates
-from app.helpers import getMetadata, sortPosts
-from app.schemas.sorting import SortChoices, OrderChoices
+from src.helpers import getMetadata, sortPosts
+from src.schemas.sorting import SortChoices, OrderChoices
 
 post_router = APIRouter(tags=["posts"])
 
 templates = Jinja2Templates(
-    directory="app/templates",
+    directory="src/templates",
     lstrip_blocks=True, trim_blocks=True  # Whitespace control
 )
 

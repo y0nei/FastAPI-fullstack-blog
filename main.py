@@ -1,9 +1,9 @@
 import uvicorn
-from app.settings import settings
+from src.core.settings import settings
 
 if __name__ == "__main__":
     uvicorn.run(
-        app="app.api:app",
+        app="src.app:app",
         host=settings.APP_HOST,
         port=settings.APP_PORT,
         log_level=settings.LOG_LEVEL,

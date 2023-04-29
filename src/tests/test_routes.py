@@ -1,6 +1,6 @@
 import pytest
 from fastapi import status
-from app.database import get_route_views
+from src.core.database.database import get_route_views
 
 @pytest.mark.asyncio
 async def test_home_route(client, get_db):
