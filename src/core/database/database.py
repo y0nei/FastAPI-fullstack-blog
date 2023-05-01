@@ -1,9 +1,11 @@
 from datetime import datetime
 from fastapi import Request
+from src.core.settings import settings
 from src.core.logging import logger
-from motor.motor_asyncio import AsyncIOMotorCollection
+from motor.motor_asyncio import AsyncIOMotorDatabase
 
-async def get_route_views(route: str, collection: AsyncIOMotorCollection) -> dict[str, int]:
+async def get_route_views(route: str, db: AsyncIOMotorDatabase) -> dict[str, int]:
+    collection = db[settings.MONGO_COLLECTION]
     pipeline = [{"$match": {"routes": route}}, {"$count": "views"}]
     cursor = collection.aggregate(pipeline)
     try:
@@ -12,7 +14,8 @@ async def get_route_views(route: str, collection: AsyncIOMotorCollection) -> dic
         return {"views": 0}
     return item
 
-async def add_view(request: Request, collection: AsyncIOMotorCollection):
+async def add_view(request: Request, db: AsyncIOMotorDatabase) -> None:
+    collection = db[settings.MONGO_COLLECTION]
     ssid = request.session.get("ssid")
     if not ssid:
         logger.debug(f"Ssid not found, ssid={ssid}")

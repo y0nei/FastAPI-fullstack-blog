@@ -5,8 +5,8 @@ from fastapi.responses import HTMLResponse
 from src.utils.hotreload import initHotreload
 from src.utils.helpers.markdown import parseMarkdown, convertMarkdown
 from src.core.database.database import get_route_views, add_view
-from src.core.database.session import get_prod_db
-from motor.motor_asyncio import AsyncIOMotorCollection as MotorCollection
+from src.core.database.session import database
+from motor.motor_asyncio import AsyncIOMotorDatabase
 
 article_router = APIRouter(tags=["posts"])
 
@@ -19,10 +19,10 @@ initHotreload(article_router, templates)
 @article_router.get("/posts/{id}", response_class=HTMLResponse)
 async def article(
     request: Request,
-    database: Annotated[MotorCollection, Depends(get_prod_db)],
+    db: Annotated[AsyncIOMotorDatabase, Depends(database.get_database)],
     id: int = Path(gt=0)
 ):
-    await add_view(request, database)
+    await add_view(request, db)
     try:
         with open(f"posts/{id}/content.md", "r") as f:
             content = f.read()
@@ -30,11 +30,12 @@ async def article(
         raise HTTPException(status_code=404, detail="Post not found")
 
     metadata, body = parseMarkdown(content)
+    route_views = await get_route_views(f"/posts/{id}", db)
 
     context = {
         "id": id,
         **metadata,
-        "views": await get_route_views(f"/posts/{id}", database),
+        "views": route_views,
         "body": convertMarkdown(body)
     }
 

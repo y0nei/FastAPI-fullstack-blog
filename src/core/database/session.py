@@ -1,5 +1,19 @@
 from src.core.settings import settings
-from motor.motor_asyncio import AsyncIOMotorClient
+from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorDatabase
 
-async def get_prod_db():
-    return AsyncIOMotorClient(settings.DB_URL)[settings.MONGO_DATABASE][settings.MONGO_COLLECTION]
+class DataBase:
+    _instance = None
+
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+            cls._instance.client = AsyncIOMotorClient(settings.DB_URL)
+        return cls._instance
+
+    def get_database(self) -> AsyncIOMotorDatabase:
+        return self.client[settings.MONGO_DATABASE]
+
+    def get_client(self) -> AsyncIOMotorClient:
+        return self.client
+
+database = DataBase()
