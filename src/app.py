@@ -13,6 +13,13 @@ from src.routes.session import session_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    logger.debug(f"Settings: {settings.dict()}")
+
+    if settings.ENABLE_METRICS:
+        Instrumentator().expose(app)
+    else:
+        logger.warning("Failed to expose instrumentator.")
+
     logger.info("Connecting to database...")
     try:
         await database.get_database().command("ping")
@@ -34,17 +41,9 @@ app.add_middleware(SessionMiddleware, secret_key=settings.SECRET_KEY)
 # Set the Instrumentator and add middleware to app
 if settings.ENABLE_METRICS:
     from prometheus_fastapi_instrumentator import Instrumentator
-    instrumentator = Instrumentator().instrument(app)
+    Instrumentator().instrument(app)
 else:
-    logger.warning("App metrics are disabled")
-
-@app.on_event("startup")
-async def startup():
-    logger.debug(f"Settings: {settings.dict()}")
-    if settings.ENABLE_METRICS:
-        instrumentator.expose(app)
-    else:
-        logger.warning("App metrics are disabled")
+    logger.warning("Could not add instrumentator middleware.")
 
 app.include_router(home_router)
 app.include_router(post_router)
