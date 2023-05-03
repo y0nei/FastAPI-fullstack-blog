@@ -24,9 +24,7 @@ class DatabaseSettings(BaseConfig):
     DB_PASSWORD: str = "password"
     DB_HOST: str = "0.0.0.0"
     DB_PORT: int = 27017
-
     MONGO_DATABASE: str = "database"
-    MONGO_COLLECTION: str = "collection"
 
     @property
     def DB_URL(self) -> str:

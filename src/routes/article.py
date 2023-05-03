@@ -6,6 +6,7 @@ from src.utils.hotreload import initHotreload
 from src.utils.helpers.markdown import parseMarkdown, convertMarkdown
 from src.core.database.database import get_route_views, add_view
 from src.core.database.session import database
+from src.core.logging import logger
 from motor.motor_asyncio import AsyncIOMotorDatabase
 
 article_router = APIRouter(tags=["posts"])
@@ -22,7 +23,12 @@ async def article(
     db: Annotated[AsyncIOMotorDatabase, Depends(database.get_database)],
     id: int = Path(gt=0)
 ):
-    await add_view(request, db)
+    ssid = request.session.get("ssid")
+    if ssid:
+        await add_view(request.url.path, ssid, db)
+    else:
+        logger.debug(f"Ssid not found in session, {request.session}")
+
     try:
         with open(f"posts/{id}/content.md", "r") as f:
             content = f.read()
