@@ -4,7 +4,7 @@ from contextlib import asynccontextmanager
 from pymongo.errors import OperationFailure, ServerSelectionTimeoutError
 from src.core.settings import settings
 from src.core.logging import logger
-from src.core.database.session import database
+from src.core.database.session import DataBase
 from starlette.middleware.sessions import SessionMiddleware
 from src.routes.home import home_router
 from src.routes.posts import post_router
@@ -20,19 +20,19 @@ async def lifespan(app: FastAPI):
     else:
         logger.warning("Failed to expose instrumentator.")
 
-    logger.info("Connecting to database...")
-    try:
-        await database.get_database().command("ping")
-        logger.info("Pinged your deployment. You successfully connected to MongoDB!")
-    except OperationFailure:
-        logger.exception("Database Authentication failed.")
-    except ServerSelectionTimeoutError:
-        logger.exception("Database is unreachable.")
-
+    if settings.POST_STATISTICS:
+        try:
+            logger.info("Connecting to database...")
+            await DataBase().get_database().command("ping")
+            logger.info("Pinged your deployment. You are connected to MongoDB!")
+        except OperationFailure:
+            logger.exception("Database Authentication failed.")
+        except ServerSelectionTimeoutError:
+            logger.exception("Database is unreachable.")
     yield
-
-    database.client.close()
-    logger.info("Connection to MongoDB closed.")
+    if settings.POST_STATISTICS:
+        DataBase().client.close()
+        logger.info("Connection to MongoDB closed.")
 
 app = FastAPI(lifespan=lifespan)
 app.mount("/static", StaticFiles(directory="src/static"), name="static")

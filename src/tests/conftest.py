@@ -3,7 +3,7 @@ import pytest_asyncio
 import asyncio
 from httpx import AsyncClient
 from src.app import app
-from src.core.database.session import database
+from src.core.database.session import DataBase
 from mongomock_motor import AsyncMongoMockClient
 
 mongoclient = AsyncMongoMockClient()
@@ -23,7 +23,7 @@ async def get_db():
 
 @pytest_asyncio.fixture(scope="session")
 async def client():
-    app.dependency_overrides[database.get_database] = get_mock_db
+    app.dependency_overrides[DataBase().get_database] = get_mock_db
 
     async with AsyncClient(app=app, base_url="http://test") as _client:
         await _client.get("/createsession")  # Create cookie session

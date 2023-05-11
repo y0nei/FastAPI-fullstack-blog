@@ -5,7 +5,7 @@ from fastapi.responses import HTMLResponse
 from src.utils.hotreload import initHotreload
 from src.utils.helpers.markdown import parseMarkdown, convertMarkdown
 from src.core.database.database import get_route_views, add_view
-from src.core.database.session import database
+from src.core.database.session import DataBase
 from src.core.logging import logger
 from motor.motor_asyncio import AsyncIOMotorDatabase
 
@@ -20,14 +20,15 @@ initHotreload(article_router, templates)
 @article_router.get("/posts/{id}", response_class=HTMLResponse)
 async def article(
     request: Request,
-    db: Annotated[AsyncIOMotorDatabase, Depends(database.get_database)],
+    db: Annotated[AsyncIOMotorDatabase | None, Depends(DataBase().get_database)],
     id: int = Path(gt=0)
 ):
-    ssid = request.session.get("ssid")
-    if ssid:
-        await add_view(request.url.path, ssid, db)
-    else:
-        logger.debug(f"Ssid not found in session, {request.session}")
+    if isinstance(db, AsyncIOMotorDatabase):
+        ssid = request.session.get("ssid")
+        if ssid:
+            await add_view(request.url.path, ssid, db)
+        else:
+            logger.debug(f"Ssid not found in session, {request.session}")
 
     try:
         with open(f"posts/{id}/content.md", "r") as f:
@@ -36,7 +37,7 @@ async def article(
         raise HTTPException(status_code=404, detail="Post not found")
 
     metadata, body = parseMarkdown(content)
-    route_views = await get_route_views(f"/posts/{id}", db)
+    route_views = await get_route_views(f"/posts/{id}", db) if db is not None else None
 
     context = {
         "id": id,
