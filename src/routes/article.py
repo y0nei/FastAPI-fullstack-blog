@@ -37,13 +37,15 @@ async def article(
         raise HTTPException(status_code=404, detail="Post not found")
 
     metadata, body = parseMarkdown(content)
-    route_views = await get_route_views(f"/posts/{id}", db) if db is not None else None
 
     context = {
         "id": id,
         **metadata,
-        "views": route_views,
         "body": convertMarkdown(body)
     }
+
+    if isinstance(db, AsyncIOMotorDatabase):
+        route_views = await get_route_views(f"/posts/{id}", db)
+        context.update({"views": route_views})
 
     return templates.TemplateResponse("components/article.html", {"request": request, **context})
