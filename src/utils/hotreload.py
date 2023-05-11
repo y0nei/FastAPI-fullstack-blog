@@ -1,8 +1,5 @@
-from src.core.settings import settings
 from src.core.logging import logger
-
-async def reload_data():
-    logger.info("Reloading server data...")
+from src.core.settings import settings
 
 def initHotreload(app, templates):
     if not settings.HOTRELOAD:
@@ -14,7 +11,7 @@ def initHotreload(app, templates):
         from starlette.routing import WebSocketRoute
 
         hotreload = arel.HotReload([
-            arel.Path("posts", on_reload=[reload_data]),
+            arel.Path("posts"),
             arel.Path("src/templates"),
             arel.Path("src/static/css")
         ])
@@ -22,7 +19,6 @@ def initHotreload(app, templates):
         app.routes.append(WebSocketRoute("/hot-reload", hotreload, name="hot-reload"))
         app.on_startup.append(hotreload.startup)
         app.on_shutdown.append(hotreload.shutdown)
-
         templates.env.globals["ENABLE_HOTRELOAD"] = settings.HOTRELOAD
         templates.env.globals["hotreload"] = hotreload
     except ImportError:

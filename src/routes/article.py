@@ -1,16 +1,17 @@
 from typing import Annotated
-from fastapi import APIRouter, Request, Path, HTTPException, Depends
-from fastapi.templating import Jinja2Templates
+from fastapi import APIRouter, Request, Path, Depends
 from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
+from fastapi.exceptions import HTTPException
+
+from src.core.logging import logger
 from src.utils.hotreload import initHotreload
 from src.utils.helpers.markdown import parseMarkdown, convertMarkdown
 from src.core.database.database import get_route_views, add_view
 from src.core.database.session import DataBase
-from src.core.logging import logger
 from motor.motor_asyncio import AsyncIOMotorDatabase
 
 article_router = APIRouter(tags=["posts"])
-
 templates = Jinja2Templates(
     directory="src/templates",
     lstrip_blocks=True, trim_blocks=True  # Whitespace control

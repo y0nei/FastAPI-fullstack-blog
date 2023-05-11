@@ -1,12 +1,14 @@
 import os
-from fastapi import APIRouter, Request, Header, Query, HTTPException
+from fastapi import APIRouter, Request, Header, Query
+from fastapi.responses import JSONResponse
 from fastapi.templating import Jinja2Templates
+from fastapi.exceptions import HTTPException
+
 from src.utils.helpers.postsorting import sortPosts
 from src.utils.helpers.markdown import parseMarkdown
 from src.schemas.sorting import SortChoices, OrderChoices
 
 post_router = APIRouter(tags=["posts"])
-
 templates = Jinja2Templates(
     directory="src/templates",
     lstrip_blocks=True, trim_blocks=True  # Whitespace control
@@ -80,4 +82,4 @@ async def post_list(
     if hx_request:
         return templates.TemplateResponse("components/postlist.html", {"request": request, **context})
     else:
-        return context
+        return JSONResponse(context)

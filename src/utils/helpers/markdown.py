@@ -17,10 +17,7 @@ def parseMarkdown(content: str) -> tuple[dict[str, str], str]:
     md.convert(content)
     lines = content.split("\n")
 
-    # Find the indices of the first two lines that contain separators
     separator_indices = [i for i, line in enumerate(lines) if line == "---"][:2]
-
-    # Remove lines between the separators if the first one is on the first line
     if separator_indices[0] == 0:
         lines = lines[separator_indices[1] + 1:]
 

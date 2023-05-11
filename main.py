@@ -1,5 +1,5 @@
 import uvicorn
-from src.core.settings import settings
+from src.core.settings import settings, EnvType
 
 if __name__ == "__main__":
     uvicorn.run(
@@ -8,5 +8,5 @@ if __name__ == "__main__":
         port=settings.APP_PORT,
         log_level=settings.LOG_LEVEL,
         use_colors=True,
-        reload=True if settings.ENVIRONMENT != "production" else False
+        reload=True if settings.ENVIRONMENT is not EnvType.PRODUCTION else False
     )

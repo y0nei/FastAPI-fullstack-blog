@@ -14,4 +14,4 @@ class DataBase:
 
     def get_database(self) -> AsyncIOMotorDatabase:
         if self.client is not None:
-            return self.client[settings.MONGO_DATABASE]
+            return self.client[settings.DB_NAME]

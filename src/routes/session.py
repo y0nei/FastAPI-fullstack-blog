@@ -10,6 +10,6 @@ async def set_session(request: Request):
         from uuid import uuid4
         ssid = str(uuid4())
         request.session["ssid"] = ssid
-        return JSONResponse({"detail": "ssid set sucessfully"}, 200)
+        return JSONResponse({"detail": "ssid set sucessfully"})
     else:
         return JSONResponse({"detail": "ssid already exists in the session"}, 409)
