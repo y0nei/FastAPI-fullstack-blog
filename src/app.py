@@ -15,6 +15,10 @@ from src.routes.session import session_router
 async def lifespan(app: FastAPI):
     logger.debug(f"Settings: {settings.dict()}")
 
+    if settings.HOTRELOAD:
+        await hotreload.startup()
+        logger.info("Hotreloading started.")
+
     if settings.ENABLE_METRICS:
         Instrumentator().expose(app)
     else:
@@ -30,12 +34,23 @@ async def lifespan(app: FastAPI):
         except ServerSelectionTimeoutError:
             logger.exception("Database is unreachable.")
     yield
+    if settings.HOTRELOAD:
+        await hotreload.shutdown()
+        logger.info("Hotreloading shutdown.")
+
     if settings.POST_STATISTICS:
         DataBase().client.close()
         logger.info("Connection to MongoDB closed.")
 
 app = FastAPI(lifespan=lifespan)
 app.mount("/static", StaticFiles(directory="src/static"), name="static")
+
+if settings.HOTRELOAD:
+    from src.utils.hotreload import hotreload
+    from starlette.routing import WebSocketRoute
+    app.routes.append(WebSocketRoute("/hot-reload", hotreload, name="hot-reload"))
+else:
+    logger.warning("Could not initialize hotreloading.")
 
 if settings.POST_STATISTICS:
     from starlette.middleware.sessions import SessionMiddleware

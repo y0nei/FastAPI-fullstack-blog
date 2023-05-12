@@ -19,7 +19,7 @@
 <hr>
 {{ body|safe }}
 
-{% if DEBUG %}
+{% if ENABLE_HOTRELOAD %}
     {{ hotreload.script(url_for("hot-reload")) | safe }}
 {% endif %}
 {% endblock %}

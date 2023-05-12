@@ -16,7 +16,7 @@ templates = Jinja2Templates(
     directory="src/templates",
     lstrip_blocks=True, trim_blocks=True  # Whitespace control
 )
-initHotreload(article_router, templates)
+initHotreload(templates)
 
 @article_router.get("/posts/{id}", response_class=HTMLResponse)
 async def article(
