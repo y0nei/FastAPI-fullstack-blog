@@ -3,9 +3,13 @@ import pytest_asyncio
 import asyncio
 from httpx import AsyncClient
 from src.app import app
+from src.core.settings import settings
 from src.core.database.session import DataBase
 from mongomock_motor import AsyncMongoMockClient
 from starlette.middleware.sessions import SessionMiddleware
+
+# Override setting for cookie creation
+settings.POST_STATISTICS = True
 
 mongoclient = AsyncMongoMockClient()
 
