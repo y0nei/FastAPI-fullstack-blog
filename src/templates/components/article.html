@@ -15,6 +15,10 @@
 {% if views %}
     <p>views: {{ views["views"] }}</p>
 {% endif %}
+{# word count #}
+{% if word_count > 0 %}
+    <p>{{ word_count }} words</p>
+{% endif %}
 {# html body #}
 <hr>
 {{ body|safe }}

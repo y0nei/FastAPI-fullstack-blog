@@ -7,6 +7,7 @@ from fastapi.exceptions import HTTPException
 from src.core.logging import logger
 from src.utils.hotreload import initHotreload
 from src.utils.helpers.markdown import parseMarkdown, convertMarkdown
+from src.utils.word_counter import count_words_in_markdown
 from src.core.database.database import get_route_views, add_view
 from src.core.database.session import DataBase
 from motor.motor_asyncio import AsyncIOMotorDatabase
@@ -38,10 +39,12 @@ async def article(
         raise HTTPException(status_code=404, detail="Post not found")
 
     metadata, body = parseMarkdown(content)
+    word_count = count_words_in_markdown(body)
 
     context = {
         "id": id,
         **metadata,
+        "word_count": word_count,
         "body": convertMarkdown(body)
     }
 
