@@ -24,6 +24,7 @@ async def post_list(
     hx_request: str | None = Header(None)
 ):
     posts = []
+    taglist = []
 
     def getPost(post_id: int):
         try:
@@ -39,6 +40,8 @@ async def post_list(
         try:
             post_id = int(post_id)
             post = getPost(post_id)
+            if post.get("tags"):
+                [taglist.append(tag) for tag in post["tags"] if tag not in taglist]
             posts.append(post)
         except ValueError:
             pass
@@ -76,7 +79,8 @@ async def post_list(
         "total_pages": total_pages,
         "current_page": page,
         "total": len(posts),
-        "pagination": pagination
+        "pagination": pagination,
+        "tags": taglist
     }
 
     if hx_request:
