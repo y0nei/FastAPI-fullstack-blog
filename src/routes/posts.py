@@ -21,6 +21,7 @@ async def post_list(
     order: OrderChoices = OrderChoices.ascending,
     page: int = Query(1, gt=0),
     page_items: int = Query(2, gt=0),
+    tag: str | None = Query(None),
     hx_request: str | None = Header(None)
 ):
     posts = []
@@ -46,6 +47,11 @@ async def post_list(
         except ValueError:
             pass
 
+    if tag in taglist:
+        posts = [post for post in posts if post.get("tags") and tag in post["tags"]]
+    elif tag is not None:
+        raise HTTPException(status_code=400, detail=f"The tag [{tag}] does not exist.")
+
     posts = sortPosts(posts, sort, order)
 
     # Simple pagination
@@ -59,14 +65,20 @@ async def post_list(
     # next and previous pages
     pagination = {}
     if page > 1:
-        pagination["prev"] = f"/posts?sort={sort.value}&order={order.value}&page={page-1}&page_items={page_items}"
+        pagination["prev"] = (
+            f"/posts?sort={sort.value}&order={order.value}"
+            f"&page={page-1}&page_items={page_items}&tag={tag}"
+        )
     else:
         pagination["prev"] = None
 
     if end_index >= len(posts):
         pagination["next"] = None
     else:
-        pagination["next"] = f"/posts?sort={sort.value}&order={order.value}&page={page+1}&page_items={page_items}"
+        pagination["next"] = (
+            f"/posts?sort={sort.value}&order={order.value}"
+            f"&page={page+1}&page_items={page_items}&tag={tag}"
+        )
 
     # Total pages
     if len(posts) <= page_items:
