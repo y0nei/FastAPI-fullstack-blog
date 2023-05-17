@@ -1,0 +1,6 @@
+$tableBorder: 1px;
+
+table, th, td {
+    border: $tableBorder solid;
+    border-collapse: collapse;
+}

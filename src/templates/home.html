@@ -1,12 +1,7 @@
 {% extends "base.html" %}
 
 {% block postlist_styling %}
-<style>
-    table, th, td {
-        border: 1px solid;
-        border-collapse: collapse;
-    }
-</style>
+<link rel="stylesheet" href="{{ url_for('static', path='/css/compiled/styles.css') }}">
 {% endblock %}
 
 {% block home %}

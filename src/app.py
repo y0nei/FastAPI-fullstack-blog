@@ -4,7 +4,7 @@ from contextlib import asynccontextmanager
 from pymongo.errors import OperationFailure, ServerSelectionTimeoutError
 
 from src.core.logging import logger
-from src.core.settings import settings
+from src.core.settings import settings, EnvType
 from src.core.database.session import DataBase
 from src.routes.home import home_router
 from src.routes.posts import post_router
@@ -14,6 +14,10 @@ from src.routes.session import session_router
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     logger.debug(f"Settings: {settings.dict()}")
+
+    if settings.ENVIRONMENT == EnvType.DEVELOPMENT:
+        from src.utils.sass import compile_sass
+        await compile_sass()
 
     if settings.HOTRELOAD:
         await hotreload.startup()
