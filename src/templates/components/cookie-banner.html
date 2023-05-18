@@ -6,7 +6,7 @@
     <p> We use session cookies to count you as a view for post analitics.
         <a href="#">read more</a>.
     </p>
-    <button id="cookie-confirm" class="cookie-btn"
+    <button id="confirm"
             hx-get="/createsession"
             _="on click
                  remove .active from #cookie-container
@@ -15,7 +15,7 @@
                   reload() the location of the window"
     >Okay</button>
 
-    <button id="cookie-deny" class="cookie-btn"
+    <button id="deny"
             _="on click
                 remove .active from #cookie-container
                 set localStorage's cookie_consent to false"

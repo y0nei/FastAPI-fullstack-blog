@@ -1,0 +1,32 @@
+$textColor: #f5f6fa;
+$linkColor: $textColor;
+$backgroundColor: #2f3640;
+$confirmButton: #e84118;
+$denyButton: gray;
+
+#cookie-container {
+    position: fixed;
+    bottom: -100%;
+    left: 0;
+    background: $backgroundColor;
+    color: $textColor;
+    padding: 0 32px;
+    box-shadow: 0 -2px 16px rgba(47, 54, 64, 0.39);
+    transition: 400ms;
+
+    &.active { bottom: 0 }
+    a { color: $linkColor }
+    button {
+        border: 0;
+        color: $textColor;
+        padding: 12px 32px;
+        font-size: 18px;
+        margin-bottom: 16px;
+        border-radius: 8px;
+        cursor: pointer;
+
+        &:hover { filter: brightness(120%) }
+        &#confirm { background: $confirmButton }
+        &#deny { background: $denyButton }
+    }
+}
