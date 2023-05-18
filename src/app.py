@@ -46,7 +46,7 @@ async def lifespan(app: FastAPI):
         DataBase().client.close()
         logger.info("Connection to MongoDB closed.")
 
-app = FastAPI(lifespan=lifespan)
+app = FastAPI(lifespan=lifespan, title=settings.APP_NAME)
 app.mount("/static", StaticFiles(directory="src/static"), name="static")
 
 if settings.HOTRELOAD:

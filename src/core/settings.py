@@ -11,6 +11,7 @@ class BaseConfig(BaseSettings):
         case_sensitive = True
 
 class AppSettings(BaseConfig):
+    APP_NAME: str = "FastAPI Blog"
     LOG_LEVEL: str = "info"
     ENVIRONMENT: str = EnvType.DEVELOPMENT
     APP_HOST: str = "0.0.0.0"
