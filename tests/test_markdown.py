@@ -1,7 +1,7 @@
 import pytest
 from src.utils.helpers.markdown import parseMarkdown, convertMarkdown
 
-with open("src/tests/samples/valid_markdown.md", "r") as f:
+with open("tests/samples/valid_markdown.md", "r") as f:
     valid_md = f.read()
 
 expected_body = "\n".join([
@@ -35,7 +35,7 @@ def test_parseMarkdown_invalid_frontmatter():
     Checks if asserting 'metadata' returns an error and if the list is empty.
     Checks if the whole markdown body gets returned, when no metadata is read.
     """
-    with open("src/tests/samples/invalid_frontmatter.md", "r") as f:
+    with open("tests/samples/invalid_frontmatter.md", "r") as f:
         invalid_frontmatter_md = f.read()
     metadata, body = parseMarkdown(invalid_frontmatter_md)
     with pytest.raises(AssertionError):
@@ -47,7 +47,7 @@ def test_convertMarkdown():
     """
     Checks if the convertMarkdown function properly converts markdown to html
     """
-    with open("src/tests/samples/valid_markdown.html", "r") as f:
+    with open("tests/samples/valid_markdown.html", "r") as f:
         expected_html = f.read()
     result = convertMarkdown(expected_body)
     assert result + "\n" == expected_html
@@ -57,9 +57,9 @@ def test_convertMarkdown_codeblocks():
     Checks if the convertMarkdown function properly converts markdown codeblocks
     with CodeHilite syntax highlighting to html
     """
-    with open("src/tests/samples/codeblocks.md", "r") as f:
+    with open("tests/samples/codeblocks.md", "r") as f:
         sample_codeblock_md = f.read()
-    with open("src/tests/samples/codeblocks.html", "r") as f:
+    with open("tests/samples/codeblocks.html", "r") as f:
         expected_codeblock_html = f.read()
     result = convertMarkdown(sample_codeblock_md)
     assert result + "\n" == expected_codeblock_html
