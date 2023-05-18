@@ -8,5 +8,6 @@ if __name__ == "__main__":
         port=settings.APP_PORT,
         log_level=settings.LOG_LEVEL,
         use_colors=True,
-        reload=True if settings.ENVIRONMENT is not EnvType.PRODUCTION else False
+        reload=True if settings.ENVIRONMENT != EnvType.PRODUCTION else False,
+        workers=1
     )
