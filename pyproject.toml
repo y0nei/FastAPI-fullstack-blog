@@ -1,6 +1,6 @@
 [tool.poetry]
-name = "yonei-dev"
-version = "0.1.0"
+name = "yonei.dev"
+version = "0.8"
 description = "A semi-static markdown blog written in FastAPI"
 authors = ["y0nei <xyz.im@proton.me>"]
 
