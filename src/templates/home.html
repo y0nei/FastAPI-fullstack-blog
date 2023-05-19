@@ -1,9 +1,5 @@
 {% extends "base.html" %}
 
-{% block postlist_styling %}
-<link rel="stylesheet" href="{{ url_for('static', path='/css/compiled/styles.css') }}">
-{% endblock %}
-
 {% block home %}
 <form hx-get="/posts" hx-target="#postlist" hx-trigger="change">
     <select name="sort">

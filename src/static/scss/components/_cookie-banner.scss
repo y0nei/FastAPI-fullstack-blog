@@ -1,3 +1,5 @@
+@import "../abstracts/variables";
+
 $textColor: #f5f6fa;
 $linkColor: $textColor;
 $backgroundColor: #2f3640;
@@ -22,7 +24,7 @@ $denyButton: gray;
         padding: 12px 32px;
         font-size: 18px;
         margin-bottom: 16px;
-        border-radius: 8px;
+        border-radius: $default-border-radius;
         cursor: pointer;
 
         &:hover { filter: brightness(120%) }
