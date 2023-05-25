@@ -1,5 +1,6 @@
 @import "base/reset";
-@import "layout/body";
+@import "layout/body",
+        "layout/main";
 @import "components/cookie-banner";
 
 $tableBorder: 1px;

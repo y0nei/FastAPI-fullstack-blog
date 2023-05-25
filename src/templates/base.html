@@ -8,9 +8,10 @@
         {% block article_styling %}{% endblock %}
     </head>
     <body>
-        {% block home %}{% endblock %}
-        {% block article %}{% endblock %}
-
+        <main>
+            {% block home %}{% endblock %}
+            {% block article %}{% endblock %}
+        </main>
         {% include "/components/cookie-banner.html" %}
         <script src="{{ url_for('static', path='/htmx.min.js') }}"></script>
         <script src="{{ url_for('static', path='/_hyperscript.min.js') }}"></script>
