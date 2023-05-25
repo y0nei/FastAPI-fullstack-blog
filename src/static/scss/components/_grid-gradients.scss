@@ -1,0 +1,34 @@
+@import "../abstracts/variables",
+        "../abstracts/colors";
+
+@mixin bullet-journal-pattern {
+    $dot-size: 0.1rem;
+    background-color: $grid-background-color;
+    background-image: radial-gradient(circle,
+        $grid-pattern-color $dot-size,
+        transparent ($dot-size + 0.02rem)
+    );
+    background-size: $grid-pattern-spacing $grid-pattern-spacing;
+}
+
+@mixin plus-grid-pattern {
+    $pattern-width: 0.05rem;
+    $pattern-size: $grid-pattern-spacing / 3; // adjustable
+    background-color: $grid-background-color;
+    background-image:
+        radial-gradient(circle,
+            transparent $pattern-size,
+            $grid-background-color $pattern-size),
+        linear-gradient(
+            $grid-pattern-color $pattern-width,
+            transparent $pattern-width),
+        linear-gradient(
+            90deg,
+            $grid-pattern-color $pattern-width,
+            transparent $pattern-width);
+    background-size: $grid-pattern-spacing $grid-pattern-spacing;
+    background-position:
+        ($grid-pattern-spacing + $pattern-width/2) ($grid-pattern-spacing + $pattern-width/2),
+        $grid-pattern-spacing/2 $grid-pattern-spacing/2,
+        $grid-pattern-spacing/2 $grid-pattern-spacing/2;
+}

@@ -1,0 +1,8 @@
+@import "../components/grid-gradients";
+
+body {
+    height: 100vh;
+    width: 40rem;
+    margin: 0 auto;
+    @include bullet-journal-pattern;
+}
