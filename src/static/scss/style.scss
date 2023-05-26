@@ -1,6 +1,13 @@
-@import "base/reset";
+@import "abstracts/colors",
+        "abstracts/variables";
+
+@import "base/reset",
+        "base/typography";
+
 @import "layout/body",
-        "layout/main";
+        "layout/main",
+        "layout/header";
+
 @import "components/cookie-banner";
 
 $tableBorder: 1px;
