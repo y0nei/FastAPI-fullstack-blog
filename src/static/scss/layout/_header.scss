@@ -7,6 +7,22 @@ header {
     margin-bottom: 1.5rem;
 
     h1 {
+        // NOTE: Beware what font you use with -webkit-text-stroke, some
+        // may not work correctly with this, for the Montserrat font its
+        // necessary to use an older version of it.
+        // (even on the non variable font weight version)
+        // Related issues:
+        // - https://stackoverflow.com/q/69253420
+        // - https://github.com/google/fonts/issues/4212
+
+        // RE: Using pseudo-elements to cover the internal lines with a
+        // second copy of the text and/or using text-shadow as an outline?
+        // While the pseudo-element solution works fine, the text stroke
+        // requires an increased size to achieve a similar result, but it still
+        // doesn't render properly on all browsers (looking at you firefox).
+        // Related issues:
+        // - https://stackoverflow.com/a/73146972
+
         color: white;
         -webkit-text-stroke: .1rem black;
         text-shadow: $shadow-distance $shadow-distance $accent-color;

@@ -1,0 +1,50 @@
+// TODO: Use a mixin to generate font faces
+
+// Montserrat Family
+$montserrat-font-path: "../../fonts/Montserrat";
+
+@font-face {
+    src: url($montserrat-font-path + "/Montserrat-Thin.ttf") format("truetype");
+    font-family: "Montserrat";
+    font-weight: 100;
+}
+@font-face {
+    src: url($montserrat-font-path + "/Montserrat-ExtraLight.ttf") format("truetype");
+    font-family: "Montserrat";
+    font-weight: 200;
+}
+@font-face {
+    src: url($montserrat-font-path + "/Montserrat-Light.ttf") format("truetype");
+    font-family: "Montserrat";
+    font-weight: 300;
+}
+@font-face {
+    src: url($montserrat-font-path + "/Montserrat-Regular.ttf") format("truetype");
+    font-family: "Montserrat";
+    font-weight: 400;
+}
+@font-face {
+    src: url($montserrat-font-path + "/Montserrat-Medium.ttf") format("truetype");
+    font-family: "Montserrat";
+    font-weight: 500;
+}
+@font-face {
+    src: url($montserrat-font-path + "/Montserrat-SemiBold.ttf") format("truetype");
+    font-family: "Montserrat";
+    font-weight: 600;
+}
+@font-face {
+    src: url($montserrat-font-path + "/Montserrat-Bold.ttf") format("truetype");
+    font-family: "Montserrat";
+    font-weight: 700;
+}
+@font-face {
+    src: url($montserrat-font-path + "/Montserrat-ExtraBold.ttf") format("truetype");
+    font-family: "Montserrat";
+    font-weight: 800;
+}
+@font-face {
+    src: url($montserrat-font-path + "/Montserrat-Black.ttf") format("truetype");
+    font-family: "Montserrat";
+    font-weight: 900;
+}
