@@ -1,50 +1,15 @@
-// TODO: Use a mixin to generate font faces
+@import "../abstracts/mixins";
 
-// Montserrat Family
-$montserrat-font-path: "../../fonts/Montserrat";
+$font-path: "../../fonts/";
 
-@font-face {
-    src: url($montserrat-font-path + "/Montserrat-Thin.ttf") format("truetype");
-    font-family: "Montserrat";
-    font-weight: 100;
-}
-@font-face {
-    src: url($montserrat-font-path + "/Montserrat-ExtraLight.ttf") format("truetype");
-    font-family: "Montserrat";
-    font-weight: 200;
-}
-@font-face {
-    src: url($montserrat-font-path + "/Montserrat-Light.ttf") format("truetype");
-    font-family: "Montserrat";
-    font-weight: 300;
-}
-@font-face {
-    src: url($montserrat-font-path + "/Montserrat-Regular.ttf") format("truetype");
-    font-family: "Montserrat";
-    font-weight: 400;
-}
-@font-face {
-    src: url($montserrat-font-path + "/Montserrat-Medium.ttf") format("truetype");
-    font-family: "Montserrat";
-    font-weight: 500;
-}
-@font-face {
-    src: url($montserrat-font-path + "/Montserrat-SemiBold.ttf") format("truetype");
-    font-family: "Montserrat";
-    font-weight: 600;
-}
-@font-face {
-    src: url($montserrat-font-path + "/Montserrat-Bold.ttf") format("truetype");
-    font-family: "Montserrat";
-    font-weight: 700;
-}
-@font-face {
-    src: url($montserrat-font-path + "/Montserrat-ExtraBold.ttf") format("truetype");
-    font-family: "Montserrat";
-    font-weight: 800;
-}
-@font-face {
-    src: url($montserrat-font-path + "/Montserrat-Black.ttf") format("truetype");
-    font-family: "Montserrat";
-    font-weight: 900;
-}
+// == Montserrat Family ==
+// TODO: Use a function to generate multiple font faces or another custom mixin
+@include font-face("Montserrat", "/Montserrat-Thin",       $font-path + "Montserrat", 100, $exts: ttf);
+@include font-face("Montserrat", "/Montserrat-ExtraLight", $font-path + "Montserrat", 200, $exts: ttf);
+@include font-face("Montserrat", "/Montserrat-Light",      $font-path + "Montserrat", 300, $exts: ttf);
+@include font-face("Montserrat", "/Montserrat-Regular",    $font-path + "Montserrat", 400, $exts: ttf);
+@include font-face("Montserrat", "/Montserrat-Medium",     $font-path + "Montserrat", 500, $exts: ttf);
+@include font-face("Montserrat", "/Montserrat-SemiBold",   $font-path + "Montserrat", 600, $exts: ttf);
+@include font-face("Montserrat", "/Montserrat-Bold",       $font-path + "Montserrat", 700, $exts: ttf);
+@include font-face("Montserrat", "/Montserrat-ExtraBold",  $font-path + "Montserrat", 800, $exts: ttf);
+@include font-face("Montserrat", "/Montserrat-Black",      $font-path + "Montserrat", 900, $exts: ttf);

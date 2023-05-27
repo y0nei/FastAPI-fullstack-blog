@@ -1,0 +1,23 @@
+// @font-face generator
+// src: gist.github.com/jonathantneal/d0460e5c2d5d7f9bc5e6
+
+@mixin font-face($family, $file, $path, $weight: normal, $style: normal, $exts: woff woff2 ttf otf) {
+	$src: null;
+
+	$formats: (
+		otf: "opentype",
+		ttf: "truetype"
+	);
+
+	@each $ext in $exts {
+		$format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
+		$src: append($src, url(quote($path + $file + "." + $ext)) format(quote($format)), comma);
+	}
+
+	@font-face {
+		font-family: quote($family);
+		font-style: $style;
+		font-weight: $weight;
+		src: $src;
+	}
+}
