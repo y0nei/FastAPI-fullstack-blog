@@ -3,13 +3,24 @@
 $font-path: "../../fonts/";
 
 // == Montserrat Family ==
-// TODO: Use a function to generate multiple font faces or another custom mixin
-@include font-face("Montserrat", "/Montserrat-Thin",       $font-path + "Montserrat", 100, $exts: ttf);
-@include font-face("Montserrat", "/Montserrat-ExtraLight", $font-path + "Montserrat", 200, $exts: ttf);
-@include font-face("Montserrat", "/Montserrat-Light",      $font-path + "Montserrat", 300, $exts: ttf);
-@include font-face("Montserrat", "/Montserrat-Regular",    $font-path + "Montserrat", 400, $exts: ttf);
-@include font-face("Montserrat", "/Montserrat-Medium",     $font-path + "Montserrat", 500, $exts: ttf);
-@include font-face("Montserrat", "/Montserrat-SemiBold",   $font-path + "Montserrat", 600, $exts: ttf);
-@include font-face("Montserrat", "/Montserrat-Bold",       $font-path + "Montserrat", 700, $exts: ttf);
-@include font-face("Montserrat", "/Montserrat-ExtraBold",  $font-path + "Montserrat", 800, $exts: ttf);
-@include font-face("Montserrat", "/Montserrat-Black",      $font-path + "Montserrat", 900, $exts: ttf);
+$montserrat-font-weights: (
+    "Thin": 100,
+    "ExtraLight": 200,
+    "Light": 300,
+    "Regular": 400,
+    "Medium": 500,
+    "SemiBold": 600,
+    "Bold": 700,
+    "ExtraBold": 800,
+    "Black": 900
+);
+
+@each $keyword, $numeric in $montserrat-font-weights {
+    @include font-face(
+        Montserrat,
+        "/Montserrat-" + $keyword,
+        $font-path + "Montserrat",
+        $numeric,
+        $exts: ttf
+    );
+}
