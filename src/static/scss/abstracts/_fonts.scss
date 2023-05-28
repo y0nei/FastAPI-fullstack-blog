@@ -21,6 +21,6 @@ $montserrat-font-weights: (
         "/Montserrat-" + $keyword,
         $font-path + "Montserrat",
         $numeric,
-        $exts: ttf
+        $exts: woff2 woff ttf
     );
 }
