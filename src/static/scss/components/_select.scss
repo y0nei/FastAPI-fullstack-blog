@@ -1,0 +1,17 @@
+select {
+    position: relative;
+    padding: 0.2rem 0.5rem;
+    margin: 0 $shadow-distance $shadow-distance 0;
+    background-color: white;
+    border: $default-border-width black solid;
+    border-radius: $default-border-radius;
+    box-shadow: $shadow-distance $shadow-distance black;
+
+    &:hover {
+        left: $shadow-distance;
+        top: $shadow-distance;
+        background-color: mix(white, black, 90%);
+        box-shadow: 0 0 black;
+        cursor: pointer;
+    }
+}

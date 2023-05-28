@@ -1,18 +1,20 @@
 <div id="postlist">
-    <table>
-        <tr>
-            <th>id</th>
-            <th>title</th>
-            <th>date</th>
-        </tr>
-        {% for post in post_list %}
-        <tr>
-            <td>{{ post.id }}</td>
-            <td><a href="posts/{{ post.id }}">{{ post.title[0] }}</a></td>
-            <td>{{ post.date[0] }}</td>
-        </tr>
-        {% endfor %}
-    </table>
+    <div id="tablewrapper">
+        <table>
+            <thead>
+                <th>id</th>
+                <th>title</th>
+                <th>date</th>
+            </thead>
+            {% for post in post_list %}
+            <tbody>
+                <td>{{ post.id }}</td>
+                <td><a href="posts/{{ post.id }}">{{ post.title[0] }}</a></td>
+                <td>{{ post.date[0] }}</td>
+            </tbody>
+            {% endfor %}
+        </table>
+    </div>
 
     {# pagination #}
     {% if pagination["next"] != None %}

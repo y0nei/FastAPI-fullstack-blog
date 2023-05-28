@@ -5,11 +5,14 @@
 @import "base/reset",
         "base/typography";
 
+@import "components/cookie-banner",
+        "components/select",
+        "components/buttons",
+        "components/tables";
+
 @import "layout/body",
         "layout/main",
         "layout/header";
-
-@import "components/cookie-banner";
 
 $tableBorder: 1px;
 

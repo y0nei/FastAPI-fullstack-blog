@@ -1,0 +1,24 @@
+div#tablewrapper {
+    width: fit-content;
+    overflow: hidden;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem + $shadow-distance;
+    border-radius: $default-border-radius;
+    border: $default-border-width black solid;
+    box-shadow: $shadow-distance $shadow-distance 0 black;
+
+    table {
+        // Important for rounded table border hack
+        border-style: hidden;
+        background-color: white;
+
+        thead {
+            background-color: mix($accent-color, white, 50%);
+        }
+
+        td, th {
+            border: $default-border-width black solid;
+            padding: 0.2rem 0.5rem;
+        }
+    }
+}
