@@ -21,3 +21,13 @@
 		src: $src;
 	}
 }
+
+@mixin neubrutalism-border(
+    $border-width: $default-border-width,
+    $shadow-color: #000,
+    $border-color: $shadow-color
+) {
+    border: $border-width solid $border-color;
+    border-radius: $default-border-radius;
+    box-shadow: $shadow-distance $shadow-distance $shadow-color;
+}

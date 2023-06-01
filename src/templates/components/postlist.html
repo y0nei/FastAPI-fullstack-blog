@@ -1,33 +1,63 @@
-<div id="postlist">
-    <div id="tablewrapper">
-        <table>
-            <thead>
-                <th>id</th>
-                <th>title</th>
-                <th>date</th>
-            </thead>
-            {% for post in post_list %}
-            <tbody>
-                <td>{{ post.id }}</td>
-                <td><a href="posts/{{ post.id }}">{{ post.title[0] }}</a></td>
-                <td>{{ post.date[0] }}</td>
-            </tbody>
+<section id="postlist-items">
+    {% for post in post_list %}
+    <article id="post">
+        <section data-type="metadata">
+            <p>id:{{ post.id }}</p>
+            <time>{{ post.date[0] }}</time>
+        </section>
+        <h1><a href="posts/{{ post.id }}">{{ post.title[0] }}</a></h1>
+        {% if post.description %}
+        <p data-type="description">{{ post.description[0] }}</p>
+        {% endif %}
+        {% if post.tags %}
+        <div id="taglist">
+            {% for tag in post.tags %}
+            <span>{{ tag }}</span>
             {% endfor %}
-        </table>
+        </div>
+        {% endif %}
+    </article>
+    {% endfor %}
+</section>
+
+<nav data-type="pagination">
+    <div>
+        {% if pagination["prev"] != None %}
+        <button hx-get="{{ pagination['prev'] }}" hx-target="#postlist-content">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 class="icon icon-tabler chevron"
+                 width="24" height="24"
+                 viewBox="0 0 24 24"
+                 stroke-width="2"
+                 stroke="currentColor"
+                 fill="none"
+                 stroke-linecap="round"
+                 stroke-linejoin="round"
+            >
+               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+               <path d="M15 6l-6 6l6 6"></path>
+            </svg>
+        </button>
+        {% endif %}
+        <p><b>{{ current_page }}</b> of <b>{{ total_pages }}</b></p>
+        {% if pagination["next"] != None %}
+        <button hx-get="{{ pagination['next'] }}" hx-target="#postlist-content">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 class="icon icon-tabler chevron"
+                 width="24" height="24"
+                 viewBox="0 0 24 24"
+                 stroke-width="2"
+                 stroke="currentColor"
+                 fill="none"
+                 stroke-linecap="round"
+                 stroke-linejoin="round"
+            >
+               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+               <path d="M9 6l6 6l-6 6"></path>
+            </svg>
+        </button>
+        {% endif %}
     </div>
 
-    {# pagination #}
-    {% if pagination["next"] != None %}
-        <button hx-get="{{ pagination['next'] }}" hx-target="#postlist" hx-swap="outerHTML">
-            next
-        </button>
-    {% endif %}
-    {% if pagination["prev"] != None %}
-        <button hx-get="{{ pagination['prev'] }}" hx-target="#postlist" hx-swap="outerHTML">
-            previous
-        </button>
-    {% endif %}
-
-    <p>page {{ current_page }}/{{ total_pages }}</p>
-    <p>showing {{ post_list|length }}/{{ total }} on current page</p>
-</div>
+    <p>showing <b>{{ post_list|length }}</b> of <b>{{ total }}</b> total</p>
+</nav>

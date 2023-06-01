@@ -1,0 +1,60 @@
+article#post {
+    @include neubrutalism-border;
+    background-color: white;
+
+    // TODO: Fancy hover animation here
+
+    section[data-type="metadata"] {
+        $fg-color: mix(white, black, 50%);
+
+        display: flex;
+        position: relative;
+        color: $fg-color;
+
+        // Vertical separator
+        p::after {
+            content: "";
+            border-left: 0.15rem dotted $fg-color;
+            margin: 0 0.5rem;
+        }
+    }
+
+    h1 a {
+        text-decoration: none;
+        color: #000;
+
+        // Underline animation
+        background: linear-gradient($accent-color, $accent-color);
+        background-size: 0 0.1rem;
+        background-position: 0 100%;
+        background-repeat: no-repeat;
+        transition: background-size 250ms, color 250ms;
+
+        &:hover,
+        &:focus {
+            background-size: 100% 0.1rem;
+            color: $accent-color;
+        }
+    }
+
+    #taglist {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 0.25rem;
+
+        span {
+            padding: 0.1rem 0.2rem;
+            border-radius: $default-border-radius;
+            // TODO: Just generate a color pallete already...
+            background-color: mix($accent-color, white, 60%);
+            border: 0.15rem solid $accent-color;
+            color: mix($accent-color, black, 25%);
+
+            &:hover {
+                border-color: black;
+                color: black;
+                cursor: pointer;
+            }
+        }
+    }
+}

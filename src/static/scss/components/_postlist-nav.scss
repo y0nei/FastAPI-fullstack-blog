@@ -1,0 +1,21 @@
+nav[data-type="pagination"] {
+    & > div {
+        background-color: mix($accent-color, white, 60%);
+        @include neubrutalism-border;
+
+        button {
+            display: flex;
+            justify-content: center;
+
+            // TODO: Fix this later so i dont need to reset the styling
+            margin: 0;
+            padding: 0;
+            border-radius: 0;
+
+            &:first-child { border-right: 0.15rem solid black }
+            &:last-child { border-left: 0.15rem solid black }
+        }
+
+        p { padding: 0 0.5rem }
+    }
+}

@@ -1,0 +1,31 @@
+#postlist {
+    form { margin-bottom: 0.5rem }
+
+    #postlist-items {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem + $shadow-distance;
+
+        article#post {
+            display: flex;
+            flex-direction: column;
+            padding: 0.5rem;
+
+        }
+    }
+
+    nav[data-type="pagination"] {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 0.5rem + $shadow-distance;
+
+        & > div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        & > p:last-child { padding-top: $shadow-distance }
+    }
+}

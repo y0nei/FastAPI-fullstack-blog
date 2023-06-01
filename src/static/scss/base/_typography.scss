@@ -11,3 +11,37 @@ header {
         text-decoration: none;
     }
 }
+
+article#post {
+    section[data-type="metadata"] {
+        font-family: "FiraMono", monospace;
+        font-size: 0.8rem;
+    }
+
+    h1 {
+        font-family: "Montserrat", sans-serif;
+        font-weight: 600;
+        font-size: 1.75rem;
+    }
+
+    p[data-type="description"] {
+        font-family: "Montserrat", sans-serif;
+        font-size: 0.9rem;
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    #taglist span {
+        font-family: "Rubik", sans-serif;
+        font-size: 0.8rem;
+        font-weight: 500;
+        font-style: normal;
+    }
+}
+
+nav[data-type="pagination"] {
+    font-family: "Montserrat", sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    font-style: normal;
+}

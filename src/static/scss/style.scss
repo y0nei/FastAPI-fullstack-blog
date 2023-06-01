@@ -8,11 +8,13 @@
 @import "components/cookie-banner",
         "components/select",
         "components/buttons",
-        "components/tables";
+        "components/post",
+        "components/postlist-nav";
 
 @import "layout/body",
         "layout/main",
-        "layout/header";
+        "layout/header",
+        "layout/postlist";
 
 $tableBorder: 1px;
 
