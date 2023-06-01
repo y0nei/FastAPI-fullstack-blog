@@ -15,10 +15,3 @@
         "layout/main",
         "layout/header",
         "layout/postlist";
-
-$tableBorder: 1px;
-
-table, th, td {
-    border: $tableBorder solid;
-    border-collapse: collapse;
-}
