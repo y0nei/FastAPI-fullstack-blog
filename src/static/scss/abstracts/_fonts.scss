@@ -24,3 +24,50 @@ $montserrat-font-weights: (
         $exts: woff2 woff ttf
     );
 }
+
+// == Rubik Family ==
+$rubik-font-weights: (
+    "Light": 300,
+    "Regular": 400,
+    "Medium": 500,
+    "SemiBold": 600,
+    "Bold": 700,
+    "ExtraBold": 800,
+    "Black": 900
+);
+
+@each $keyword, $numeric in $rubik-font-weights {
+    @include font-face(
+        Rubik,
+        "/Rubik-" + $keyword,
+        $font-path + "Rubik",
+        $numeric,
+        $exts: ttf
+    );
+    // Also italic versions
+    @include font-face(
+        Rubik,
+        "/Rubik-" + $keyword + "Italic",
+        $font-path + "Rubik",
+        italic,
+        $numeric,
+        $exts: ttf
+    );
+}
+
+// == FiraMono Family ==
+$firamono-font-weights: (
+    "Regular": 400,
+    "Medium": 500,
+    "Bold": 700
+);
+
+@each $keyword, $numeric in $firamono-font-weights {
+    @include font-face(
+        FiraMono,
+        "/FiraMono-" + $keyword,
+        $font-path + "FiraMono",
+        $numeric,
+        $exts: ttf
+    );
+}
