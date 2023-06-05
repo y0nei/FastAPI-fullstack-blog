@@ -6,12 +6,16 @@
         "base/typography";
 
 @import "components/cookie-banner",
-        "components/select",
         "components/buttons",
         "components/post",
-        "components/postlist-nav";
+        "components/postlist-nav",
+        "components/postlist-form";
 
 @import "layout/body",
         "layout/main",
         "layout/header",
         "layout/postlist";
+
+.hidden {
+    display: none;
+}

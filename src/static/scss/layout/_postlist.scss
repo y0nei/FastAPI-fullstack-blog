@@ -1,5 +1,11 @@
 #postlist {
-    form { margin-bottom: 0.5rem }
+    header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.5rem;
+
+        h1 { flex-grow: 1 }
+    }
 
     #postlist-items {
         display: flex;
