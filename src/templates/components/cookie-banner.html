@@ -1,23 +1,10 @@
-<div id="cookie-container"
-     _="on load
-          if localStorage's cookie_consent is empty then
-            wait 1s then add .active to me"
->
+<div id="cookie-container">
     <p> We use session cookies to count you as a view for post analitics.
         <a href="#">read more</a>.
     </p>
     <button id="confirm"
             hx-get="/createsession"
-            _="on click
-                 remove .active from #cookie-container
-                 set localStorage's cookie_consent to true
-               on htmx:afterRequest
-                  reload() the location of the window"
+            hx-on="htmx:afterRequest: window.location.reload()"
     >Okay</button>
-
-    <button id="deny"
-            _="on click
-                remove .active from #cookie-container
-                set localStorage's cookie_consent to false"
-    >Nope</button>
+    <button id="deny">Nope</button>
 </div>

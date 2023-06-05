@@ -25,7 +25,7 @@
             {% block article %}{% endblock %}
         </main>
         {% include "/components/cookie-banner.html" %}
+        <script src="{{ url_for('static', path='/cookie.js') }}"></script>
         <script src="{{ url_for('static', path='/htmx.min.js') }}"></script>
-        <script src="{{ url_for('static', path='/_hyperscript.min.js') }}"></script>
     </body>
 </html>
