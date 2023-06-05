@@ -67,7 +67,7 @@ async def post_list(
     if page > 1:
         pagination["prev"] = (
             f"/posts?sort={sort.value}&order={order.value}"
-            f"&page={page-1}&page_items={page_items}&tag={tag}"
+            f"&page={page-1}&page_items={page_items}{'&tag=' + tag if tag is not None else ''}"
         )
     else:
         pagination["prev"] = None
@@ -77,7 +77,7 @@ async def post_list(
     else:
         pagination["next"] = (
             f"/posts?sort={sort.value}&order={order.value}"
-            f"&page={page+1}&page_items={page_items}&tag={tag}"
+            f"&page={page+1}&page_items={page_items}{'&tag=' + tag if tag is not None else ''}"
         )
 
     # Total pages
