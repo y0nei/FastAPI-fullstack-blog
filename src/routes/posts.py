@@ -1,4 +1,5 @@
 import os
+import httpx
 from fastapi import APIRouter, Request, Header, Query
 from fastapi.responses import JSONResponse
 from fastapi.templating import Jinja2Templates
@@ -65,20 +66,36 @@ async def post_list(
     # next and previous pages
     pagination = {}
     if page > 1:
-        pagination["prev"] = (
-            f"/posts?sort={sort.value}&order={order.value}"
-            f"&page={page-1}&page_items={page_items}{'&tag=' + tag if tag is not None else ''}"
+        url = httpx.URL(
+            path="/posts",
+            params={
+                "sort": sort.value,
+                "order": order.value,
+                "page": page-1,
+                "page_items": page_items,
+            }
         )
+        if tag:
+            url = url.copy_with(params={"tag": tag})
+        pagination["prev"] = str(url)
     else:
         pagination["prev"] = None
 
     if end_index >= len(posts):
         pagination["next"] = None
     else:
-        pagination["next"] = (
-            f"/posts?sort={sort.value}&order={order.value}"
-            f"&page={page+1}&page_items={page_items}{'&tag=' + tag if tag is not None else ''}"
+        url = httpx.URL(
+            path="/posts",
+            params={
+                "sort": sort.value,
+                "order": order.value,
+                "page": page+1,
+                "page_items": page_items,
+            }
         )
+        if tag:
+            url = url.copy_with(params={"tag": tag})
+        pagination["next"] = str(url)
 
     # Total pages
     if len(posts) <= page_items:
