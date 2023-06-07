@@ -68,6 +68,6 @@ $firamono-font-weights: (
         "/FiraMono-" + $keyword,
         $font-path + "FiraMono",
         $numeric,
-        $exts: ttf
+        $exts: woff2 woff ttf
     );
 }
