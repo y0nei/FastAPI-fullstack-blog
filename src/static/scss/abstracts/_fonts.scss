@@ -42,7 +42,7 @@ $rubik-font-weights: (
         "/Rubik-" + $keyword,
         $font-path + "Rubik",
         $numeric,
-        $exts: ttf
+        $exts: woff2 woff ttf
     );
     // Also italic versions
     @include font-face(
@@ -51,7 +51,7 @@ $rubik-font-weights: (
         $font-path + "Rubik",
         italic,
         $numeric,
-        $exts: ttf
+        $exts: woff2 woff ttf
     );
 }
 
