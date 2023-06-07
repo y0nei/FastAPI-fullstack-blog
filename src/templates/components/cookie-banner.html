@@ -2,9 +2,11 @@
     <p> We use session cookies to count you as a view for post analitics.
         <a href="#">read more</a>.
     </p>
-    <button id="confirm"
-            hx-get="/createsession"
-            hx-on="htmx:afterRequest: window.location.reload()"
-    >Okay</button>
-    <button id="deny">Nope</button>
+    <div>
+        <button id="confirm"
+                hx-get="/createsession"
+                hx-on="htmx:afterRequest: window.location.reload()"
+        >Okay</button>
+        <button id="deny">Nope</button>
+    </div>
 </div>

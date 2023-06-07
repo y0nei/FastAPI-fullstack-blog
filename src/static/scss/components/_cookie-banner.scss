@@ -1,32 +1,26 @@
-$textColor: #f5f6fa;
-$linkColor: $textColor;
-$backgroundColor: #2f3640;
-$confirmButton: #e84118;
-$denyButton: gray;
-
 #cookie-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
     position: fixed;
     bottom: -100%;
     left: 0;
-    background: $backgroundColor;
-    color: $textColor;
-    padding: 0 32px;
-    box-shadow: 0 -2px 16px rgba(47, 54, 64, 0.39);
+    width: 100%;
+    padding: 1rem;
+    background-color: white;
+    border-top: $default-border-width solid black;
+    box-shadow: 0 0 2rem 0.1rem rgba(black, 0.15);
     transition: 400ms;
 
     &.active { bottom: 0 }
-    a { color: $linkColor }
+    a { color: $accent-color }
     button {
-        border: 0;
-        color: $textColor;
-        padding: 12px 32px;
-        font-size: 18px;
-        margin-bottom: 16px;
-        border-radius: $default-border-radius;
-        cursor: pointer;
+        padding: 0.5rem 1rem;
 
-        &:hover { filter: brightness(120%) }
-        &#confirm { background: $confirmButton }
-        &#deny { background: $denyButton }
+        &#confirm { background: $accent-color }
+        &#deny { background: gray }
     }
 }
