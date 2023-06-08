@@ -15,6 +15,8 @@ templates = Jinja2Templates(
     lstrip_blocks=True, trim_blocks=True  # Whitespace control
 )
 initHotreload(templates)
+templates.env.globals["git_version"] = "YYYY.MM.DD+placeholder"
+
 
 @home_router.get("/", response_class=HTMLResponse)
 async def home(

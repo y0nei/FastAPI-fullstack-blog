@@ -47,7 +47,9 @@ article#post {
     }
 }
 
-nav[data-type="pagination"], #postlist form label {
+nav[data-type="pagination"],
+#postlist form label,
+footer {
     font-family: "Montserrat", sans-serif;
     font-size: 0.9rem;
     font-weight: 500;
