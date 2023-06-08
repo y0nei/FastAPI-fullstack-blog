@@ -5,16 +5,15 @@ stages:
   - docker-build
 
 .before_script_template: &setup
-  before_script:
-    - apt update
-    - apt install gcc
+  - apt update
+  - apt install gcc git
+  - git --version # debug
 
 .before_script_template: &configure_poetry
-  before_script:
-    - pip install poetry
-    - poetry config virtualenvs.create false
-    - poetry config virtualenvs.in-project true
-    - poetry install
+  - pip install poetry
+  - poetry config virtualenvs.create false
+  - poetry config virtualenvs.in-project true
+  - poetry install
 
 cache:
   paths:
@@ -22,8 +21,9 @@ cache:
 
 test:
   stage: test
-  <<: *setup
-  <<: *configure_poetry
+  before_script:
+    - *setup
+    - *configure_poetry
   script:
     - poetry run pytest -v
 
