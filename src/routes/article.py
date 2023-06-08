@@ -6,6 +6,7 @@ from fastapi.exceptions import HTTPException
 
 from src.core.logging import logger
 from src.utils.hotreload import initHotreload
+from src.utils.helpers.version import get_git_version, get_git_url_and_branch
 from src.utils.helpers.markdown import parseMarkdown, convertMarkdown
 from src.utils.word_counter import count_words_in_markdown
 from src.core.database.database import get_route_views, add_view
@@ -13,11 +14,14 @@ from src.core.database.session import DataBase
 from motor.motor_asyncio import AsyncIOMotorDatabase
 
 article_router = APIRouter(tags=["posts"])
+# TODO: Dont define templates per route. Move this somewhere else
 templates = Jinja2Templates(
     directory="src/templates",
     lstrip_blocks=True, trim_blocks=True  # Whitespace control
 )
 initHotreload(templates)
+templates.env.globals["git_version"] = get_git_version()
+templates.env.globals["git_url"] = get_git_url_and_branch().get("url")
 
 @article_router.get("/posts/{id}", response_class=HTMLResponse)
 async def article(

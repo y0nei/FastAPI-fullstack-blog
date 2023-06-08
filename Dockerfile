@@ -15,16 +15,15 @@ WORKDIR /project
 RUN adduser --gecos "docker" docker
 RUN chown -R docker:docker /project
 RUN apt update
-RUN apt install -y gcc
+RUN apt install -y gcc git
 
 USER docker
+RUN git config --global --add safe.directory /project
 
 COPY --from=build ./requirements.txt .
 RUN pip install --no-cache-dir -U pip
 RUN pip install --no-cache-dir -U -r requirements.txt
 
-COPY main.py .
-COPY src ./src
-COPY posts ./posts
+COPY . .
 
 ENTRYPOINT ["python3", "main.py"]
