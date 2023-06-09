@@ -6,7 +6,7 @@ stages:
 
 .before_script_template: &setup
   - apt update
-  - apt install gcc git
+  - apt install -y gcc git
   - git --version # debug
 
 .before_script_template: &configure_poetry
