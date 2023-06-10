@@ -2,18 +2,14 @@ import os
 import httpx
 from fastapi import APIRouter, Request, Header, Query
 from fastapi.responses import JSONResponse
-from fastapi.templating import Jinja2Templates
 from fastapi.exceptions import HTTPException
 
 from src.utils.helpers.postsorting import sortPosts
 from src.utils.helpers.markdown import parseMarkdown
 from src.schemas.sorting import SortChoices, OrderChoices
+from src.core.templates import templates
 
 post_router = APIRouter(tags=["posts"])
-templates = Jinja2Templates(
-    directory="src/templates",
-    lstrip_blocks=True, trim_blocks=True  # Whitespace control
-)
 
 @post_router.get("/posts")
 async def post_list(
