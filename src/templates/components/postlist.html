@@ -1,7 +1,7 @@
 <section id="postlist-items">
     {% from "components/post-item.html" import post_item %}
     {% for post in post_list %}
-        {{ post_item(post) }}
+        {{ post_item(post, request) }}
     {% endfor %}
 </section>
 

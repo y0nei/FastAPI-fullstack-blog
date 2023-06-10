@@ -1,12 +1,16 @@
-{% macro post_item(post) -%}
+{% macro post_item(post, request) -%}
 <article id="post">
     <section data-type="metadata">
         <p>id:{{ post.id }}</p>
-        <time>{{ post.date[0] }}</time>
+        <time>{{ post.date|first }}</time>
     </section>
-    <h1><a href="posts/{{ post.id }}">{{ post.title[0] }}</a></h1>
+    <h1>
+        <a href="{{ request.url_for('article', id=post.id) }}">
+            {{ post.title|first }}
+        </a>
+    </h1>
     {% if post.description %}
-    <p data-type="description">{{ post.description[0] }}</p>
+    <p data-type="description">{{ post.description|first }}</p>
     {% endif %}
     {% if post.tags %}
     <div id="taglist">
