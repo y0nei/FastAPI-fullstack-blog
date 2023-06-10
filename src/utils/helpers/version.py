@@ -10,11 +10,16 @@ def subprocess_run(args, **kwargs) -> str:
     return proc.stdout.strip()
 
 
+# NOTE: After few failed CI pipelines i realized that the rev-parse command
+# fails to get the upstream branch because gitlab runs the ci on a detached
+# head state repo. An ugly workaroud is just to checkout to main for the
+# nescessary CI stage, other than that it works fine, should fix in future.
+
 def get_git_url_and_branch() -> dict[str, str]:
     try:
         ref = subprocess_run(["git", "rev-parse", "--abbrev-ref", "@{upstream}"])
     except subprocess.CalledProcessError:
-        ref = subprocess_run(["git", "rev-parse", "--abbrev-ref", "master@{upstream}"])
+        ref = subprocess_run(["git", "rev-parse", "--abbrev-ref", "main@{upstream}"])
     origin, git_branch = ref.split("/", 1)
     git_url = subprocess_run(["git", "remote", "get-url", origin])
 

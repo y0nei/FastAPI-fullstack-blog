@@ -24,6 +24,7 @@ test:
   before_script:
     - *setup
     - *configure_poetry
+    - git checkout $CI_COMMIT_REF_NAME
   script:
     - poetry run pytest -v
 
