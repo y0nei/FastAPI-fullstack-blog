@@ -1,22 +1,7 @@
 <section id="postlist-items">
+    {% from "components/post-item.html" import post_item %}
     {% for post in post_list %}
-    <article id="post">
-        <section data-type="metadata">
-            <p>id:{{ post.id }}</p>
-            <time>{{ post.date[0] }}</time>
-        </section>
-        <h1><a href="posts/{{ post.id }}">{{ post.title[0] }}</a></h1>
-        {% if post.description %}
-        <p data-type="description">{{ post.description[0] }}</p>
-        {% endif %}
-        {% if post.tags %}
-        <div id="taglist">
-            {% for tag in post.tags %}
-            <span>{{ tag }}</span>
-            {% endfor %}
-        </div>
-        {% endif %}
-    </article>
+        {{ post_item(post) }}
     {% endfor %}
 </section>
 
