@@ -10,4 +10,6 @@ body {
 
     border-left: $default-border-width solid black;
     border-right: $default-border-width solid black;
+
+    & > * { background-color: #fff }
 }
