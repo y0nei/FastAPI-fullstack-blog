@@ -1,70 +1,11 @@
 {% extends "base.html" %}
 
 {% block postlist_sortchange %}
-<script src="{{ url_for('static', path='/postlist-sortchange.js') }}"></script>
+<script src="{{ url_for('static', path='/postlist.js') }}"></script>
 {% endblock %}
 
 {% block home %}
-<div id="postlist">
-    <header>
-        <h1>Post listing</h1>
-        <form hx-get="/posts"
-              hx-target="#postlist-content"
-              hx-trigger="submit, change"
-        >
-            <span>
-                <label for="sort">sort by:</label>
-                <select name="sort">
-                    <option value="id" selected>id</option>
-                    <option value="date">date</option>
-                </select>
-            </span>
-            <button onclick="changeSort.call(this);" id="order">
-                <svg xmlns="http://www.w3.org/2000/svg"
-                     class="icon icon-tabler sort-descending"
-                     width="24" height="24"
-                     viewBox="0 0 24 24"
-                     stroke="currentColor"
-                     fill="none"
-                     stroke-linecap="round"
-                     stroke-linejoin="round"
-                >
-                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                   <path d="M4 6l9 0"></path>
-                   <path d="M4 12l7 0"></path>
-                   <path d="M4 18l7 0"></path>
-                   <path d="M15 15l3 3l3 -3"></path>
-                   <path d="M18 6l0 12"></path>
-                </svg>
-                <svg xmlns="http://www.w3.org/2000/svg"
-                     class="icon icon-tabler sort-ascending hidden"
-                     width="24" height="24"
-                     viewBox="0 0 24 24"
-                     stroke="currentColor"
-                     fill="none"
-                     stroke-linecap="round"
-                     stroke-linejoin="round"
-                >
-                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                   <path d="M4 6l7 0"></path>
-                   <path d="M4 12l7 0"></path>
-                   <path d="M4 18l9 0"></path>
-                   <path d="M15 9l3 -3l3 3"></path>
-                   <path d="M18 6l0 12"></path>
-                </svg>
-            </button>
-            <select name="order" class="hidden">
-                <option value="asc">ascending</option>
-                <option value="desc" selected>descending</option>
-            </select>
-        </form>
-    </header>
-
-    <article id="postlist-content"
-             hx-get="/posts"
-             hx-trigger="load"
-    ></article>
-</div>
+<div id="postlist" hx-get="/posts" hx-trigger="load"></div>
 
 {% if ENABLE_HOTRELOAD %}
     {{ hotreload.script(url_for("hot-reload")) | safe }}
