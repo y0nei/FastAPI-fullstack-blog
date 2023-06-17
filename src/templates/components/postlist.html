@@ -18,38 +18,8 @@
             </select>
         </span>
         <button onclick="changeSort.call(this);" id="order">
-            <svg xmlns="http://www.w3.org/2000/svg"
-                 class="icon icon-tabler sort-descending"
-                 width="24" height="24"
-                 viewBox="0 0 24 24"
-                 stroke="currentColor"
-                 fill="none"
-                 stroke-linecap="round"
-                 stroke-linejoin="round"
-            >
-               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-               <path d="M4 6l9 0"></path>
-               <path d="M4 12l7 0"></path>
-               <path d="M4 18l7 0"></path>
-               <path d="M15 15l3 3l3 -3"></path>
-               <path d="M18 6l0 12"></path>
-            </svg>
-            <svg xmlns="http://www.w3.org/2000/svg"
-                 class="icon icon-tabler sort-ascending hidden"
-                 width="24" height="24"
-                 viewBox="0 0 24 24"
-                 stroke="currentColor"
-                 fill="none"
-                 stroke-linecap="round"
-                 stroke-linejoin="round"
-            >
-               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-               <path d="M4 6l7 0"></path>
-               <path d="M4 12l7 0"></path>
-               <path d="M4 18l9 0"></path>
-               <path d="M15 9l3 -3l3 3"></path>
-               <path d="M18 6l0 12"></path>
-            </svg>
+            <i class="ti ti-sort-descending"></i>
+            <i class="ti ti-sort-ascending hidden"></i>
         </button>
         <select name="order" class="hidden">
             <option value="asc">ascending</option>
@@ -69,37 +39,13 @@
     <div>
         {% if pagination["prev"] != None %}
         <button hx-get="{{ pagination['prev'] }}" hx-target="#postlist">
-            <svg xmlns="http://www.w3.org/2000/svg"
-                 class="icon icon-tabler chevron"
-                 width="24" height="24"
-                 viewBox="0 0 24 24"
-                 stroke-width="2"
-                 stroke="currentColor"
-                 fill="none"
-                 stroke-linecap="round"
-                 stroke-linejoin="round"
-            >
-               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-               <path d="M15 6l-6 6l6 6"></path>
-            </svg>
+            <i class="ti ti-chevron-left"></i>
         </button>
         {% endif %}
         <p><b>{{ current_page }}</b> of <b>{{ total_pages }}</b></p>
         {% if pagination["next"] != None %}
         <button hx-get="{{ pagination['next'] }}" hx-target="#postlist">
-            <svg xmlns="http://www.w3.org/2000/svg"
-                 class="icon icon-tabler chevron"
-                 width="24" height="24"
-                 viewBox="0 0 24 24"
-                 stroke-width="2"
-                 stroke="currentColor"
-                 fill="none"
-                 stroke-linecap="round"
-                 stroke-linejoin="round"
-            >
-               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-               <path d="M9 6l6 6l-6 6"></path>
-            </svg>
+            <i class="ti ti-chevron-right"></i>
         </button>
         {% endif %}
     </div>

@@ -64,3 +64,12 @@ footer {
         font-size: inherit;
     }
 }
+
+// Icons
+.ti {
+    font-size: 1.25rem;
+
+    footer & {
+        font-size: 1.15rem;
+    }
+}
