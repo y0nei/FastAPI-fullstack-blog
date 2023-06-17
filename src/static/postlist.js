@@ -10,5 +10,6 @@ function changeSort() {
 // the `tag` parameter is excluded from the request made by HTMX
 function handleTagChange() {
     var formElement = document.querySelector("#postlist-header form");
-    formElement.setAttribute('hx-params', this.value === "" ? "not tag" : "*");
+    var tagSelectElement = formElement.querySelector("select[name=tag]")
+    formElement.setAttribute('hx-params', tagSelectElement.value === ""  ? "not tag" : "*");
 }

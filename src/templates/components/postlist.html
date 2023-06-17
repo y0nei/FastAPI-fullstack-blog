@@ -3,7 +3,7 @@
     <form hx-get="/posts" hx-target="#postlist" hx-trigger="submit, change">
         <span>
             <label for="tag">tag:</label>
-            <select name="tag" onchange="handleTagChange.call(this);">
+            <select name="tag" onchange="handleTagChange();">
                 <option selected value>All</option>
                 {% for tag in tags %}
                 <option value="{{tag}}">{{tag}}</option>
@@ -12,12 +12,12 @@
         </span>
         <span>
             <label for="sort">sort by:</label>
-            <select name="sort">
+            <select name="sort" onchange="handleTagChange();">
                 <option value="id" selected>id</option>
                 <option value="date">date</option>
             </select>
         </span>
-        <button onclick="changeSort.call(this);" id="order">
+        <button onclick="changeSort.call(this); handleTagChange();" id="order">
             <i class="ti ti-sort-descending"></i>
             <i class="ti ti-sort-ascending hidden"></i>
         </button>
