@@ -3,6 +3,12 @@
 $font-path: "../../fonts/";
 $ti-font-path: $font-path + "TablerIcons";
 
+// Amazing local font stack taken from simplecss.org
+$sans-font: -apple-system, BlinkMacSystemFont, "Avenir Next", Avenir,
+    "Nimbus Sans L", Roboto, Noto, "Segoe UI", Arial, Helvetica,
+    "Helvetica Neue", sans-serif;
+$mono-font: Consolas, Menlo, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+
 // == Montserrat Family ==
 $montserrat-font-weights: (
     "Thin": 100,
@@ -51,23 +57,6 @@ $rubik-font-weights: (
         "/Rubik-" + $keyword + "Italic",
         $font-path + "Rubik",
         italic,
-        $numeric,
-        $exts: woff2 woff ttf
-    );
-}
-
-// == FiraMono Family ==
-$firamono-font-weights: (
-    "Regular": 400,
-    "Medium": 500,
-    "Bold": 700
-);
-
-@each $keyword, $numeric in $firamono-font-weights {
-    @include font-face(
-        FiraMono,
-        "/FiraMono-" + $keyword,
-        $font-path + "FiraMono",
         $numeric,
         $exts: woff2 woff ttf
     );

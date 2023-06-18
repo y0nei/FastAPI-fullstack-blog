@@ -1,9 +1,19 @@
-body > header {
+body > header,
+#postlist header h1,
+#postlist form label,
+article#post h1,
+article#post p[data-type="description"],
+nav[data-type="pagination"],
+#postlist form label,
+footer,
+#cookie-container {
     font-family: "Montserrat", sans-serif;
+}
 
+body > header {
     h1 {
+        font-size: 2.75rem;
         font-weight: 900;
-        font-size: 2.8rem;
     }
     a {
         font-size: 1.2rem;
@@ -12,31 +22,33 @@ body > header {
     }
 }
 
-#postlist {
-    header h1 {
-        font-family: "Montserrat", sans-serif;
-        font-size: 1.5rem;
-        font-weight: 700;
-    }
+article#post p[data-type="description"],
+nav[data-type="pagination"],
+#postlist form label,
+footer {
+    font-size: 0.9rem;
+    font-weight: 500;
+    font-style: normal;
+}
+
+#postlist header h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
 }
 
 article#post {
     section[data-type="metadata"] {
-        font-family: "FiraMono", monospace;
+        font-family: $mono-font;
         font-size: 0.8rem;
     }
 
     h1 {
-        font-family: "Montserrat", sans-serif;
-        font-weight: 600;
         font-size: 1.75rem;
+        font-weight: 600;
     }
 
     p[data-type="description"] {
-        font-family: "Montserrat", sans-serif;
-        font-size: 0.9rem;
         font-weight: 400;
-        font-style: normal;
     }
 
     #taglist span {
@@ -47,29 +59,13 @@ article#post {
     }
 }
 
-nav[data-type="pagination"],
-#postlist form label,
-footer {
-    font-family: "Montserrat", sans-serif;
-    font-size: 0.9rem;
-    font-weight: 500;
-    font-style: normal;
-}
-
 #cookie-container {
-    font-family: sans-serif;
-    font-size: 1rem;
-
-    button {
-        font-size: inherit;
-    }
+    button { font-size: inherit }
 }
 
 // Icons
 .ti {
     font-size: 1.25rem;
 
-    footer & {
-        font-size: 1.15rem;
-    }
+    footer & { font-size: 1.15rem }
 }
