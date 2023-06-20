@@ -1,10 +1,10 @@
 #postlist form {
     display: flex;
     gap: 0.5rem;
-    margin-bottom: $shadow-distance;
 
     span {
         @include neubrutalism-border;
+        box-shadow: none;
         display: flex;
         align-items: center;
         overflow: hidden;
@@ -27,7 +27,11 @@
 
         background-color: mix($accent-color, white, 60%);
         border-radius: 100%;
+        transition: 150ms ease;
 
-        &:hover { background-color: $accent-color }
+        &:hover {
+            transform: translate(-$shadow-distance, -$shadow-distance);
+            box-shadow: $shadow-distance $shadow-distance black;
+        }
     }
 }

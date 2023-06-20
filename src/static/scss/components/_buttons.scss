@@ -4,12 +4,10 @@ button {
     margin: 0 $shadow-distance $shadow-distance 0;
     background-color: white;
     @include neubrutalism-border;
+    box-shadow: none;
 
     &:hover {
-        left: $shadow-distance;
-        top: $shadow-distance;
         background-color: mix(white, black, 90%);
-        box-shadow: none;
         cursor: pointer;
     }
 }

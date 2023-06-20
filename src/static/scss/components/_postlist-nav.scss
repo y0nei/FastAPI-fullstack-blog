@@ -2,6 +2,7 @@ nav[data-type="pagination"] {
     & > div {
         background-color: mix($accent-color, white, 60%);
         @include neubrutalism-border;
+        box-shadow: none;
 
         button {
             display: flex;
