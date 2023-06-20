@@ -1,6 +1,9 @@
 <header id="postlist-header" hx-preserve>
     <h1>Post listing</h1>
-    <form hx-get="/posts" hx-target="#postlist" hx-trigger="submit, change">
+    <form hx-get="/posts"
+          hx-target="#postlist"
+          hx-trigger="submit, change, click from:#taglist"
+    >
         <span>
             <label for="tag">tag:</label>
             <select name="tag" onchange="handleTagChange();">
