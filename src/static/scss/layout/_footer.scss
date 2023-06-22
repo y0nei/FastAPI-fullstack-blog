@@ -20,7 +20,7 @@ footer {
 
             a {
                 text-decoration: none;
-                color: mix($accent-color, black, 75%);
+                color: map-get($accent-color-pallete, 600);
             }
             &:hover a { text-decoration: underline }
         }

@@ -24,7 +24,7 @@ body > header {
         // Related issues:
         // - https://stackoverflow.com/a/73146972
 
-        color: white;
+        color: $bg-color;
         -webkit-text-stroke: .1rem black;
         text-shadow: $shadow-distance $shadow-distance $accent-color;
     }
@@ -37,7 +37,7 @@ body > header {
         }
 
         a {
-            color: black;
+            color: $text-color;
             position: relative;
             z-index: 1;
 

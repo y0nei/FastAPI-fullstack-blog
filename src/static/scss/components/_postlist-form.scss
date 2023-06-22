@@ -8,12 +8,12 @@
         display: flex;
         align-items: center;
         overflow: hidden;
-        background-color: mix($accent-color, white, 60%);
+        background-color: map-get($accent-color-pallete, 300);
 
         label { padding: 0.15rem 0.5rem }
 
         select {
-            background: white;
+            background: $bg-color;
             height: 100%;
             border: none;
             border-left: $default-border-width solid black;
@@ -25,7 +25,7 @@
         margin: 0;
         aspect-ratio: 1;
 
-        background-color: mix($accent-color, white, 60%);
+        background-color: map-get($accent-color-pallete, 300);
         border-radius: 100%;
         transition: 150ms ease;
 
