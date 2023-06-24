@@ -45,7 +45,7 @@ article#post {
             border: 0.15rem solid $accent-color;
             border-radius: $default-border-radius;
             color: map-get($accent-color-pallete, 900);
-            background-color: map-get($accent-color-pallete, 300);
+            background-color: map-get($accent-color-pallete, 200);
 
             &:hover {
                 border-color: black;

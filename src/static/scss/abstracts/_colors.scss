@@ -1,8 +1,7 @@
 $bg-color: #fff;
 $text-color: #212121;
 $accent-color: #3cb371; // or mediumseagreen
-$accent-color-pallete: colorMap($accent-color, 10);
-@debug $accent-color-pallete;
+$accent-color-pallete: makeColorPalette($accent-color);
 
 // Component specific
 $grid-background-color: #fafafa;

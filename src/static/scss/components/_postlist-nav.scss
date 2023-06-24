@@ -1,6 +1,6 @@
 nav[data-type="pagination"] {
     & > div {
-        background-color: map-get($accent-color-pallete, 300);
+        background-color: map-get($accent-color-pallete, 200);
         @include neubrutalism-border;
         box-shadow: none;
 
