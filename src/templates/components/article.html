@@ -22,8 +22,9 @@
             {% if word_count > 0 %}
             <p><b>{{ word_count }}</b> words</p>
             <span id="sep"></span>
+            {% from "components/read-time.html" import readTime %}
+            <p><b>{{ readTime(word_count) }}</b> read</p>
             {% endif %}
-            <p><b>TODO</b> est. read time</p>
         </div>
         {% if tags %}
         <p>

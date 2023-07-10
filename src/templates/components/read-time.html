@@ -1,0 +1,7 @@
+{% macro readTime(wordCount,wpm=200) -%}
+    {% if (wordCount/wpm)>=1 -%}
+        {{ ((wordCount/wpm)|round|int) }}min
+    {%- else -%}
+        {{ ( (wordCount/wpm)*60 ) | int}}s
+    {%- endif %}
+{%- endmacro %}
