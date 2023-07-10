@@ -7,6 +7,7 @@ from src.core.logging import logger
 from src.core.settings import settings, EnvType
 from src.core.database.session import DataBase
 from src.routes.home import home_router
+from src.routes.about import about_router
 from src.routes.posts import post_router
 from src.routes.article import article_router
 from src.routes.session import session_router
@@ -69,6 +70,7 @@ else:
     logger.warning("Could not add instrumentator middleware.")
 
 app.include_router(home_router)
+app.include_router(about_router)
 app.include_router(post_router)
 app.include_router(article_router)
 app.include_router(session_router)
