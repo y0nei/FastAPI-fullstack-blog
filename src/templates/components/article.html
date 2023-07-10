@@ -2,6 +2,7 @@
 
 {% block article_styling %}
 <link href="{{ url_for('static', path='/css/pygments/dracula.css') }}" rel="stylesheet">
+<link href="{{ url_for('static', path='/css/compiled/markdown.css') }}" rel="stylesheet">
 {% endblock %}
 
 {% block article %}
@@ -21,7 +22,7 @@
 {% endif %}
 {# html body #}
 <hr>
-{{ body|safe }}
+<article class="markdown">{{ body|safe }}</article>
 
 {% if ENABLE_HOTRELOAD %}
     {{ hotreload.script(url_for("hot-reload")) | safe }}

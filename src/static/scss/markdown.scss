@@ -1,0 +1,108 @@
+@import "abstracts/functions",
+        "abstracts/variables",
+        "abstracts/colors";
+
+.markdown {
+    font-family: sans-serif;
+    line-height: 1.618; // Golden ratio :nerd_emoji:
+
+    div.highlight, table {
+        margin: 1rem 0;
+    }
+
+    h1 { font-size: 2.25rem }
+    h2 { font-size: 1.75rem }
+    h3 { font-size: 1.5rem }
+    h4 { font-size: 1.25rem }
+    h5 { font-size: 1rem }
+    h6 { font-size: 0.85rem }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: bold;
+        &:hover a[title="Permanent link"] {
+            display: initial;
+        }
+    }
+
+    a {
+        color: map-get($accent-color-palette, 700);
+        text-decoration: none;
+
+        &:hover { text-decoration: underline }
+        &[title="Permanent link"] {
+            margin-left: 0.5rem;
+            display: none;
+        }
+    }
+
+    ul, ol { margin-left: 2rem }
+    ul { list-style: initial }
+
+    .checklist {
+        list-style: none;
+        margin-left: 0.5rem;
+    }
+
+    hr {
+        border: none;
+        height: 1px;
+        background: black;
+        margin: 1rem auto;
+    }
+
+    blockquote {
+        margin: 1rem 1.5rem;
+        padding: 0 0.8rem;
+        border-left: 0.35rem solid $accent-color;
+        font-style: italic;
+
+        & > * { opacity: 0.5 }
+        & > blockquote { opacity: 1 } // reset opacity to initial 0.5
+
+        & > :last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+    }
+
+    code {
+        background-color: map-get($accent-color-palette, 200);
+        padding: 0.15rem 0.25rem;
+        border-radius: $default-border-radius/2;
+    }
+
+    // Codeblocks
+    div.highlight {
+        border-radius: $default-border-radius;
+        border: 0.15rem solid black;
+        overflow: hidden;
+        overflow-x: scroll;
+
+        & > pre {
+            border-left: 0.35rem solid $accent-color;
+            padding: 1rem;
+        }
+
+        code {
+            background-color: initial;
+            padding: initial;
+        }
+
+        // TODO: Highlighted lines support
+    }
+
+    table {
+        background-color: white;
+
+        thead {
+            background-color: map-get($accent-color-palette, 200);
+        }
+        td, th {
+            border: $default-border-width black solid;
+            padding: 0.2rem 0.5rem;
+        }
+        tr:nth-child(2n) {
+            background-color: map-get($accent-color-palette, 50);
+        }
+    }
+}

@@ -8,8 +8,9 @@ body {
     margin: 0 auto;
     @include bullet-journal-pattern;
 
-    border-left: $default-border-width solid black;
-    border-right: $default-border-width solid black;
-
-    & > * { background-color: $bg-color }
+    & > * {
+        border-left: $default-border-width solid black;
+        border-right: $default-border-width solid black;
+        background-color: $bg-color;
+    }
 }
