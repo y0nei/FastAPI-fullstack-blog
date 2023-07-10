@@ -6,22 +6,36 @@
 {% endblock %}
 
 {% block article %}
-{# title #}
-<h1>{{ title[0] }}</h1>
-{# description #}
-<p>{{ description[0] }}</p>
-{# date #}
-<p>created: {{ date[0] }}</p>
-{# view count #}
-{% if views %}
-    <p>views: {{ views["views"] }}</p>
-{% endif %}
-{# word count #}
-{% if word_count > 0 %}
-    <p>{{ word_count }} words</p>
-{% endif %}
-{# html body #}
-<hr>
+<div id="article-meta">
+    <header>
+        <h1>{{ title[0] }}</h1>
+        <p>{{ description[0] }}</p>
+    </header>
+    <hr>
+    <section data-type="metadata">
+        <p>created: <b><time>{{ date[0] }}</time></b></p>
+        <div id="stats">
+            {% if views %}
+            <p><b>{{ views["views"] }}</b> views</p>
+            <span id="sep"></span>
+            {% endif %}
+            {% if word_count > 0 %}
+            <p><b>{{ word_count }}</b> words</p>
+            <span id="sep"></span>
+            {% endif %}
+            <p><b>TODO</b> est. read time</p>
+        </div>
+        {% if tags %}
+        <p>
+            tags:
+            {% for tag in tags %}
+            <span><u>{{tag}}</u></span>
+            {% endfor %}
+        </p>
+        {% endif %}
+    </section>
+</div>
+
 <article class="markdown">{{ body|safe }}</article>
 
 {% if ENABLE_HOTRELOAD %}
