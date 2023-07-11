@@ -2,12 +2,6 @@ footer {
     padding: 0.5rem;
     border-top: $default-border-width solid black;
 
-    span#sep {
-        height: auto;
-        margin: 0.25rem 0;
-        border-left: 0.15rem dotted grey;
-    }
-
     ul {
         display: flex;
         justify-content: center;

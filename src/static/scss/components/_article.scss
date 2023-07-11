@@ -26,12 +26,6 @@
         gap: 0.5rem;
     }
 
-    span#sep {
-        height: auto;
-        margin: 0.25rem 0;
-        border-left: 0.15rem dotted grey;
-    }
-
     hr {
         border: none;
         border-top: 1px dashed map-get($accent-color-palette, 600);
