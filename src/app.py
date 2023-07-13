@@ -49,6 +49,7 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan, title=settings.APP_NAME)
 app.mount("/static", StaticFiles(directory="src/static"), name="static")
+app.mount("/mkdocs", StaticFiles(directory="docbuild", html=True), name="documentation")
 
 if settings.HOTRELOAD:
     from src.utils.hotreload import hotreload

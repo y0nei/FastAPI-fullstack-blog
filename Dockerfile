@@ -5,7 +5,7 @@ RUN pip install --no-cache-dir -U poetry
 COPY pyproject.toml poetry.lock ./
 RUN poetry export --with dev,markdown -f requirements.txt --output requirements.txt
 
-FROM python:3.11-slim
+FROM python:3.11-slim as setup
 
 ENV PATH=$PATH:/home/docker/.local/bin \
     PYTHONUNBUFFERED=1
@@ -25,5 +25,7 @@ RUN pip install --no-cache-dir -U pip
 RUN pip install --no-cache-dir -U -r requirements.txt
 
 COPY . .
+
+RUN mkdocs build
 
 ENTRYPOINT ["python3", "main.py"]
