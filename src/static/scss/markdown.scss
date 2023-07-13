@@ -6,6 +6,21 @@
     font-family: sans-serif;
     line-height: 1.618; // Golden ratio :nerd_emoji:
 
+    div.toc, img {
+        border-radius: $default-border-radius;
+    }
+
+    img {
+        margin: 0.25rem 0;
+        margin-top: 0.5rem;
+    }
+
+    div.toc {
+        padding: 0.5rem;
+        border: 1px solid map-get($accent-color-palette, 200);
+        background-color: map-get($accent-color-palette, 50);
+    }
+
     div.highlight, table {
         margin: 1rem 0;
     }
