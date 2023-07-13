@@ -3,7 +3,7 @@ FROM python:3.11-slim AS build
 RUN pip install --no-cache-dir -U poetry
 
 COPY pyproject.toml poetry.lock ./
-RUN poetry export --with dev -f requirements.txt --output requirements.txt
+RUN poetry export --with dev,markdown -f requirements.txt --output requirements.txt
 
 FROM python:3.11-slim
 

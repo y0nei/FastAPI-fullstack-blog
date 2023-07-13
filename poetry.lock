@@ -341,6 +341,51 @@ files = [
 testing = ["coverage", "pyyaml"]
 
 [[package]]
+name = "markdown-checklist"
+version = "0.4.4"
+description = "Python Markdown extension for task lists with checkboxes"
+optional = false
+python-versions = "*"
+files = [
+    {file = "markdown-checklist-0.4.4.tar.gz", hash = "sha256:69c93850798b1e01cdc6fcd4a80592d941f669f6451bbf69c71a4ffd1142f849"},
+]
+
+[package.dependencies]
+markdown = "*"
+
+[package.extras]
+coverage = ["coverage", "figleaf"]
+testing = ["pytest"]
+
+[[package]]
+name = "markdown-del-ins"
+version = "1.0.0"
+description = "Markdown extension to support the <del> and <ins> tags"
+optional = false
+python-versions = "*"
+files = [
+    {file = "markdown_del_ins-1.0.0-py3-none-any.whl", hash = "sha256:fc71237eaec2c5413d4ae330b1f691f38583b9f0ba35de7234bce86a7da955e7"},
+    {file = "markdown_del_ins-1.0.0.tar.gz", hash = "sha256:bcce060d367ac867341e9652d210a500508a352aab55c56414e385e65f972913"},
+]
+
+[package.dependencies]
+markdown = ">=2.0"
+
+[[package]]
+name = "markdown-sub-sup"
+version = "0.0.3"
+description = "A markdown python extension for use <sub> and <sup> tags with ^text^ and ~text~."
+optional = false
+python-versions = "*"
+files = [
+    {file = "markdown_sub_sup-0.0.3-py3-none-any.whl", hash = "sha256:2e965baaa5d6ea65f199de2a976511642df2a319af5e3fd29970fa287a8538e8"},
+    {file = "markdown_sub_sup-0.0.3.tar.gz", hash = "sha256:b59c1bbc2f681e3ecebe6bd9eb3df5841f27fb69768c8ac5a58489196fdd4368"},
+]
+
+[package.dependencies]
+markdown = ">=3.0"
+
+[[package]]
 name = "markupsafe"
 version = "2.1.2"
 description = "Safely add untrusted strings to HTML/XML markup."
@@ -571,6 +616,21 @@ files = [
 
 [package.extras]
 plugins = ["importlib-metadata"]
+
+[[package]]
+name = "pymdown-extensions"
+version = "10.0.1"
+description = "Extension pack for Python Markdown."
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "pymdown_extensions-10.0.1-py3-none-any.whl", hash = "sha256:ae66d84013c5d027ce055693e09a4628b67e9dec5bce05727e45b0918e36f274"},
+    {file = "pymdown_extensions-10.0.1.tar.gz", hash = "sha256:b44e1093a43b8a975eae17b03c3a77aad4681b3b56fce60ce746dbef1944c8cb"},
+]
+
+[package.dependencies]
+markdown = ">=3.2"
+pyyaml = "*"
 
 [[package]]
 name = "pymongo"
@@ -1053,4 +1113,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "8a290d64e52ea5510319bd635c32ba063f6001ad5ec279c4799ec41db7a8dfd9"
+content-hash = "d0650ff5faba0a7a83804adf9cc5316a3ad2c3a9397957fdf3bcf154abd2afdc"

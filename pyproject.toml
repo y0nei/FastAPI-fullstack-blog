@@ -10,11 +10,17 @@ fastapi = "^0.95.0"
 uvicorn = {extras = ["standard"], version = "^0.21.1"}
 jinja2 = "^3.1.2"
 markdown = "^3.4.3"
-pygments = "^2.14.0"
 motor = "^3.1.1"
 itsdangerous = "^2.1.2"
 prometheus-fastapi-instrumentator = "^6.0.0"
 gitpython = "^3.1.32"
+
+[tool.poetry.group.markdown.dependencies]
+pygments = "^2.14.0"
+pymdown-extensions = "^10.0.1"
+markdown-checklist = "^0.4.4"
+markdown-del-ins = "^1.0.0"
+markdown-sub-sup = "^0.0.3"
 
 [tool.poetry.group.dev.dependencies]
 arel = "==0.2.*"

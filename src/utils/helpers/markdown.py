@@ -1,16 +1,6 @@
 import markdown
-from pygments.formatters import HtmlFormatter
-from markdown.extensions.codehilite import CodeHiliteExtension
-
-class CustomHtmlFormatter(HtmlFormatter):
-    def __init__(self, lang_str="", **options):
-        super().__init__(**options)
-        self.lang_str = lang_str
-
-    def _wrap_code(self, source):
-        yield 0, f"<code class=\"{self.lang_str}\">"
-        yield from source
-        yield 0, "</code>"
+from markdown.extensions.toc import TocExtension
+from pymdownx.b64 import B64Extension
 
 def parseMarkdown(content: str) -> tuple[dict[str, str], str]:
     md = markdown.Markdown(extensions=["meta"])
@@ -27,6 +17,16 @@ def parseMarkdown(content: str) -> tuple[dict[str, str], str]:
 
 def convertMarkdown(content: str) -> str:
     return markdown.markdown(content, extensions=[
-        "fenced_code",
-        CodeHiliteExtension(pygments_formatter=CustomHtmlFormatter, css_class="highlight")
+        "tables",
+        "sane_lists",
+        "footnotes",
+        TocExtension(permalink="#", toc_depth="1-3"),
+        "markdown_checklist.extension",
+        "markdown_del_ins",
+        "markdown_sub_sup",
+        "pymdownx.smartsymbols",
+        "pymdownx.magiclink",
+        "pymdownx.superfences",
+        "pymdownx.highlight",
+        B64Extension(base_path="posts")
     ])
