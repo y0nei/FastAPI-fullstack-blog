@@ -4,8 +4,10 @@ from contextlib import asynccontextmanager
 from pymongo.errors import OperationFailure, ServerSelectionTimeoutError
 
 from src.core.logging import logger
-from src.core.settings import settings, EnvType
+from src.core.settings import settings, EnvType, app_description, short_description
 from src.core.database.session import DataBase
+from src.utils.helpers.version import get_git_version
+
 from src.routes.home import home_router
 from src.routes.about import about_router
 from src.routes.posts import post_router
@@ -47,7 +49,30 @@ async def lifespan(app: FastAPI):
         DataBase().client.close()
         logger.info("Connection to MongoDB closed.")
 
-app = FastAPI(lifespan=lifespan, title=settings.APP_NAME)
+tags_meta = [
+    { "name": "default",
+      "description": "Anything from the home route to cookie creation logic"
+    },
+    { "name": "posts",
+      "description": "Logic related to post listing and article viewing"
+    }
+]
+
+app = FastAPI(
+    openapi_tags=tags_meta,
+    lifespan=lifespan,
+    title=settings.APP_NAME,
+    description=app_description,
+    summary=short_description,
+    version=get_git_version(),
+    terms_of_service="/about#TOS",
+    contact={},
+    license_info={
+        "name": "MIT License",
+        "url": "https://gitlab.com/yonei.dev/fullstack/-/raw/main/LICENSE"
+    }
+)
+
 app.mount("/static", StaticFiles(directory="src/static"), name="static")
 
 try:

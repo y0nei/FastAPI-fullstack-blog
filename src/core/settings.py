@@ -39,3 +39,27 @@ class Settings(AppSettings, DatabaseSettings):
     pass
 
 settings: Settings = Settings()
+
+# TODO: Move this out of here into a TOML file later
+short_description = "A python-based blogging framework designed to simplify \
+content management with Markdown parsing, database integration, and other \
+interactive features."
+
+app_description = """
+A Python application designed to serve as a personal blogging framework.
+
+It parses Markdown files organized into numbered folders to generate an easy
+navigable list of articles.  
+Thanks to the power of [**FastAPI**][1] and various [**Markdown addons**][2],
+it simplifies the process of building and managing blogs.
+
+This app also provides optional database integration for storing article views,
+Prometheus metrics for monitoring, [**hot reloading**][3] for efficient
+development and an interactive article listing thanks to the use of the
+[**HTMX JavaScript framework**][4].
+
+[1]: https://fastapi.tiangolo.com/
+[2]: https://gitlab.com/yonei.dev/fullstack/-/blob/main/pyproject.toml#L19
+[3]: https://github.com/florimondmanca/arel
+[4]: https://htmx.org/
+"""
