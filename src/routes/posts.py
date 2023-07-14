@@ -1,4 +1,5 @@
 import os
+from typing import Annotated
 import httpx
 from fastapi import APIRouter, Request, Header, Query
 from fastapi.responses import JSONResponse
@@ -27,12 +28,27 @@ class PostList(BaseModel):
 )
 async def post_list(
     request: Request,
-    sort: SortChoices = SortChoices.id,
-    order: OrderChoices = OrderChoices.ascending,
-    page: int = Query(1, gt=0),
-    page_items: int = Query(2, gt=0),
-    tag: str | None = Query(None),
-    hx_request: str | None = Header(None)
+    sort: Annotated[SortChoices, Query(
+        description="Sort key to order the posts by"
+    )] = SortChoices.id,
+    order: Annotated[OrderChoices, Query(
+        description="Order to sort the post list by"
+    )] = OrderChoices.ascending,
+    page: int = Query(1, gt=0,
+        description="The page of the post listing to view"
+    ),
+    page_items: int = Query(2, gt=0,
+        description="Post items displayed per page"
+    ),
+    tag: str | None = Query(None,
+        description="Display only the posts containing the given tag"
+    ),
+    hx_request: str | None = Header(None,
+        description="""The `hx-request` header is sent automatically by the
+        HTMX framework whenever an request is made. It is used to determine
+        if this route should return a post list in JSON format or in raw HTML  
+        See: [HTMX Request Headers](https://htmx.org/docs/#request-headers)"""
+    )
 ):
     """
     This route handles all the nescessary logic in order to return a (ordered)
