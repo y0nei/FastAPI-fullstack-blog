@@ -8,13 +8,17 @@ from src.core.database.session import DataBase
 from src.core.templates import templates
 from motor.motor_asyncio import AsyncIOMotorDatabase
 
-home_router = APIRouter(tags=["home"])
+home_router = APIRouter()
 
-@home_router.get("/", response_class=HTMLResponse)
+@home_router.get("/", response_class=HTMLResponse, summary="Home page")
 async def home(
     request: Request,
     db: Annotated[AsyncIOMotorDatabase | None, Depends(DataBase().get_database)]
 ):
+    """
+    Display the home page that includes the post listing component
+    """
+
     if isinstance(db, AsyncIOMotorDatabase):
         ssid = request.session.get("ssid")
         if ssid:

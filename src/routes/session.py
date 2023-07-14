@@ -3,8 +3,17 @@ from fastapi.responses import JSONResponse
 
 session_router = APIRouter()
 
-@session_router.get("/createsession")
+@session_router.get("/createsession", summary="Create a cookie session")
 async def set_session(request: Request):
+    """
+    This route is used to generate a UUID4 session token, if the user
+    already has a session token, return a **409** error.  
+    If the post statistics functionality is not enabled, return a **501**
+
+    **This route is needed in order to identify the user as a view for article
+    statistics.**
+    """
+
     try:
         ssid = request.session.get("ssid")
         if not ssid:

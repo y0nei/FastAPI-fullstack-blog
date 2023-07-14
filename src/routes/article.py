@@ -13,12 +13,25 @@ from motor.motor_asyncio import AsyncIOMotorDatabase
 
 article_router = APIRouter(tags=["posts"])
 
-@article_router.get("/posts/{id}", response_class=HTMLResponse)
+@article_router.get(
+    "/posts/{id}",
+    response_class=HTMLResponse,
+    summary="Display a blog article"
+)
 async def article(
     request: Request,
     db: Annotated[AsyncIOMotorDatabase | None, Depends(DataBase().get_database)],
     id: int = Path(gt=0)
 ):
+    """
+    This route parses the Markdown article specified by the id path paramiter,
+    returns all of the respectful metadata and a total word count for the post.
+
+    In addition to displaying the article content, it also stores the cookie
+    session id *(or just add a view)* to the database if the post statistics
+    functionality is enabled and the user accepted the cookies.
+    """
+
     if isinstance(db, AsyncIOMotorDatabase):
         ssid = request.session.get("ssid")
         if ssid:

@@ -3,6 +3,7 @@ import httpx
 from fastapi import APIRouter, Request, Header, Query
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import HTTPException
+from pydantic import BaseModel
 
 from src.utils.helpers.postsorting import sortPosts
 from src.utils.helpers.markdown import parseMarkdown
@@ -11,7 +12,19 @@ from src.core.templates import templates
 
 post_router = APIRouter(tags=["posts"])
 
-@post_router.get("/posts")
+class PostList(BaseModel):
+    post_list: dict
+    total_pages: int
+    current_page: int
+    total: int
+    pagination: dict[str, str | None]
+    tags: list[str]
+
+@post_router.get(
+    "/posts",
+    response_model=PostList,
+    summary="Article listing with pagination functionality",
+)
 async def post_list(
     request: Request,
     sort: SortChoices = SortChoices.id,
@@ -21,6 +34,21 @@ async def post_list(
     tag: str | None = Query(None),
     hx_request: str | None = Header(None)
 ):
+    """
+    This route handles all the nescessary logic in order to return a (ordered)
+    post list with pagination functionality.  
+    It either returns the list in a JSON format, or one in HTML if the
+    hx-request header is present (Indicates that the response is made by
+    HTMX)
+
+    It shows:
+    - a list of posts ordered by the selected sort key
+    - a list of all avalible tags
+    - number of total posts
+    - number of total posts displayed on the current page
+    - total count of pages
+    """
+
     posts = []
     taglist = []
 
