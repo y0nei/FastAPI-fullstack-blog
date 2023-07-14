@@ -17,17 +17,17 @@ development and an interactive article listing thanks to the use of the
 
 # Features
 
-- **Articles written in Markdown**: No need to store additional data in some database, all the article conent storage is controlled by you and backing up all the articles is as simple as moving a few files over.
+- **Articles written in Markdown**: No need to store additional data in some database, backing up all the articles is as simple as moving a few files over.
 
 - **Frontend Metadata**: Markdown files include frontend metadata, such as tags, titles, dates, authors and whatever else you'd like. This metadata allows users to categorize their articles, display informative titles, and sort content based on publishing dates.
 
-- **Article Navigation:** The app generates a list of articles displayed on the home page, enabling seemless navigation for readers thanks to the use of [**HTMX**][htmx], a small, dependency free and fast JavaScript framework.
+- **Article Navigation:** The app generates a list of articles displayed on the home page, enabling seamless navigation for readers thanks to the use of [**HTMX**][htmx].
 
-- **Database Integration**: The framework supports storing and retrieving article view metrics in a database. This feature allows users to track the popularity of their articles, the "view" is determined by a cookie session, no raw IP's in the database, no salts generated from various information, just a random uuid4 string.
+- **Database Integration**: The framework supports storing and retrieving article view metrics in a database. This feature allows users to track the popularity of their articles, the "view" is determined by a cookie session, no raw IP's in the database, no salts generated from various information, just an ssid stored in the cookie.
 
-- **Prometheus Metrics**: Built-in integration with Prometheus enables users to monitor and expose various metrics related to their blogging platform. This includes monitoring server performance, request/response statistics, and other key indicators, providing valuable insights into the website's health and performance.
+- **Prometheus Metrics**: Built-in integration with Prometheus enables users to monitor and expose various metrics. This includes monitoring server performance, request/response statistics, and other key indicators, providing valuable insights into the website's health and performance.
 
-- **Hot Reloading**: The framework incorporates hot reloading, which means that changes made to Markdown files or the codebase are reflected in the running application. This accelerates blog wrigting, development and testing, allowing users to iterate quickly and efficiently.
+- **Hot Reloading**: The framework incorporates hot reloading, which means that changes made to Markdown files or the codebase are reflected in the running application. This accelerates blog writing, development and testing, allowing users to iterate quickly and efficiently.
 
 
 # Quickstart
@@ -42,9 +42,9 @@ To get started with the blog app, follow the steps below:
 
 3. Copy the `.env.example` file to `.env` and edit nescessary settings
 
-4. Edit some Markdown files in the designated `posts` folder (**each article should have a numerical id folder like displayed in the examples**). Utilize the frontend metadata to enhance the user experience.
+4. Edit some Markdown files in the designated `posts` folder. Utilize the frontend metadata to enhance the user experience.
 
-5. If you want to configure the database settings to store article view metrics. Refer to the provided documentation for instructions on how to set up and connect to your database.
+5. If you want to configure the database settings to store article view metrics. Refer to the provided [documentation][docs] for instructions on how to set up and connect to your database.
 
 6. Build and run the app
     1. If you preffer `poetry`:
@@ -52,7 +52,7 @@ To get started with the blog app, follow the steps below:
         poetry install
         poetry run python main.py
         ```
-        *(**Note**: you can run `poetry run mkdocs build` to build the documentation)*
+        *(**Note**: you can run `poetry run mkdocs build` to build the [documentation][docs])*
     
     2. If you preffer `docker`:
         ```sh
@@ -66,7 +66,7 @@ To get started with the blog app, follow the steps below:
 
 8. Pat yourself on the back and admire how great you are :3
 
-For more detailed instructions and configuration options, please refer to the documentation.
+For more detailed instructions and configuration options, please refer to the [documentation][docs].
 
 # Contributing
 
@@ -82,5 +82,6 @@ We would like to express our gratitude to the [**FastAPI**][fastapi] community f
 
 If you find this framework useful or have any feedback, we would love to hear from you! Please don't hesitate to reach out and share your thoughts.
 
+[docs]: docs/
 [fastapi]: https://fastapi.tiangolo.com/
 [htmx]: https://htmx.org/
