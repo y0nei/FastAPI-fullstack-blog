@@ -49,7 +49,11 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan, title=settings.APP_NAME)
 app.mount("/static", StaticFiles(directory="src/static"), name="static")
-app.mount("/mkdocs", StaticFiles(directory="docbuild", html=True), name="documentation")
+
+try:
+    app.mount("/mkdocs", StaticFiles(directory="docbuild", html=True), name="documentation")
+except RuntimeError:
+    logger.exception("Mkdocs directory not found")
 
 if settings.HOTRELOAD:
     from src.utils.hotreload import hotreload
