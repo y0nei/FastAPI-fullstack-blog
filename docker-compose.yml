@@ -11,4 +11,5 @@ services:
       - .env:/project/.env:ro
       - ./src:/project/src
       - ./posts:/project/posts:ro
+      - ./docs:/project/docs:ro
     restart: unless-stopped
