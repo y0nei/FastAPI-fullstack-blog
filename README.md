@@ -25,18 +25,17 @@ Maybe this meme will describe the situation the best:
 
 # Features
 
-- **Articles written in Markdown**: No need to store additional data in some database, backing up all the articles is as simple as moving a few files over.
+- **Markdown-Based Articles**: Easily manage articles in Markdown format, making backup and migration a breeze.
 
-- **Frontend Metadata**: Markdown files include frontend metadata, such as tags, titles, dates, authors and whatever else you'd like. This metadata allows users to categorize their articles, display informative titles, and sort content based on publishing dates.
+- **Frontmatter Metadata**: Categorize articles, display informative titles, and sort content by date, author, and more.
 
-- **Article Navigation:** The app generates a list of articles displayed on the home page, enabling seamless navigation for readers thanks to the use of [**HTMX**][htmx].
+- **Seamless Article Navigation:** [HTMX][htmx]-powered list of articles on the homepage for smooth reader navigation.
 
-- **Database Integration**: The framework supports storing and retrieving article view metrics in a database. This feature allows users to track the popularity of their articles, the "view" is determined by a cookie session, no raw IP's in the database, no salts generated from various information, just an ssid stored in the cookie.
+- **Database Integration**: Store and retrieve article view metrics securely using cookie sessions, ensuring user privacy.
 
-- **Prometheus Metrics**: Built-in integration with Prometheus enables users to monitor and expose various metrics. This includes monitoring server performance, request/response statistics, and other key indicators, providing valuable insights into the website's health and performance.
+- **Prometheus Metrics**: Monitor server performance, request/response stats, and website health for valuable insights.
 
-- **Hot Reloading**: The framework incorporates hot reloading, which means that changes made to Markdown files or the codebase are reflected in the running application. This accelerates blog writing, development and testing, allowing users to iterate quickly and efficiently.
-
+- **Hot Reloading**: Swiftly iterate with real-time updates to Markdown files and the codebase, streamlining writing and development.
 
 # Quickstart
 To get started with the blog app, see the **Getting started** section of the
