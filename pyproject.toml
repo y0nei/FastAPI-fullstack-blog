@@ -15,6 +15,7 @@ itsdangerous = "^2.1.2"
 prometheus-fastapi-instrumentator = "^6.0.0"
 gitpython = "^3.1.32"
 mkdocs = "^1.4.3"
+mkdocs-material = "^9.1.18"
 
 [tool.poetry.group.markdown.dependencies]
 pygments = "^2.14.0"

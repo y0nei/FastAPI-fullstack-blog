@@ -1,2 +1,26 @@
 site_name: Yonei.dev app documentation
 site_dir: docbuild
+repo_url: https://gitlab.com/yonei.dev/fullstack
+repo_name: yonei.dev/fullstack
+dev_addr: "127.0.0.1:8010"
+
+theme:
+  name: material
+  palette:
+    scheme: slate
+    primary: green
+  icon:
+    repo: fontawesome/brands/gitlab
+  features:
+    - navigation.path
+    - navigation.top
+
+markdown_extensions:
+  - tables
+  - footnotes
+  - toc:
+      permalink: true
+
+  - pymdownx.betterem
+  - pymdownx.highlight
+  - pymdownx.superfences
