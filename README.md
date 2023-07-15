@@ -15,6 +15,13 @@ development and an interactive article listing thanks to the use of the
 [1]: https://gitlab.com/yonei.dev/fullstack/-/blob/main/pyproject.toml#L19
 [2]: https://github.com/florimondmanca/arel
 
+## Why?
+
+This project was started in order to "test my skills in the field" and also
+serve as a personal blogging platform for myself, later i decided to make app
+accessable to anyone. Maybe this meme will describe the situation the best:
+![Meme](images/developing_a_blog_meme.jpg)
+
 # Features
 
 - **Articles written in Markdown**: No need to store additional data in some database, backing up all the articles is as simple as moving a few files over.
@@ -31,7 +38,8 @@ development and an interactive article listing thanks to the use of the
 
 
 # Quickstart
-To get started with the blog app, follow the steps below:
+To get started with the blog app, see the **Getting started** section of the
+app [documentation][docs] or follow the steps below or :
 
 1. Make sure you have `docker`, `docker-compose` and `git` installed *(optionally `python` and `poetry`)*
 
@@ -53,7 +61,7 @@ To get started with the blog app, follow the steps below:
         poetry run python main.py
         ```
         *(**Note**: you can run `poetry run mkdocs build` to build the [documentation][docs])*
-    
+
     2. If you preffer `docker`:
         ```sh
         docker compose up
