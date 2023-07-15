@@ -64,7 +64,7 @@ For a list of default values refer to the `settings.py` file.[^2]
   the docs state, it "Should be a random string."
 
 ### Database settings
-- Variables are used in the MongoDB connection string[^2]:
+- Variables used in the MongoDB connection string[^2]:
     - `DB_USER`: MongoDB username.
     - `DB_PASSWORD`: MongoDB password.
     - `DB_HOST`: Database URL.
