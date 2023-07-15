@@ -9,16 +9,16 @@ or follow the steps below:
     git clone https://gitlab.com/yonei.dev/fullstack.git
     ```
 
-3. Copy the `.env.example` file to `.env` and edit nescessary settings[^1]
+3. Copy the `.env.example` file to `.env` and edit necessary settings[^1]
 
 4. Build and run the app
-    1. If you preffer `poetry`:
+    1. If you prefer `poetry`:
         ```sh
         poetry install
         poetry run python main.py
         ```
 
-    2. If you preffer `docker`:
+    2. If you prefer `docker`:
         ```sh
         docker compose up
         ```

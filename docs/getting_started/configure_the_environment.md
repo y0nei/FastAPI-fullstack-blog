@@ -34,7 +34,7 @@ For a list of default values refer to the `settings.py` file.[^2]
 - `POST_STATISTICS`: If set to `true` or `1` do a few things:
     - expose various database-related settings to the app[^2]
     - enable the database functionality for view storage
-    - control if [starlettes session middleware][1] should be initialized
+    - control if [starlette's session middleware][1] should be initialized
     - and if the cookie consent banner should be shown or not
 
 - `HOTRELOAD`: If set to `true` or `1`, enable the hot reloading functionality.
@@ -55,12 +55,13 @@ For a list of default values refer to the `settings.py` file.[^2]
 
 - `APP_PORT`: Define the **internal** port the Uvicorn server will run on.
     - **Note**: If running in docker, the internal port is on the right side,
-    while the external port (port you will access the app from) is on the left.
+    while the external port (the port you will access the app from) is on the
+    left.
     ```yaml hl_lines="2" title="docker-compose.yml"
     ports:
       - "external_port:internal:port"
     ```
-- `SECRET_KEY`: Used for [starlettes session middleware][1] cookie signing, as
+- `SECRET_KEY`: Used for [starlette's session middleware][1] cookie signing, as
   the docs state, it "Should be a random string."
 
 ### Database settings

@@ -3,7 +3,7 @@
 This is a Python application designed to serve as a feature rich personal
 blogging framework.
 
-It parses Markdown files organized into numbered folders to generate an easy
+It parses Markdown files organized into numbered folders to generate an easily
 navigable list of articles.  
 Thanks to the power of [**FastAPI**][fastapi] and various [**Markdown addons**][1],
 it simplifies the process of building and managing blogs.  
@@ -21,7 +21,7 @@ development and an interactive article listing thanks to the use of the
 
 ## Where to start?
 
-See the [Getting Started][1] section of the documentation or check the projects
+See the [Getting Started][1] section of the documentation or check the project's
 `README.md` file.
 
 To build the documentation run:
