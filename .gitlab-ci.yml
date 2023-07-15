@@ -3,6 +3,7 @@ image: python:3.11-slim
 stages:
   - test
   - docker-build
+  - serve-docs
 
 .before_script_template: &setup
   - apt update
@@ -28,6 +29,19 @@ test:
   script:
     - poetry run mkdocs build
     - poetry run pytest -v
+  artifacts:
+    paths:
+      - docbuild
+
+pages:
+  stage: serve-docs
+  script:
+    - mv docbuild public
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
 docker build:
   stage: docker-build
