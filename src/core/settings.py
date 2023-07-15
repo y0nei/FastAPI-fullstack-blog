@@ -19,7 +19,7 @@ class AppSettings(BaseConfig):
     HOTRELOAD: bool = False
     POST_STATISTICS: bool = False
     ENABLE_METRICS: bool = False
-    SECRET_KEY: str | None = None
+    SECRET_KEY: str | None = None  # TODO: Move this in the if statement below
 
 class DatabaseSettings(BaseConfig):
     if AppSettings().POST_STATISTICS:
