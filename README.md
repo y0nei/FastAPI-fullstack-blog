@@ -91,6 +91,6 @@ We would like to express our gratitude to the [**FastAPI**][fastapi] community f
 
 If you find this framework useful or have any feedback, we would love to hear from you! Please don't hesitate to reach out and share your thoughts.
 
-[docs]: docs/
+[docs]: https://yonei-dev.gitlab.io/fullstack/
 [fastapi]: https://fastapi.tiangolo.com/
 [htmx]: https://htmx.org/

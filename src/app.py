@@ -66,7 +66,10 @@ app = FastAPI(
     summary=short_description,
     version=get_git_version(),
     terms_of_service="/about#TOS",
-    contact={},
+    contact={
+        "name": "MkDocs documentation",
+        "url": "https://yonei-dev.gitlab.io/fullstack/"
+    },
     license_info={
         "name": "MIT License",
         "url": "https://gitlab.com/yonei.dev/fullstack/-/raw/main/LICENSE"
