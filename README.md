@@ -19,8 +19,9 @@ development and an interactive article listing thanks to the use of the
 
 This project was started in order to "test my skills in the field" and also
 serve as a personal blogging platform for myself, later i decided to make app
-accessable to anyone. Maybe this meme will describe the situation the best:
-![Meme](images/developing_a_blog_meme.jpg)
+accessable to anyone.  
+Maybe this meme will describe the situation the best:  
+<img src="images/developing_a_blog_meme.jpg" width="500"/>
 
 # Features
 
