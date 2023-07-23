@@ -15,15 +15,13 @@ development and an interactive article listing thanks to the use of the
 [1]: https://gitlab.com/yonei.dev/fullstack/-/blob/main/pyproject.toml#L19
 [2]: https://github.com/florimondmanca/arel
 
-## Why?
+### ⚠ DISCLAIMER
+This project is far from perfect, it has some flaws and caveats. I advise you to not run
+it in production untill a major stable release is pushed `(v1.x.x or higher)`  
+For more information on what is and is not implemented, please refer to the documentation or
+the [roadmap](#-roadmap) section of this readme.
 
-This project was started in order to "test my skills in the field" and also
-serve as a personal blogging platform for myself, later i decided to make app
-accessable to anyone.  
-Maybe this meme will describe the situation the best:  
-<img src="images/developing_a_blog_meme.jpg" width="500"/>
-
-# Features
+# ✨ Features
 
 - **Markdown-Based Articles**: Easily manage articles in Markdown format, making backup and migration a breeze.
 
@@ -31,22 +29,33 @@ Maybe this meme will describe the situation the best:
 
 - **Seamless Article Navigation:** [HTMX][htmx]-powered list of articles on the homepage for smooth reader navigation.
 
-- **Database Integration**: Store and retrieve article view metrics securely using cookie sessions, ensuring user privacy.
+- (Optional) **Database Integration**: Store and retrieve article view metrics securely using cookie sessions, ensuring user privacy.
 
 - **Prometheus Metrics**: Monitor server performance, request/response stats, and website health for valuable insights.
 
 - **Hot Reloading**: Swiftly iterate with real-time updates to Markdown files and the codebase, streamlining writing and development.
 
-# Quickstart
+## ❓ Why(s)
+
+- ### Why did i make this?
+    This project was started in order to "test my skills in the field" and also
+    serve as a personal blogging platform for myself, later i decided to make app
+    accessable to anyone.  
+    Maybe this meme will describe the situation the best:  
+    <img src="images/developing_a_blog_meme.jpg" width="500"/>
+
+- ### Why use HTMX as a JS Framework instead of an industry standard?
+    `Popular != Good`. [HTMX][htmx] is fast and lightweight. There is abosulutely no reason to spin
+    up a whole node server to serve simple interactivity *(in this case just a postlist and
+    cookie banner)*, htmx has all the nescessary tools to ship a feature rich app.
+
+# 🚀 Quickstart
 To get started with the blog app, see the **Getting started** section of the
 app [documentation][docs] or follow the steps below or :
 
 1. Make sure you have `docker`, `docker-compose` and `git` installed *(optionally `python` and `poetry`)*
 
-2. Clone this repository:
-    ```sh
-    git clone https://gitlab.com/yonei.dev/fullstack.git
-    ```
+2. Clone this repository
 
 3. Copy the `.env.example` file to `.env` and edit nescessary settings
 
@@ -55,14 +64,13 @@ app [documentation][docs] or follow the steps below or :
 5. If you want to configure the database settings to store article view metrics. Refer to the provided [documentation][docs] for instructions on how to set up and connect to your database.
 
 6. Build and run the app
-    1. If you preffer `poetry`:
+    1. If you prefer `poetry`:
         ```sh
         poetry install
         poetry run python main.py
         ```
-        *(**Note**: you can run `poetry run mkdocs build` to build the [documentation][docs])*
 
-    2. If you preffer `docker`:
+    2. If you prefer `docker`:
         ```sh
         docker compose up
         ```
@@ -72,24 +80,37 @@ app [documentation][docs] or follow the steps below or :
     - **If docker**: The port specified in the `docker-compose.yml` file (default external is 8080)
     - **If poetry**: The `APP_PORT` variable in the `.env` file
 
-8. Pat yourself on the back and admire how great you are :3
+# 📋 Roadmap
 
-For more detailed instructions and configuration options, please refer to the [documentation][docs].
+- General
+    - [x] Documentation
+    - [ ] Use npm for dependencies
+    - [ ] Makefile for simplicity
+    - [ ] Rate limiting (toggled with ENV variable)
+    - [ ] Better article folder structure instead of numbered folders
+    - [ ] Example setups with reverse proxies (Traefik, Nginx)
+    - [ ] Custom logger both for uvicorn and regular logs
+    - [ ] Use a TOML config to configure internal app settings
+- Code optimizations and improvements
+    - Tests
+        - [ ] Proper unit tests
+        - [ ] Code coverage integration
+        - [ ] Dont a mock database, better split the logic
+    - [ ] Improve the Database logic
+    - [ ] Make the app fully asynchronous
+    - [ ] Use a SSG solution for generating articles instead of parsing markdown on request
+- Frontend
+    - [ ] Darkmode
+    - [ ] Proper style guide & a sane theme
 
-# Contributing
+# 🤝 Contributing
 
 Contributions are welcome! If you encounter any issues, have suggestions for improvements, or would like to add new features to the app, please open an issue or submit a pull request.
 
-# License
+# 🧾 License
 
-The app is open-source and released under the [**MIT License**](LICENSE). You are free to use, modify, and distribute the framework in accordance with the terms of the license.
-
-# Acknowledgements
-
-We would like to express our gratitude to the [**FastAPI**][fastapi] community for providing an excellent web framework, [**PyMdown Extensions**](https://facelessuser.github.io/pymdown-extensions/) for great Markdown addons and the [**HTMX**][htmx] team for creating a wonderful JavaScript framework that isnt a pain in the ass to work with.
-
-If you find this framework useful or have any feedback, we would love to hear from you! Please don't hesitate to reach out and share your thoughts.
+The app is open-source and released under the [**MIT License**](LICENSE).
 
 [docs]: https://yonei-dev.gitlab.io/fullstack/
-[fastapi]: https://fastapi.tiangolo.com/
-[htmx]: https://htmx.org/
+[htmx]: https://htmx.org
+[fastapi]: https://fastapi.tiangolo.com
